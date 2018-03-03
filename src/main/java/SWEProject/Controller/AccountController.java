@@ -32,12 +32,17 @@ public class AccountController {
 	@GetMapping("/login")
 	public String showLoginForm(Model model)
 	{
+		model.addAttribute("user",new User() {});
 		return "login";
 	}
 	
 	@PostMapping("/login")
-	public String login()
+	public String login(@ModelAttribute User user)
 	{
-		return "";
+		if(userRepository.existsByID(user.getUsername(), user.getPassword()))
+		{
+			return "add-product";
+		}
+		return "login";
 	}
 }
