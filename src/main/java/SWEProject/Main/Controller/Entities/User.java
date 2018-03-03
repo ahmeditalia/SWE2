@@ -1,4 +1,4 @@
-package SWEProject.Entities;
+package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,10 +1,10 @@
-package SWEProject.Repository;
+package SWEProject.Main.Controller.Repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import SWEProject.Entities.User;
 import org.springframework.data.repository.query.Param;
+
+import SWEProject.Main.Controller.Entities.User;
 
 public interface UserRepository extends CrudRepository<User, String>{
 

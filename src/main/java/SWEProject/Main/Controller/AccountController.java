@@ -1,4 +1,4 @@
-package SWEProject.Controller;
+package SWEProject.Main.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import SWEProject.Entities.User;
-import SWEProject.Repository.UserRepository;
+import SWEProject.Main.Controller.Entities.User;
+import SWEProject.Main.Controller.Repository.UserRepository;
 
 @Controller
 public class AccountController {
