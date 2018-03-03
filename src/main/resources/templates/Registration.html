@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="valid.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Registration</title>
 </head>
 <body>
-
+        <div class="Registration">            
+            <img src="signup.png" class="avatar">
+            <h2>Register</h2>
+            <form name="Registrationform" onsubmit="return registervalid()" method="POST">
+                <p>UserName</p>
+                <input name="username" type="text" placeholder="user name">
+                <div id="validname" class="valid"></div>
+                <p>E-mail</p>
+                <input name="email" type="text" placeholder="avatar@mail.com">
+                <div id="validemail" class="valid"></div>
+                <p>Password</p>
+                <input name="password" type="password" placeholder="********">
+                <div id="validpassword" class="valid"></div>
+                <input type="Submit" value="Register">
+                <a href="#">Go To Login</a>
+            </form>
+        </div>
 </body>
 </html>

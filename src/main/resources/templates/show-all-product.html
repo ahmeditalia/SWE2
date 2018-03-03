@@ -2,25 +2,27 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>show all products</title>
 </head>
 <body>
 
-<table>
-    <th>
-    <td>name</td>
-    <td>price</td>
-    <td>type</td>
-    <td>brand</td>
-    <td>category</td>
-    </th>
-
+<table class="showtable">
+    <tr class="theader">
+        <td class="tdshow">Name</td>
+        <td class="tdshow">Price</td>
+        <td class="tdshow">Type</td>
+        <td class="tdshow">Brand</td>
+        <td class="tdshow">Category</td>
+        <td class="tdshow">Quantity</td>
+    </tr>
     <tr th:each="product : $(products)">
-        <td th:text="$(product.name)"></td>
-        <td th:text="$(product.price)"></td>
-        <td th:text="$(product.type)"></td>
-        <td th:text="$(product.brand)"></td>
-        <td th:text="$(product.category)"></td>
+        <td th:text="$(product.name)">Proudct one</td>
+        <td th:text="$(product.price)">$125,000</td>
+        <td th:text="$(product.type)">Techonology</td>
+        <td th:text="$(product.brand)">Samsung</td>
+        <td th:text="$(product.category)">Electro</td>
+        <td th:text="$(product.quantity)">25</td>
     </tr>
 </table>
 </body>
