@@ -54,3 +54,28 @@ important links
 https://spring.io/guides/gs/rest-service/
 https://spring.io/guides/gs/serving-web-content/
 https://spring.io/guides/gs/accessing-data-mysql/
+
+
+
+##################################3
+Entity Classes sprint 1
+User
+Product
+Administrator -> User
+
+
+CrudRepository
+UserRepository
+ProductRepository
+AdminRepository
+
+Controller Classes
+AdminController
+AccountController
+ProductController
+
+views
+login view
+registration view
+admin view
+AddProduct view
