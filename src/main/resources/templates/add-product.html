@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Add product</title>
+<script type="text/javascript" src="valid.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Add Product</title>
 </head>
 <body>
-    <form action="#" th:action="@{/add-product}" th:object="${Product}" method="post">
-        name <input type="text" th:field="*{id}"><br>
-        price <input type="text" th:field="*{price}"><br>
-        type <input type="text" th:field="*{type}"><br>
-        brand <input type="text" th:field="*{brand}"><br>
-        category<input type="text" th:field="*{category}"><br>
-        <input type="submit" value="Submit">
-    </form>
+        <div class="form"> 
+            <h2>Add Product</h2>
+            <form name="addproduct" action="#" th:action="@{/add-product}" th:object="${Product}" onsubmit="return addproductvalid()" method="post">
+                Name <input name="name" type="text" th:field="*{id}"><br>
+                Price <input name="price" type="text" th:field="*{price}"><br>
+                Type <input name="type" type="text" th:field="*{type}"><br>
+                Brand <input name="brand" type="text" th:field="*{brand}"><br>
+                Category<input name="category" type="text" th:field="*{category}"><br>
+                Quantitiy<input name="quantitiy" type="text" th:field="*{quantitiy}"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
 </body>
 </html>

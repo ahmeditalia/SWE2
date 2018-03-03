@@ -3,6 +3,55 @@ body{
     background-size: cover;
     font-family: sans-serif;
 }
+.form{
+    font-size: 14px;
+    border-radius: 15px;
+    position: absolute;
+    padding: 40px 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 350px;
+    height: 550px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.534);
+    color: white;
+}
+
+.form input{
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 8px;
+}
+
+.form input[type="text"]{
+    border-bottom: 1px solid rgb(4, 255, 234);
+    background:transparent;
+    outline: none;
+    margin-top: 3px;
+    height: 18px;
+    color: white;
+    border-radius: 2px;
+    font-size: 16px;
+    text-indent: 2px;
+}
+.form input[type="submit"]{
+    border: none;
+    outline: none;
+    font-size: 16px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    background: rgb(1, 1, 94);
+    border-radius: 50px;
+    margin-bottom: 30px;
+    margin-top: 18px;
+}
+.form input[type="submit"]:hover{
+    background: yellow;
+    color: rgba(255, 0, 0, 0.87);
+    font-weight: bold;
+}
 .loginBox{
     border-radius: 15px;
     position: absolute;
