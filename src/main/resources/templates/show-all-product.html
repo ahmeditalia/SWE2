@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>show all products</title>
+</head>
+<body>
+
+<table>
+    <th>
+    <td>name</td>
+    <td>price</td>
+    <td>type</td>
+    <td>brand</td>
+    <td>category</td>
+    </th>
+
+    <tr th:each="product : $(products)">
+        <td th:text="$(product.name)"></td>
+        <td th:text="$(product.price)"></td>
+        <td th:text="$(product.type)"></td>
+        <td th:text="$(product.brand)"></td>
+        <td th:text="$(product.category)"></td>
+    </tr>
+</table>
+</body>
+</html>
