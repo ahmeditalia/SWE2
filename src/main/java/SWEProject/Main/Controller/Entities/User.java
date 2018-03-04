@@ -7,42 +7,49 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance
-public abstract class User {
+public class User {
 	@Id
 	private String username;
 	@NotNull
 	private String email;
 	@NotNull
-	private String Password;
+	private String password;
 
 	public User() {
-		super();
 		username="";
 		email="";
-		Password="";
+		password="";
 	}
 	public User(String username, String email, String password) {
-		super();
 		this.username = username;
 		this.email = email;
-		Password = password;
+		this.password = password;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
-		return Password;
+		return password;
 	}
+
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
+
+
+
 }

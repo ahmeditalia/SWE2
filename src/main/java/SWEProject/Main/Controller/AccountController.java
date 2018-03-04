@@ -18,9 +18,10 @@ public class AccountController {
 	@GetMapping("/Registration")
 	public String showRegistrationForm(Model model)
 	{
-		model.addAttribute("user",new User() {});
+		model.addAttribute("user",new User());
 		return "Registration";
 	}
+
 	
 	@PostMapping("/Registration")
 	public String registration(@ModelAttribute User user)
@@ -32,14 +33,14 @@ public class AccountController {
 	@GetMapping("/login")
 	public String showLoginForm(Model model)
 	{
-		model.addAttribute("user",new User() {});
+		model.addAttribute("user",new User());
 		return "login";
 	}
 	
 	@PostMapping("/login")
 	public String login(@ModelAttribute User user)
 	{
-		if(userRepository.existsByID(user.getUsername(), user.getPassword()))
+		if(userRepository.existsByUsernameAndPassword(user.getUsername(), user.getPassword()))
 		{
 			return "add-product";
 		}

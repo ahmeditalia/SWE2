@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="style.css"></link>
+<link href="/style.css"
+          th:href="@{style.css}" rel="stylesheet"/>
 <script type="text/javascript" src="valid.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Registration</title>
@@ -10,15 +11,15 @@
         <div class="Registration">            
             <img src="signup.png" class="avatar"></img>
             <h2>Register</h2>
-            <form name="Registrationform" onsubmit="return registervalid()" method="POST">
+            <form action="#" name="Registrationform" th:action="@{/Registration}" th:Object="${user}" onsubmit="return registervalid()" method="POST">
                 <p>UserName</p>
-                <input name="username" type="text" placeholder="user name"></input>
+                <input name="username" th:field="*{username}" type="text" placeholder="user name"></input>
                 <div id="validname" class="valid"></div>
                 <p>E-mail</p>
-                <input name="email" type="text" placeholder="avatar@mail.com"></input>
+                <input name="email" th:field="*{email}" type="text" placeholder="avatar@mail.com"></input>
                 <div id="validemail" class="valid"></div>
                 <p>Password</p>
-                <input name="password" type="password" placeholder="********"></input>
+                <input name="password" th:field="*{password}" type="password" placeholder="********"></input>
                 <div id="validpassword" class="valid"></div>
                 <input type="Submit" value="Register"></input>
                 <a href="#">Go To Login</a>

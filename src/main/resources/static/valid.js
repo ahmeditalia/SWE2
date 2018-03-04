@@ -61,22 +61,18 @@ function registervalid() {
 }
 
 function loginvalid() {
-    var email = document.forms["loginform"]["email"].value;
+    var username = document.forms["loginform"]["username"].value;
     var password = document.forms["loginform"]["password"].value;
     var flag3 = true;
     var flag2 = true;
     var filtermail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var filterpass = /^([a-zA-Z0-9]){8,32}$/;
-    if(email == ""){
-        document.getElementById('validemail').innerText = "*Email require";
-        flag2 = false;
-    }
-    else if (!filtermail.test(email)){
-        document.getElementById('validemail').innerText = "*Email not valid";
+    if(username == ""){
+        document.getElementById('validname').innerText = "*UserName require";
         flag2 = false;
     }
     else{
-        document.getElementById('validemail').innerText = "";
+        document.getElementById('validname').innerText = "";
         flag2 = true;
     }
     if(password == ""){

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/style.css"></link>
 <script type="text/javascript" src="valid.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Login</title>
 </head>
 <body>
         <div class="loginBox">           
-            <img src="user.png" class="avatar">
+            <img src="user.png" class="avatar"></img>
             <h2>Log In</h2>
-            <form name="loginform" method="POST" onsubmit="return loginvalid()">
-                <p>E-mail</p>
-                <input name="email" type="text" placeholder="avatar@mail.com">
-                <div id="validemail" class="valid"></div>
+            <form action="#" name="loginform" th:action="@{/login}" method="POST" onsubmit="return loginvalid()">
+                <p>UserName</p>
+                <input name="username" type="text" placeholder="User Name"></input>
+                <div id="validname" class="valid"></div>
                 <p>Password</p>
-                <input name="password" type="password" placeholder="*******">
+                <input name="password" type="password" placeholder="*******"></input>
                 <div id="validpassword" class="valid"></div>
-                <input type="Submit" value="Log In">
+                <input type="Submit" value="Log In"></input>
                 <a href="#">Registration</a>
             </form>
         </div>
