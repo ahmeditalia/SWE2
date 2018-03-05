@@ -17,23 +17,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
     @Autowired
     private ProductRepository repo;
+    
+    
     @GetMapping("/add-product")
     public String showproductsform(Model model){
         model.addAttribute("product",new Product());
         return "add-product";
     }
+    
+    
     @PostMapping("/add-product")
-    public String addProduct(Model model, @ModelAttribute Product product){
+    public String addProduct(@ModelAttribute Product product){
         repo.save(product);
-        Iterable<Product> pro=repo.findAll();
-    	List<Product> products=new ArrayList<Product>();
-    	for(Product p:pro)
-    	{
-    		products.add(p);
-    	}
-    	model.addAttribute("products",products);
-        return "show-all-product";
+        return "redirect:/show-all-product";
     }
+    
+    
     @RequestMapping("/show-all-product")
     public String showAllProducts(Model model)
     {

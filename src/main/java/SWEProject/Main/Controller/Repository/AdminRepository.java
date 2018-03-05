@@ -1,13 +1,10 @@
 package SWEProject.Main.Controller.Repository;
 
-
-
-
 import org.springframework.transaction.annotation.Transactional;
 
-import SWEProject.Main.Controller.Entities.User;
+import SWEProject.Main.Controller.Entities.Admin;
 
 @Transactional
-public interface UserRepository extends UserBaseRepository<User>{
+public interface AdminRepository extends UserBaseRepository<Admin>{
 
 }

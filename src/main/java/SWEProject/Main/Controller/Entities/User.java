@@ -9,23 +9,34 @@ import javax.validation.constraints.NotNull;
 @Inheritance
 public class User {
 	@Id
-	private String username;
+	protected String username;
 	@NotNull
-	private String email;
+	protected String email;
 	@NotNull
-	private String password;
+	protected String password;
+	@NotNull
+	protected int type;
 
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public User() {
 		username="";
 		email="";
 		password="";
 	}
-	public User(String username, String email, String password) {
+
+
+	public User(String username, String email, String password, int type) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.type = type;
 	}
-
+	
 	public String getUsername() {
 		return username;
 	}

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import SWEProject.Main.Controller.Entities.Admin;
 import SWEProject.Main.Controller.Entities.User;
 import SWEProject.Main.Controller.Repository.UserRepository;
 
@@ -26,8 +27,12 @@ public class AccountController {
 	@PostMapping("/Registration")
 	public String registration(@ModelAttribute User user)
 	{
-		userRepository.save(user);
-		return "login";	
+		if(user.getType()==3)
+		{
+			Admin admin= new Admin(user);
+			userRepository.save(admin);
+		}
+		return "redirect:/login";	
 	}
 	
 	@GetMapping("/login")
@@ -42,7 +47,16 @@ public class AccountController {
 	{
 		if(userRepository.existsByUsernameAndPassword(user.getUsername(), user.getPassword()))
 		{
-			return "add-product";
+			User repoUser=userRepository.findOneByUsernameAndPassword(user.getUsername(), user.getPassword());
+			if(repoUser instanceof Admin)
+			{
+				System.out.println("admin");
+				return "redirect:/add-product";
+			}
+			else {
+				System.out.println("enta htsthbel");
+			}
+			
 		}
 		return "login";
 	}
