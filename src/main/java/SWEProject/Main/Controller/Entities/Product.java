@@ -10,17 +10,21 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String name;
+    private double price;
 	private String brand;
     private String category;
+    private int quantity;
     private String type;
     
     
     
-    public Product(Integer id, String name, String brand, String category, int quantity, String type) {
+    public Product(Integer id, String name, double price, String brand, String category, int quantity, String type) {
 		this.id = id;
 		this.name = name;
+		this.price = price;
 		this.brand = brand;
 		this.category = category;
+		this.quantity = quantity;
 		this.type = type;
 	}
 
@@ -28,8 +32,10 @@ public class Product {
 
 	public Product(){
         this.name="";
-       this.brand ="";
+        this.price=0;
+        this.brand ="";
         this.category ="";
+        this.quantity =0;
         this.type ="";
     }
 
@@ -59,9 +65,15 @@ public class Product {
 
 
 
+	public double getPrice() {
+		return price;
+	}
 
 
 
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 
 
@@ -82,9 +94,23 @@ public class Product {
 	}
 
 
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 
 
 	public String getType() {
