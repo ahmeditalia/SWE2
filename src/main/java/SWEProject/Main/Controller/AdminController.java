@@ -10,18 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdminController {
 	
-	@GetMapping("/adminView")
-	public String loadView(Model model)
+	@GetMapping("/admin-view")
+	public String loadView()
 	{
-		model.addAttribute("direct", new String());
-		return "adminView";
+		return "admin-view";
 	}
 	
-	@PostMapping("/adminView")
-	public String redirect(@ModelAttribute String s)
-	{
-		return "redirect:/"+s;
-	}
-	
-	
+
 }

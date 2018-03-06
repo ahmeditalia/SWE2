@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/style.css"></link>
-    <title>show all products</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/style.css"></link>
+<title>show all products</title>
 </head>
 <body>
-
-<table class="showtable">
-    <tr class="theader">
-    	<td class="tdshow">ID</td>
-        <td class="tdshow">Name</td>
-        <td class="tdshow">Price</td>
-        <td class="tdshow">Type</td>
-        <td class="tdshow">Brand</td>
-        <td class="tdshow">Category</td>
-        <td class="tdshow">Quantity</td>
-    </tr>
-    <tr th:each="product : ${products}">
-    	<td th:text="${product.id}"></td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.brand}"></td>
-        <td th:text="${product.category}"></td>
-        <td th:text="${product.quantity}"></td>
-        <td th:text="${product.type}"></td>
-    </tr>
-</table>
+	<div class="homebutton">
+		<form th:action="@{/admin-view}"
+			th:Object="${user}" method="get">
+			<input type="Submit" value="Home Page"></input>
+		</form>
+	</div>
+	<table class="showtable">
+		<tr class="theader">
+			<td class="tdshow">ID</td>
+			<td class="tdshow">Name</td>
+			<td class="tdshow">Type</td>
+			<td class="tdshow">Brand</td>
+			<td class="tdshow">Category</td>
+		</tr>
+		<tr th:each="product : ${products}">
+			<td th:text="${product.id}"></td>
+			<td th:text="${product.name}"></td>
+			<td th:text="${product.type}"></td>
+			<td th:text="${product.brand}"></td>
+			<td th:text="${product.category}"></td>
+		</tr>
+	</table>
 </body>
 </html>

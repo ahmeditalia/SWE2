@@ -91,6 +91,10 @@ function loginvalid() {
 	}
 }
 
+function isString (value) {
+	return typeof value === 'string' || value instanceof String;
+}
+
 function addproductvalid() {
 	var name = document.forms["addProduct"]["name"].value;
 	var price = document.forms["addProduct"]["price"].value;
@@ -98,7 +102,9 @@ function addproductvalid() {
 	var brand = document.forms["addProduct"]["brand"].value;
 	var quantity = document.forms["addProduct"]["quantity"].value;
 	var category = document.forms["addProduct"]["category"].value;
-
+	var numbers = /^\d+$/;
+	var floatnumber = /(^-?\d\d*\.\d\d*$)|(^-?\.\d\d*$)/;
+	
 	var flag1 = true;
 	var flag2 = true;
 	var flag3 = true;
@@ -110,29 +116,31 @@ function addproductvalid() {
 		document.getElementById('validname').innerText = "*Name require";
 		flag1 = false;
 	}
-	else if (typeof (name) == "number") {
+	else if (numbers.test(name)){
 		document.getElementById('validname').innerText = "*Invlaid Input";
 		flag1 = false;
 	} else {
 		document.getElementById('validname').innerText = "";
 		flag1 = true;
 	}
+	
 	if (price == "") {
 		document.getElementById('validprice').innerText = "*Price require";
 		flag2 = false;
 	}
-	else if (typeof (price) == "string") {
+	else if (!floatnumber.test(price)) {
 		document.getElementById('validprice').innerText = "*Invlaid Input";
 		flag2 = false;
 	} else {
 		document.getElementById('validprice').innerText = "";
 		flag2 = true;
 	}
+	
 	if (type == "") {
 		document.getElementById('validtype').innerText = "*Type require";
 		flag3 = false;
 	}
-	else if (typeof (type) == "number") {
+	else if (numbers.test(type)) {
 		document.getElementById('validtype').innerText = "*Invlaid Input";
 		flag3 = false;
 	} else {
@@ -143,7 +151,7 @@ function addproductvalid() {
 		document.getElementById('validbrand').innerText = "*Brand require";
 		flag4 = false;
 	}
-	else if (typeof (brand) == "number") {
+	else if (numbers.test(brand)) {
 		document.getElementById('validbrand').innerText = "*Invlaid Input";
 		flag4 = false;
 	} else {
@@ -151,21 +159,21 @@ function addproductvalid() {
 		flag4 = true;
 	}
 	if (category == "") {
-		document.getElementById('validvcategor').innerText = "*Category require";
+		document.getElementById('validcategory').innerText = "*Category require";
 		flag5 = false;
 	}
-	else if (typeof (category) == "number") {
+	else if (numbers.test(category)) {
 		document.getElementById('validcategory').innerText = "*Invlaid Input";
 		flag5 = false;
 	} else {
 		document.getElementById('validcategory').innerText = "";
 		flag5 = true;
 	}
-	if (quantity== "") {
+	if (quantity == "" ) {
 		document.getElementById('validquantity').innerText = "*Quantity require";
 		flag6 = false;
 	}
-	else if (typeof (quantity) == "number") {
+	else if (!numbers.test(quantity)) {
 		document.getElementById('validquantity').innerText = "*Invlaid Input";
 		flag6 = false;
 	} else {
@@ -173,11 +181,11 @@ function addproductvalid() {
 		flag6 = true;
 	}
 
+	
+	
 	if (flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
-		alert('true');
 		return true;
 	} else {
-		alert('false');
 		return false;
 	}
 }

@@ -1,250 +1,399 @@
-body{
-    background:url("bg2.jpg");
-    background-size: cover;
-    font-family: sans-serif;
-}
-.form{
-    font-size: 14px;
-    border-radius: 15px;
-    position: absolute;
-    padding: 40px 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 350px;
-    height: 550px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.534);
-    color: white;
+body {
+	background: url("bg2.jpg");
+	background-size: cover;
+	font-family: sans-serif;
 }
 
-.form input{
-    width: 100%;
-    margin-bottom: 15px;
-    margin-top: 8px;
+::placeholder {
+	color: rgba(255, 255, 255, .5);
 }
 
-.form input[type="text"]{
-    border-bottom: 1px solid rgb(4, 255, 234);
-    background:transparent;
-    outline: none;
-    margin-top: 3px;
-    height: 18px;
-    color: white;
-    border-radius: 2px;
-    font-size: 16px;
-    text-indent: 2px;
+.avatar {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;
+	position: absolute;
+	top: calc(-100px/ 2);
+	left: calc(50% - 50px);
 }
-.form input[type="submit"]{
-    border: none;
-    outline: none;
-    font-size: 16px;
-    height: 40px;
-    color: white;
-    cursor: pointer;
-    background: rgb(1, 1, 94);
-    border-radius: 50px;
-    margin-bottom: 30px;
-    margin-top: 18px;
+
+.valid {
+	margin-top: -14px;
+	margin-bottom: 8px;
+	height: 15px;
+	font-size: 13px;
+	color: rgb(238, 255, 2);
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
-.form input[type="submit"]:hover{
-    background: yellow;
-    color: rgba(255, 0, 0, 0.87);
-    font-weight: bold;
+
+.validadd {
+	margin-top: 3px;
+	margin-bottom: 0px;
+	height: 15px;
+	font-size: 13px;
+	color: rgb(238, 255, 2);
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
-.loginBox{
-    border-radius: 15px;
-    position: absolute;
-    padding: 80px 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 350px;
-    height: 460px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.534);
+
+.homebutton input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: #ffffff;
+	cursor: pointer;
+	background: rgb(158, 0, 0);
+	border-radius: 10px;
+	margin-bottom: 30px;
+	font-weight: bold;
 }
-.avatar{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: absolute;
-    top: calc(-100px/2);
-    left:calc(50% - 50px);
+
+.homebutton input[type="submit"]:hover {
+	background: white;
+	color: rgb(255, 0, 0);
+	font-weight: bold;
 }
+
+.container {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 0px;
+	color: white;
+	font-weight:bold;
+	font-size: 14px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
-.valid{
-    height: 45px;
-    font-size: 15px;
-    color: rgb(238, 255, 2);
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+
+.container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
 }
-.loginBox h2{
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-    color: rgb(253, 253, 253);
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 24px;
+	width: 24px;
+	background-color: #eee;
+	border-radius: 50%;
 }
-.loginBox p{
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    font-size: 14px;
+
+.container:hover input ~ .checkmark {
+	background-color: #ccc;
 }
-.loginBox input{
-    width: 100%;
-    margin-bottom: 15px;
+
+.container input:checked ~ .checkmark {
+	background-color: #2196F3;
 }
-.loginBox input[type="text"],
-.loginBox input[type="password"]{
-    border: none;
-    border-bottom: 1px solid rgb(4, 255, 234);
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: white;
-    font-size: 16px;
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
 }
-::placeholder{
-    color: rgba(255, 255, 255, .5);
+
+.container input:checked ~ .checkmark:after {
+	display: block;
 }
-.loginBox input[type="submit"]{
-    border: none;
-    outline: none;
-    font-size: 16px;
-    height: 40px;
-    color: white;
-    cursor: pointer;
-    background: rgb(1, 1, 94);
-    border-radius: 50px;
-    margin-bottom: 30px;
+
+.container .checkmark:after {
+	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
 }
-.loginBox input[type="submit"]:hover{
-    background: white;
-    color: rgba(4, 4, 160, 0.87);
-    font-weight: bold;
+
+.Box {
+	border-radius: 15px;
+	position: absolute;
+	padding: 40px 40px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 610px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
 }
-.loginBox a{
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
+
+.Box h2 {
+	margin: 10px;
+	padding: 0 0 30px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
+.Box p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+
+.Box input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.Box input[type="text"] {
+	border-bottom: 1px solid rgb(4, 255, 234);
+	background: transparent;
+	outline: none;
+	height: 20px;
+	color: white;
+	margin-bottom: -10px;
+	font-size: 16px;
+}
+
+.Box input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+.Box input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+.Box a {
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.adminBox {
+	border-radius: 15px;
+	position: absolute;
+	padding: 80px 40px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+.adminBox input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	width: 100%;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+.adminBox input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+.loginBox {
+	border-radius: 15px;
+	position: absolute;
+	padding: 80px 40px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 460px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+.loginBox h2 {
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
+.loginBox p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+
+.loginBox input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.loginBox input[type="text"], .loginBox input[type="password"] {
+	border: none;
+	border-bottom: 1px solid rgb(4, 255, 234);
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: white;
+	font-size: 16px;
+}
+
+.loginBox input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+.loginBox input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+.loginBox a {
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.Registration {
+	border-radius: 15px;
+	position: absolute;
+	padding: 75px 40px;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 650px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+.Registration h2 {
+	margin: 0;
+	padding: 0 0 0 0;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
 }
 
 
+.Registration h3 {
+	margin: 0;
+	font-size:14px;
+	padding: 0 0 20px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
 
-.Registration{
-    border-radius: 15px;
-    position: absolute;
-    padding: 80px 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 350px;
-    height: 500px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.534);
+.Registration p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
 }
-.avatar{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: absolute;
-    top: calc(-100px/2);
-    left:calc(50% - 50px);
+
+.Registration input {
+	width: 100%;
+	margin-bottom: 15px;
 }
-.valid{
-    margin-top: -14px;
-    margin-bottom: 8px;
-    height: 15px;
-    font-size: 13px;
-    color: rgb(238, 255, 2);
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+
+.Registration input[type="text"], .Registration input[type="password"] {
+	border: none;
+	border-bottom: 1px solid rgb(4, 255, 234);
+	background: transparent;
+	outline: none;
+	height: 35px;
+	color: white;
+	font-size: 16px;
 }
-.Registration h2{
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-    color: rgb(253, 253, 253);
+
+::placeholder {
+	color: rgba(255, 255, 255, .5);
 }
-.Registration p{
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    font-size: 14px;
+
+.Registration input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+	margin-top: 12px;
 }
-.Registration input{
-    width: 100%;
-    margin-bottom: 15px;
+
+.Registration input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
 }
-.Registration input[type="text"],
-.Registration input[type="password"]{
-    border: none;
-    border-bottom: 1px solid rgb(4, 255, 234);
-    background: transparent;
-    outline: none;
-    height: 35px;
-    color: white;
-    font-size: 16px;
-}
-::placeholder{
-    color: rgba(255, 255, 255, .5);
-}
-.Registration input[type="submit"]{
-    border: none;
-    outline: none;
-    font-size: 16px;
-    height: 40px;
-    color: white;
-    cursor: pointer;
-    background: rgb(1, 1, 94);
-    border-radius: 50px;
-    margin-bottom: 30px;
-    margin-top: 18px;
-}
-.Registration input[type="submit"]:hover{
-    background: white;
-    color: rgba(4, 4, 160, 0.87);
-    font-weight: bold;
-}
-.Registration a{
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
+
+.Registration a {
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .showtable {
-    border-collapse: collapse;
-    width: 80%;
-    left: 50%;
-    top: 10%;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    padding: 80px 40px;
+	border-collapse: collapse;
+	width: 70%;
+	left: 50%;
+	top: 10%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	padding: 80px 40px;
 }
 
 th, td {
-    text-align: left;
-    padding: 8px;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;
+	text-align: left;
+	padding: 8px;
+	font-size: 14px;
+	border-bottom: 1px solid #ddd;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
 
 .theader {
-    background-color: #4CAF50;
-    color: white;
+	background-color: #4CAF50;
+	color: white;
 }
-.tdshow{
-    font-size: 16px;
-    color: yellow;
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+
+.tdshow {
+	font-size: 16px;
+	color: yellow;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }

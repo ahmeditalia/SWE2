@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link href="/style.css"
-          th:href="@{style.css}" rel="stylesheet"/>
+<link href="/style.css" th:href="@{style.css}" rel="stylesheet" />
 <script type="text/javascript" src="valid.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Registration</title>
 </head>
 <body>
-        <div class="Registration">            
-            <img src="signup.png" class="avatar"></img>
-            <h2>Register</h2>
-            <form action="#" name="Registrationform" th:action="@{/Registration}" th:Object="${user}" onsubmit="return registervalid()" method="POST">
-                <p>UserName</p>
-                <input name="username" th:field="*{username}" type="text" placeholder="user name"></input>
-                <div id="validname" class="valid"></div>
-                <p>E-mail</p>
-                <input name="email" th:field="*{email}" type="text" placeholder="avatar@mail.com"></input>
-                <div id="validemail" class="valid"></div>
-                <p>Password</p>
-                <input name="password" th:field="*{password}" type="password" placeholder="********"></input>
-                <p>Type</p>
-                <input name="type" th:field="*{type}" type="text"></input>
-                <div id="validpassword" class="valid"></div>
-                <input type="Submit" value="Register"></input>
-                <a href="#">Go To Login</a>
-            </form>
-        </div>
+	<div class="Registration">
+		<img src="signup.png" class="avatar"></img>
+		<h2>Register</h2>
+		<form action="#" name="Registrationform" th:action="@{/Registration}"
+			th:Object="${user}" onsubmit="return registervalid()" method="POST">
+			<p>UserName</p>
+			<input name="username" th:field="*{username}" type="text"
+				placeholder="user name"></input>
+			<div id="validname" class="valid"></div>
+			<p>E-mail</p>
+			<input name="email" th:field="*{email}" type="text"
+				placeholder="avatar@mail.com"></input>
+			<div id="validemail" class="valid"></div>
+			<p>Password</p>
+			<input name="password" th:field="*{password}" type="password" placeholder="********"></input> 
+			<div id="validpassword" class="valid"></div>
+			<h3>Account Type:</h3>
+			<label class="container">Admin
+			<input type="radio" name="type" value="admin"></input>
+			<span class="checkmark"></span>
+			</label><br></br>
+			<label class="container">Store Owner
+			<input type="radio" name="type" value="store owner"></input>
+			<span class="checkmark"></span>
+			</label><br></br> 
+			<label class="container">Normal User
+			<input type="radio" name="type" value="normal user"></input>
+			<span class="checkmark"></span>
+			</label><br></br>
+			<input type="Submit" value="Register"></input> <a th:href="@{/login}">Go To Login</a>
+		</form>
+	</div>
 </body>
 </html>

@@ -11,6 +11,5 @@ public class Admin extends User {
 		this.username=user.username;
 		this.password=user.password;
 		this.email=user.email;
-		this.type=user.type;
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import SWEProject.Main.Controller.Entities.Admin;
 import SWEProject.Main.Controller.Entities.User;
@@ -25,9 +26,9 @@ public class AccountController {
 
 	
 	@PostMapping("/Registration")
-	public String registration(@ModelAttribute User user)
+	public String registration(@ModelAttribute User user, @RequestParam("type") String type)
 	{
-		if(user.getType()==3)
+		if(type.equals("admin"))
 		{
 			Admin admin= new Admin(user);
 			userRepository.save(admin);
@@ -51,7 +52,7 @@ public class AccountController {
 			if(repoUser instanceof Admin)
 			{
 				System.out.println("admin");
-				return "redirect:/add-product";
+				return "redirect:/admin-view";
 			}
 			else {
 				System.out.println("enta htsthbel");
