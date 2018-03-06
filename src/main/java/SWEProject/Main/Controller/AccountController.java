@@ -28,12 +28,18 @@ public class AccountController {
 	@PostMapping("/Registration")
 	public String registration(@ModelAttribute User user, @RequestParam("type") String type)
 	{
+		String routed = "/";
 		if(type.equals("admin"))
 		{
-			Admin admin= new Admin(user);
-			userRepository.save(admin);
+			if(!userRepository.exists(user.getUsername())) {
+				Admin admin = new Admin(user);
+				userRepository.save(admin);
+				routed = "redirect:/login";
+			} else {
+				routed = "redirect:/Registration?error";
+			}
 		}
-		return "redirect:/login";	
+		return routed;
 	}
 	
 	@GetMapping("/login")
@@ -54,10 +60,7 @@ public class AccountController {
 				System.out.println("admin");
 				return "redirect:/admin-view";
 			}
-			else {
-				System.out.println("enta htsthbel");
-			}
-			
+
 		}
 		return "login";
 	}

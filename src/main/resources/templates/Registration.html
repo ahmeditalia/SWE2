@@ -37,7 +37,12 @@
 			<span class="checkmark"></span>
 			</label><br></br>
 			<input type="Submit" value="Register"></input> <a th:href="@{/login}">Go To Login</a>
+			<div th:if="${param.error}" >
+				Invalid Parameters.
+			</div>
+
 		</form>
 	</div>
+
 </body>
 </html>
