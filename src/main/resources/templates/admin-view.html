@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="/style.css"></link>
-<script type="text/javascript" src="valid.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+<script type="text/javascript" src="/js/valid.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Admin View</title>
 </head>
@@ -17,7 +17,7 @@
 			<input type="submit" value="Show All Products" ></input>
 		</form>
 		
-		<form name="logOut" th:action="@{/login}" method="get">
+		<form name="logOut" th:action="@{/logout}" method="post">
 			<input type="submit" value="Log out" ></input>
 		</form>
 		

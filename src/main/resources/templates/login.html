@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="/style.css"></link>
-<script type="text/javascript" src="valid.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+<script type="text/javascript" src="/js/valid.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Login</title>
 </head>
 <body>
         <div class="loginBox">           
-            <img src="user.png" class="avatar"></img>
+            <img src="/img/user.png" class="avatar"></img>
             <h2>Log In</h2>
             <form action="#" name="loginform" th:action="@{/login}" method="POST" onsubmit="return loginvalid()">
                 <p>UserName</p>

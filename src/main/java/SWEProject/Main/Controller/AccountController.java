@@ -1,6 +1,8 @@
 package SWEProject.Main.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,22 +47,17 @@ public class AccountController {
 	@GetMapping("/login")
 	public String showLoginForm(Model model)
 	{
-		model.addAttribute("user",new User());
 		return "login";
 	}
 	
-	@PostMapping("/login")
-	public String login(@ModelAttribute User user)
+	@GetMapping("/success")
+	public String success()
 	{
-		if(userRepository.existsByUsernameAndPassword(user.getUsername(), user.getPassword()))
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user instanceof Admin)
 		{
-			User repoUser=userRepository.findOneByUsernameAndPassword(user.getUsername(), user.getPassword());
-			if(repoUser instanceof Admin)
-			{
-				System.out.println("admin");
-				return "redirect:/admin-view";
-			}
-
+			System.out.println("admin");
+			return "redirect:/admin-view";
 		}
 		return "login";
 	}
