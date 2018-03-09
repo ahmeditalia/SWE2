@@ -31,8 +31,6 @@ public class WebSecurityAuthenticator implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        System.out.println(username);
-        System.out.println(password);
 
         userRepository.existsByUsernameAndPassword(username, password);
         User user = userRepository.findOneByUsernameAndPassword(username, password);
@@ -44,7 +42,6 @@ public class WebSecurityAuthenticator implements AuthenticationProvider {
             grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
         }
 
-        System.out.println("El Donya 7lwa");
 
         return new UsernamePasswordAuthenticationToken(user, password, grantedAuthorities);
 

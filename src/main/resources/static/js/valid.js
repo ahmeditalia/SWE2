@@ -96,21 +96,18 @@ function isString (value) {
 }
 
 function addproductvalid() {
+
 	var name = document.forms["addProduct"]["name"].value;
-	var price = document.forms["addProduct"]["price"].value;
 	var type = document.forms["addProduct"]["type"].value;
 	var brand = document.forms["addProduct"]["brand"].value;
-	var quantity = document.forms["addProduct"]["quantity"].value;
 	var category = document.forms["addProduct"]["category"].value;
 	var numbers = /^\d+$/;
 	var floatnumber = /(^-?\d\d*\.\d\d*$)|(^-?\.\d\d*$)/;
 	
 	var flag1 = true;
-	var flag2 = true;
 	var flag3 = true;
 	var flag4 = true;
 	var flag5 = true;
-	var flag6 = true;
 
 	if (name == "") {
 		document.getElementById('validname').innerText = "*Name require";
@@ -124,18 +121,7 @@ function addproductvalid() {
 		flag1 = true;
 	}
 	
-	if (price == "") {
-		document.getElementById('validprice').innerText = "*Price require";
-		flag2 = false;
-	}
-	else if (!floatnumber.test(price)) {
-		document.getElementById('validprice').innerText = "*Invlaid Input";
-		flag2 = false;
-	} else {
-		document.getElementById('validprice').innerText = "";
-		flag2 = true;
-	}
-	
+
 	if (type == "") {
 		document.getElementById('validtype').innerText = "*Type require";
 		flag3 = false;
@@ -169,21 +155,9 @@ function addproductvalid() {
 		document.getElementById('validcategory').innerText = "";
 		flag5 = true;
 	}
-	if (quantity == "" ) {
-		document.getElementById('validquantity').innerText = "*Quantity require";
-		flag6 = false;
-	}
-	else if (!numbers.test(quantity)) {
-		document.getElementById('validquantity').innerText = "*Invlaid Input";
-		flag6 = false;
-	} else {
-		document.getElementById('validquantity').innerText = "";
-		flag6 = true;
-	}
 
 	
-	
-	if (flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
+	if (flag1  && flag3 && flag4 && flag5) {
 		return true;
 	} else {
 		return false;
