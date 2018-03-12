@@ -11,7 +11,7 @@ public class OnlineStore implements Store {
     @EmbeddedId
     private StoreIdentity storeIdentity;
     private String storeType;
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "book_category_id")
     private ProductStoreID id;
 
@@ -21,7 +21,7 @@ public class OnlineStore implements Store {
 
     public void setId(ProductStoreID id) {
         this.id = id;
-    }*/
+    }
 
     public OnlineStore(StoreIdentity storeIdentity, String storeType) {
         this.storeIdentity = storeIdentity;

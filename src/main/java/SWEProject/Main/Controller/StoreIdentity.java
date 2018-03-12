@@ -7,18 +7,11 @@ import java.io.Serializable;
 @Embeddable
 public class StoreIdentity implements Serializable  {
     @NotNull
-    private String name;
+    private String storeName;
     //@NotNull
     //private StoreOwner storeOwner;
 
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
    /* public StoreOwner getStoreOwner() {
         return storeOwner;
     }*/
@@ -27,10 +20,18 @@ public class StoreIdentity implements Serializable  {
         this.storeOwner = storeOwner;
     }*/
 
-    public StoreIdentity(String name/*,StoreOwner storeOwner*/) {
-        this.name = name;
-        //this.storeOwner=storeOwner;
+    public String getStoreName() {
+        return storeName;
     }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public StoreIdentity(String storeName/*StoreOwner*/) {
+        this.storeName = storeName;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -40,7 +41,7 @@ public class StoreIdentity implements Serializable  {
             return false;
         }
         final StoreIdentity other = (StoreIdentity) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+        if ((this.storeName == null) ? (other.storeName != null) : !this.storeName.equals(other.storeName)) {
             return false;
         }
         /*if (this.storeOwner != other.storeOwner) {
