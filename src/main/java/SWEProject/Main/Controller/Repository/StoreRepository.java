@@ -6,4 +6,5 @@ import SWEProject.Main.Controller.StoreIdentity;
 
 public interface StoreRepository extends CrudRepository<Store,StoreIdentity> {
 
+    Iterable<Store> findAllByStoreIdentity(StoreIdentity storeIdentity);
 }

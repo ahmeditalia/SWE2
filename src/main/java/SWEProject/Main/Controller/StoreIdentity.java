@@ -31,5 +31,21 @@ public class StoreIdentity implements Serializable  {
         this.name = name;
         //this.storeOwner=storeOwner;
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!StoreIdentity.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final StoreIdentity other = (StoreIdentity) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        /*if (this.storeOwner != other.storeOwner) {
+            return false;
+        }*/
+        return true;
+    }
 }

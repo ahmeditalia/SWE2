@@ -2,14 +2,26 @@ package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.Id;
 import javax.persistence.EmbeddedId;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import SWEProject.Main.Controller.StoreIdentity;
 
 public class OnlineStore implements Store {
-
-    @Id
     @EmbeddedId
     private StoreIdentity storeIdentity;
     private String storeType;
+    /*@ManyToOne
+    @JoinColumn(name = "book_category_id")
+    private ProductStoreID id;
+
+    public ProductStoreID getId() {
+        return id;
+    }
+
+    public void setId(ProductStoreID id) {
+        this.id = id;
+    }*/
 
     public OnlineStore(StoreIdentity storeIdentity, String storeType) {
         this.storeIdentity = storeIdentity;
@@ -31,4 +43,6 @@ public class OnlineStore implements Store {
     public void setStoreType(String storeType) {
         this.storeType = storeType;
     }
+
+
 }

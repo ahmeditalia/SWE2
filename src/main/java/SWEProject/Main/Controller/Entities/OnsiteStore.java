@@ -7,7 +7,6 @@ import javax.persistence.Id;
 
 public class OnsiteStore  implements Store {
 
-    @Id
     @EmbeddedId
     private StoreIdentity storeIdentity;
     private String storeType;
@@ -31,4 +30,6 @@ public class OnsiteStore  implements Store {
 
     public void setStoreType(String storeType) {
         this.storeType = storeType;
-    }}
+    }
+
+}

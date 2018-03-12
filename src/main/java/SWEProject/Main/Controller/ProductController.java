@@ -1,5 +1,6 @@
 package SWEProject.Main.Controller;
 import SWEProject.Main.Controller.Entities.Product;
+import SWEProject.Main.Controller.Entities.SystemProduct;
 import SWEProject.Main.Controller.Repository.ProductRepository;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ProductController {
     
     @GetMapping("/add-product")
     public String showproductsform(Model model){
-        model.addAttribute("product",new Product());
+        model.addAttribute("product",new SystemProduct());
         return "add-product";
     }
     
