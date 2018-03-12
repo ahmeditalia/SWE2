@@ -12,7 +12,7 @@ public class OnlineStore implements Store {
     private StoreIdentity storeIdentity;
     private String storeType;
     @ManyToOne
-    @JoinColumn(name = "book_category_id")
+    @JoinColumn(name = "id")
     private ProductStoreID id;
 
     public ProductStoreID getId() {
