@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping("/add-product")
     public String showproductsform(Model model){
         model.addAttribute("product",new SystemProduct());
-        return "add-product";
+        return "add-product-to-system";
     }
     
     
