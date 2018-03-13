@@ -7,12 +7,25 @@ import java.io.Serializable;
 @Embeddable
 public class StoreIdentity implements Serializable  {
 	@NotNull
-    private String storeOwner;
+    private String storeOwnerId;
 
     @NotNull
     private String storeName;
-    
 
+    public StoreIdentity(String storeOwnerId, String storeName) {
+        this.storeOwnerId = storeOwnerId;
+        this.storeName = storeName;
+    }
+    public StoreIdentity(){
+
+    }
+    public String getStoreOwnerId() {
+        return storeOwnerId;
+    }
+
+    public void setStoreOwnerId(String storeOwnerId) {
+        this.storeOwnerId = storeOwnerId;
+    }
 
     public String getStoreName() {
         return storeName;
@@ -22,22 +35,7 @@ public class StoreIdentity implements Serializable  {
         this.storeName = storeName;
     }
 
-
-    public String getStoreOwner() {
-		return storeOwner;
-	}
-
-	public void setStoreOwner(String storeOwner) {
-		this.storeOwner = storeOwner;
-	}
-	public StoreIdentity() {
-	}
-	public StoreIdentity(String storeOwner, String storeName) {
-		this.storeOwner = storeOwner;
-		this.storeName = storeName;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -49,9 +47,9 @@ public class StoreIdentity implements Serializable  {
         if ((this.storeName == null) ? (other.storeName != null) : !this.storeName.equals(other.storeName)) {
             return false;
         }
-        /*if (this.storeOwner != other.storeOwner) {
+        if (!this.storeOwnerId .equals( other.storeOwnerId)) {
             return false;
-        }*/
+        }
         return true;
     }
 }

@@ -5,76 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+@Entity(name = "OnlineStore")
 
-@Entity
-public class OnlineStore implements Store {
-	
-	@Id
-	private String storeName;
-	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name="StoreOwner")
-	private StoreOwner owner;
+public class OnlineStore extends Store {
 
-	public String getStoreName() {
-		return storeName;
+	public OnlineStore(StoreIdentity storeName) {
+		super(storeName);
 	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public StoreOwner getOwner() {
-		return owner;
-	}
-
-	public void setOwner(StoreOwner owner) {
-		this.owner = owner;
-	}
-
-	public OnlineStore() {
-	}
-	public OnlineStore(String storeName, StoreOwner owner) {
-		this.storeName = storeName;
-		this.owner = owner;
-	}
-	/*
-    @EmbeddedId
-    private StoreIdentity storeIdentity;
-    private String storeType;
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private ProductStoreID id;
-
-    public ProductStoreID getId() {
-        return id;
-    }
-
-    public void setId(ProductStoreID id) {
-        this.id = id;
-    }
-
-    public OnlineStore(StoreIdentity storeIdentity, String storeType) {
-        this.storeIdentity = storeIdentity;
-        this.storeType = storeType;
-    }
-
-    public StoreIdentity getStoreIdentity() {
-        return storeIdentity;
-    }
-
-    public void setStoreIdentity(StoreIdentity storeIdentity) {
-        this.storeIdentity = storeIdentity;
-    }
-
-    public String getStoreType() {
-        return storeType;
-    }
-
-    public void setStoreType(String storeType) {
-        this.storeType = storeType;
-    }
-*/
-
 }
