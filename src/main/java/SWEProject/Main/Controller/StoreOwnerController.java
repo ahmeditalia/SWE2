@@ -23,10 +23,10 @@ public class StoreOwnerController {
 	@Autowired
 	OnsiteStoreRepository onsiteStoreRepository;
 	
-	@GetMapping("/store-owner")
+	@GetMapping("/store-owner-view")
 	public String showStoreOwnerView()
 	{
-		return "store-owner";
+		return "store-owner-view";
 	}
 	@GetMapping("/add-store")
 	public String creationStoreView(@ModelAttribute User user)
