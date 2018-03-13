@@ -1,10 +1,8 @@
 package SWEProject.Main.Controller.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Brand {
@@ -16,7 +14,9 @@ public class Brand {
     private String name;
     @NotNull
     private String category;
-    
+
+    @OneToMany(mappedBy="brand",cascade=CascadeType.ALL)
+    List<Product> products;
     
 
     public Brand(String name, String category) {

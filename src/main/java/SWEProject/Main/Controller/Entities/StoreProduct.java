@@ -2,20 +2,25 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//@Entity
+@Entity
 public class StoreProduct implements Product {
-	/*
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String name;
     @NotNull
     private double price;
+    @ManyToOne
+    @JoinColumn(name="Brand_ID")
     private Brand brand;
     @NotNull
     private int quantity;
     private String type;
-    private ProductStore productStore;
+    @ManyToOne
+    @JoinColumn(name="Store_ID")
+    private Store store;
+
 
     public StoreProduct() {}
 
@@ -32,15 +37,11 @@ public class StoreProduct implements Product {
     public Integer getId() { return id; }
 
     @Override
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     @Override
     public void setName(String name) { this.name = name; }
 
-    @Override
-    public ProductStore getProductStore() { return productStore; }
 
     public double getPrice() { return price; }
 
@@ -59,11 +60,14 @@ public class StoreProduct implements Product {
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
     @Override
-    public String getType() {
-        return type;
-    }
+    public String getType() { return type; }
 
     @Override
     public void setType(String type) { this.type = type; }
-    */
+
+    @Override
+    public Store getStore() { return store; }
+
+    @Override
+    public void setStore(Store store) { this.store = store; }
 }
