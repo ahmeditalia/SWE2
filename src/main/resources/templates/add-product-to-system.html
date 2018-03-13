@@ -10,7 +10,7 @@
 	<div class="Box">
 		<h2>Add Product To Store</h2>
 		<form name="addProduct" th:action="@{/add-product}"
-			th:object="${product}" onsubmit="return addproductvalid()"
+			th:object="${SystemProduct}" onsubmit="return addproductvalid()"
 			method="post">
 			<p>Name</p>
 			<input name="name" type="text" th:field="*{name}"></input>
