@@ -2,9 +2,9 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//@MappedSuperclass
+@MappedSuperclass
 public interface Product {
-/*
+
 	public Integer getId();
 
 	@NotNull
@@ -12,12 +12,7 @@ public interface Product {
 
 	public void setName(String name);
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name ="id", referencedColumnName="id")
-	public ProductStore getProductStore();
-
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name ="id", referencedColumnName="id")
+	@NotNull
 	public Brand getBrand();
 
 	public void setBrand(Brand brand);
@@ -26,5 +21,10 @@ public interface Product {
 	public String getType();
 
 	public void setType(String type);
-*/
+
+	@NotNull
+	public Store getStore();
+
+	public void setStore(Store store);
+
 }
