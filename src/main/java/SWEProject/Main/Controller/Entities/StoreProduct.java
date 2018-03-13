@@ -2,9 +2,11 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
+//@Entity
 public class StoreProduct implements Product {
-
+	/*
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String name;
     @NotNull
@@ -63,4 +65,5 @@ public class StoreProduct implements Product {
 
     @Override
     public void setType(String type) { this.type = type; }
+    */
 }

@@ -2,21 +2,18 @@ package SWEProject.Main.Controller;
 
 import SWEProject.Main.Controller.Entities.Product;
 import SWEProject.Main.Controller.Entities.StoreProduct;
-import SWEProject.Main.Controller.Repository.ProductRepository;
-import SWEProject.Main.Controller.Repository.StoreRepository;
-import SWEProject.Main.Controller.Entities.Store;
+import SWEProject.Main.Controller.Repository.OnlineStoreRepository;
+import SWEProject.Main.Controller.Repository.StoreProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StoreController {
     @Autowired
-    private StoreRepository srepo;
-    private ProductRepository prepo;
+    private OnlineStoreRepository srepo;
+    @Autowired
+    private StoreProductRepository prepo;
 
     @GetMapping("/add-product-store")
     public String showproductsform(Model model){
@@ -27,7 +24,7 @@ public class StoreController {
 
     @PostMapping("/add-product-store")
     public String addProduct(@ModelAttribute Product product){
-        prepo.save(product);
+       // prepo.save(product);
         return "redirect:/show-all-product-store";
     }
 

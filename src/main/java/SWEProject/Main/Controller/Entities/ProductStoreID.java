@@ -3,9 +3,9 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
-@Embeddable
+//@Embeddable
 public class ProductStoreID {
-
+/*
     @NotNull
     private int ProductId;
 
@@ -27,5 +27,5 @@ public class ProductStoreID {
     public int getStoreId() { return storeId; }
 
     public void setStoreId(int storeId) { this.storeId = storeId; }
-
+*/
 }
