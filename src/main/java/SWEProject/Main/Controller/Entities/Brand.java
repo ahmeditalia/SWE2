@@ -16,6 +16,8 @@ public class Brand {
     private String name;
     @NotNull
     private String category;
+    
+    
 
     public Brand(String name, String category) {
         this.name = name;

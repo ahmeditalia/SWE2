@@ -4,9 +4,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-@Entity
+//@Entity
 public class ProductStore {
-
+/*
     @EmbeddedId
     private ProductStoreID id;
 
@@ -29,4 +29,5 @@ public class ProductStore {
     public int getBuyers() { return buyers; }
 
     public void setBuyers(int buyers) { this.buyers = buyers; }
+    */
 }

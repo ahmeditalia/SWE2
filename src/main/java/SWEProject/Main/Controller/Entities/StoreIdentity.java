@@ -1,4 +1,4 @@
-package SWEProject.Main.Controller;
+package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
@@ -6,19 +6,13 @@ import java.io.Serializable;
 
 @Embeddable
 public class StoreIdentity implements Serializable  {
+	@NotNull
+    private String storeOwner;
+
     @NotNull
     private String storeName;
-    //@NotNull
-    //private StoreOwner storeOwner;
+    
 
-
-   /* public StoreOwner getStoreOwner() {
-        return storeOwner;
-    }*/
-
-   /* public void setStoreOwner(StoreOwner storeOwner) {
-        this.storeOwner = storeOwner;
-    }*/
 
     public String getStoreName() {
         return storeName;
@@ -28,11 +22,22 @@ public class StoreIdentity implements Serializable  {
         this.storeName = storeName;
     }
 
-    public StoreIdentity(String storeName/*StoreOwner*/) {
-        this.storeName = storeName;
-    }
 
-    @Override
+    public String getStoreOwner() {
+		return storeOwner;
+	}
+
+	public void setStoreOwner(String storeOwner) {
+		this.storeOwner = storeOwner;
+	}
+	public StoreIdentity() {
+	}
+	public StoreIdentity(String storeOwner, String storeName) {
+		this.storeOwner = storeOwner;
+		this.storeName = storeName;
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

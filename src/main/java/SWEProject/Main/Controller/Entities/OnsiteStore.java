@@ -1,14 +1,48 @@
 package SWEProject.Main.Controller.Entities;
 
-import SWEProject.Main.Controller.StoreIdentity;
-
-import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
+@Entity
 public class OnsiteStore  implements Store {
 
+	@Id
+	private String storeName;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="StoreOwner")
+	private StoreOwner owner;
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+
+	public StoreOwner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(StoreOwner owner) {
+		this.owner = owner;
+	}
+
+	public OnsiteStore() {
+	}
+	public OnsiteStore(String storeName, StoreOwner owner) {
+		super();
+		this.storeName = storeName;
+		this.owner = owner;
+	}
+	
+
+	/*
     @EmbeddedId
     private StoreIdentity storeIdentity;
     private String storeType;
@@ -44,5 +78,7 @@ public class OnsiteStore  implements Store {
     public void setStoreType(String storeType) {
         this.storeType = storeType;
     }
+*/
+
 
 }

@@ -2,10 +2,12 @@ package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class SystemProduct implements Product{
-
+/*
     private ProductStore productStore;
+    @Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String name;
     private Brand brand;
@@ -34,4 +36,5 @@ public class SystemProduct implements Product{
 
     @Override
     public void setType(String type) { this.type = type; }
+    */
 }
