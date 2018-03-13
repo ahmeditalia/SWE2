@@ -113,7 +113,9 @@ body {
 	background: white;
 }
 
-.Box {
+/*addtosystem*/
+
+.addtosystem {
 	border-radius: 15px;
 	position: absolute;
 	padding: 40px 40px;
@@ -122,6 +124,76 @@ body {
 	transform: translate(-50%, -50%);
 	width: 350px;
 	height: 610px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+.addtosystem h2 {
+	margin: 10px;
+	padding: 0 0 30px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
+.addtosystem p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+
+.addtosystem input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.addtosystem input[type="text"] {
+	border-bottom: 1px solid rgb(4, 255, 234);
+	background: transparent;
+	outline: none;
+	height: 20px;
+	color: white;
+	margin-bottom: -10px;
+	font-size: 16px;
+}
+
+.addtosystem input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+.addtosystem input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+.addtosystem a {
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/*end*/
+.Box {
+	border-radius: 15px;
+	position: absolute;
+	padding: 40px 40px;
+	top: 56%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 670px;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.534);
 }
