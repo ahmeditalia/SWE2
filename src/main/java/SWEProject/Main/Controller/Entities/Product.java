@@ -2,29 +2,49 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@MappedSuperclass
-public interface Product {
-
-	public Integer getId();
-
+@Entity
+public abstract class Product {
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	private Integer id;
+	private String name;
 	@NotNull
-	public String getName();
-
-	public void setName(String name);
-
+	@ManyToOne
+	@JoinColumn(name="brandId")
+	private Brand brand;
 	@NotNull
-	public Brand getBrand();
+	private String type;
 
-	public void setBrand(Brand brand);
+	public Integer getId() {
+		return id;
+	}
 
-	@NotNull
-	public String getType();
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-	public void setType(String type);
+	public String getName() {
+		return name;
+	}
 
-	@NotNull
-	public Store getStore();
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	public void setStore(Store store);
+	public Brand getBrand() {
+		return brand;
+	}
 
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Product(){}
 }

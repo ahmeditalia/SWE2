@@ -12,4 +12,6 @@ public class OnsiteStore  extends Store {
     public OnsiteStore(StoreIdentity storeName) {
         super(storeName);
     }
+    public OnsiteStore(){}
+
 }

@@ -32,12 +32,12 @@ public class StoreController {
 
     @PostMapping("/{oname}/{sname}/add-product-store")
     public String addProduct(@ModelAttribute StoreProduct product,@PathVariable String oname, @PathVariable String sname){
-        StoreIdentity sID=new StoreIdentity(oname,sname);
+        /*StoreIdentity sID=new StoreIdentity(oname,sname);
         Store s=repo.findOne(sID);
         List<StoreProduct> products=s.getProducts();
         products.add(product);
         s.setProducts(products);
-        //prepo.save(product);
+        //prepo.save(product);*/
         String url = "redirect:/" + oname + "/" + sname + "/show-all-product-store";
         return url;
     }
@@ -45,7 +45,7 @@ public class StoreController {
 
     @RequestMapping("/{oname}/{sname}/show-all-product-store/")
     public String showAllProducts(Model model,  @PathVariable String oname, @PathVariable String sname)
-    {
+    {/*
         StoreIdentity sId=new StoreIdentity(oname,sname);
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager em = emfactory.createEntityManager();
@@ -61,7 +61,7 @@ public class StoreController {
             }
 
         }
-        model.addAttribute("products",products);
+        model.addAttribute("products",products);*/
         return "show-all-product-store";
     }
 }

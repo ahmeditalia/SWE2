@@ -1,30 +1,32 @@
 package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Embeddable
 public class StoreIdentity implements Serializable  {
-	@NotNull
-    private String storeOwnerId;
+    private StoreOwner storeOwner;
 
     @NotNull
     private String storeName;
 
-    public StoreIdentity(String storeOwnerId, String storeName) {
-        this.storeOwnerId = storeOwnerId;
+    public StoreIdentity(StoreOwner storeOwner, String storeName) {
+        this.storeOwner = storeOwner;
         this.storeName = storeName;
     }
     public StoreIdentity(){
 
     }
-    public String getStoreOwnerId() {
-        return storeOwnerId;
+    public StoreOwner getStoreOwner() {
+        return storeOwner;
     }
 
-    public void setStoreOwnerId(String storeOwnerId) {
-        this.storeOwnerId = storeOwnerId;
+    public void setStoreOwner(StoreOwner storeOwner) {
+        this.storeOwner = storeOwner;
     }
 
     public String getStoreName() {
@@ -47,7 +49,7 @@ public class StoreIdentity implements Serializable  {
         if ((this.storeName == null) ? (other.storeName != null) : !this.storeName.equals(other.storeName)) {
             return false;
         }
-        if (!this.storeOwnerId .equals( other.storeOwnerId)) {
+        if (!this.storeOwner .equals( other.storeOwner)) {
             return false;
         }
         return true;

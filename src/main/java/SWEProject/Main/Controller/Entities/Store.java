@@ -2,6 +2,7 @@ package SWEProject.Main.Controller.Entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -16,6 +17,10 @@ public abstract class Store {
     public Store() {
 
     }
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="storeOwnerId")
+    private StoreOwner storeOwner;
 
     public Store(StoreIdentity storeName) {
         this.storeId = storeName;
@@ -36,4 +41,5 @@ public abstract class Store {
     public void setProducts(List<StoreProduct> products) {
         this.products = products;
     }
+
 }

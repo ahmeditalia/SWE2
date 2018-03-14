@@ -9,8 +9,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class StoreOwner extends User{
-	@OneToMany(mappedBy="owner",cascade=CascadeType.ALL)
-	List<OnlineStore> stores;
+	@OneToMany(mappedBy="storeOwner",cascade=CascadeType.ALL)
+	List<Store> stores;
 	public StoreOwner() {
 	}
 	public StoreOwner(User user)
