@@ -1,6 +1,8 @@
 package SWEProject.Main.Controller;
+import SWEProject.Main.Controller.Entities.Brand;
 import SWEProject.Main.Controller.Entities.Product;
 import SWEProject.Main.Controller.Entities.SystemProduct;
+import SWEProject.Main.Controller.Repository.BrandRepository;
 import SWEProject.Main.Controller.Repository.StoreProductRepository;
 import SWEProject.Main.Controller.Repository.SystemProductRepository;
 
@@ -20,10 +22,12 @@ public class ProductController {
     private SystemProductRepository sysProductrepo;
     @Autowired
     private StoreProductRepository storeProductRepo;
+    @Autowired
+    private BrandRepository brandRepository;
     
     
     @GetMapping("/add-product-to-system")
-    public String showproductsform(Model model){
+    public String showProductForm(Model model){
         model.addAttribute("product",new SystemProduct());
         return "add-product-to-system";
     }
@@ -31,6 +35,12 @@ public class ProductController {
     
     @PostMapping("/add-product-to-system")
     public String addProduct(@ModelAttribute SystemProduct product){
+        Brand brand = new Brand();
+        brand.setName(product.getBrand().getName());
+        brand.setCategory(product.getBrand().getCategory());
+
+        System.out.println(brand.getCategory() + " " + brand.getName());
+        brandRepository.save(brand);
         sysProductrepo.save(product);
         return "redirect:/show-all-product";
     }

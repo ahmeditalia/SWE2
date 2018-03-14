@@ -7,35 +7,26 @@
 <title>Add Product</title>
 </head>
 <body>
-	<div class="Box">
-		<h2>Add Product To Store</h2>
-		<form name="addProduct" th:action="@{/add-product}"
-			th:object="${SystemProduct}" onsubmit="return addproductvalid()"
+	<div class="addtosystem">
+		<h2>Add Product To System</h2>
+		<form name="addProduct" action="#" th:object="${product}" th:action="@{/add-product-to-system}"
+			  onsubmit="return addproductvalid()"
 			method="post">
 			<p>Name</p>
 			<input name="name" type="text" th:field="*{name}"></input>
 			<div id="validname" class="validadd"></div>
 			<br></br>
-			<p>Type</p>
-			<input name="type" type="text" th:field="*{type}"></input>
-			<div id="validtype" class="validadd"></div>
-			<br></br>
-			<p>Price</p>
-			<input name="price" type="text" th:field="*{price}"></input>
-			<div id="validprice" class="validadd"></div>
-			<br></br>
 			<p>Brand</p>
-			<input name="brand" type="text" th:field="*{brand}"></input>
+			<input name="brand" type="text" th:field="*{brand.name}"></input>
 			<div id="validbrand" class="validadd"></div>
 			<br></br>
 			<p>Category</p>
-			<input name="category" type="text" th:field="*{category}"></input>
+			<input name="category" type="text" th:field="*{brand.category}"></input>
 			<div id="validcategory" class="validadd"></div>
 			<br></br>
-			<p>Quantity</p>
-			<input name="quantity" type="text" th:field="*{quantity}"></input>
-			<div id="validquantity" class="validadd"></div>
-			<br></br>
+			<p>Type</p>
+			<input name="type" type="text" th:field="*{type}"></input>
+			<div id="validtype" class="validadd"></div>
 			<input type="submit" value="Submit"></input>
 		</form>
 		
