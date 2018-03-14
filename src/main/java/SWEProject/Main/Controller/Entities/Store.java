@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class Store {
     @Id
-    protected StoreIdentity storeId;
+    protected String storeId;
 
     @OneToMany(mappedBy="store",cascade=CascadeType.ALL)
     List<StoreProduct> products;
@@ -22,15 +22,15 @@ public abstract class Store {
     @JoinColumn(name="storeOwnerId")
     private StoreOwner storeOwner;
 
-    public Store(StoreIdentity storeName) {
+    public Store(String storeName) {
         this.storeId = storeName;
     }
 
-    public StoreIdentity getStoreId() {
+    public String getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(StoreIdentity storeName) {
+    public void setStoreId(String storeName) {
         this.storeId = storeName;
     }
 
@@ -42,4 +42,7 @@ public abstract class Store {
         this.products = products;
     }
 
+    public void addProduct(StoreProduct s){
+        products.add(s);
+    }
 }

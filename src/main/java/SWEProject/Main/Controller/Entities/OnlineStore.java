@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 public class OnlineStore extends Store {
 
-	public OnlineStore(StoreIdentity storeName) {
+	public OnlineStore(String storeName) {
 		super(storeName);
 	}
 	public OnlineStore(){}
