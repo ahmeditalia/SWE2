@@ -41,6 +41,7 @@ public class ProductController {
 
         System.out.println(brand.getCategory() + " " + brand.getName());
         brandRepository.save(brand);
+        product.setBrand(brand);
         sysProductrepo.save(product);
         return "redirect:/show-all-product";
     }
