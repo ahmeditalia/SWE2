@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import SWEProject.Main.Controller.Entities.SystemProduct;
 
-public interface SystemProductRepository/* extends CrudRepository<SystemProduct, Integer>*/{
+public interface SystemProductRepository extends CrudRepository<SystemProduct, Integer>{
 
 }

@@ -31,18 +31,13 @@ public class AccountController {
 	@PostMapping("/Registration")
 	public String registration(@ModelAttribute User user, @RequestParam("type") String type)
 	{
-		String routed = "/";
 		if(!userRepository.exists(user.getUsername()))
 		{
 			user=creator.createUser(type, user);
 			userRepository.save(user);
-			routed = "redirect:/login";
+			return "redirect:/login";
 		}
-		else 
-		{
-			routed = "redirect:/Registration?error";
-		}
-		return routed;
+		return "redirect:/Registration?error";
 	}
 	
 	@GetMapping("/login")

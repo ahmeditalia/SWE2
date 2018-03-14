@@ -10,10 +10,7 @@ public class StoreProduct extends Product {
     private String type;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "storeName", insertable = false, updatable = false),
-            @JoinColumn(name = "ownerName", insertable = false, updatable = false)
-    })
+    @JoinColumn(name = "storeName", insertable = false, updatable = false)
     private Store store;
 
     public int getQuantity() {

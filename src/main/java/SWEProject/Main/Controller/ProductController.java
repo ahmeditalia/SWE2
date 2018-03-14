@@ -1,6 +1,7 @@
 package SWEProject.Main.Controller;
 import SWEProject.Main.Controller.Entities.Product;
 import SWEProject.Main.Controller.Entities.SystemProduct;
+import SWEProject.Main.Controller.Repository.StoreProductRepository;
 import SWEProject.Main.Controller.Repository.SystemProductRepository;
 
 import java.util.ArrayList;
@@ -15,20 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ProductController {
-   // @Autowired
-    //private SystemProductRepository repo;
+    @Autowired
+    private SystemProductRepository sysProductrepo;
+    @Autowired
+    private StoreProductRepository storeProductRepo;
     
     
-    @GetMapping("/add-product")
+    @GetMapping("/add-product-to-system")
     public String showproductsform(Model model){
         model.addAttribute("product",new SystemProduct());
         return "add-product-to-system";
     }
     
     
-    @PostMapping("/add-product")
-    public String addProduct(@ModelAttribute Product product){
-        //repo.save(product);
+    @PostMapping("/add-product-to-system")
+    public String addProduct(@ModelAttribute SystemProduct product){
+        sysProductrepo.save(product);
         return "redirect:/show-all-product";
     }
     
@@ -36,15 +39,13 @@ public class ProductController {
     @RequestMapping("/show-all-product")
     public String showAllProducts(Model model)
     {
-    	/*
-    	Iterable<Product> pro=repo.findAll();
+    	Iterable<SystemProduct> pro=sysProductrepo.findAll();
     	List<Product> products=new ArrayList<Product>();
     	for(Product p:pro)
     	{
     		products.add(p);
     	}
     	model.addAttribute("products",products);
-    	*/
     	return "show-all-product";
     }
 }

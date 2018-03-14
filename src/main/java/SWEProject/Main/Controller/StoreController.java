@@ -49,7 +49,7 @@ public class StoreController {
         List<StoreProduct> products=new ArrayList<StoreProduct>();
         for(StoreProduct p:allProducts)
         {
-            if(p.getStore().getStoreId().equals(sname)){
+            if(p.getStore().getStoreName().equals(sname)){
                 products.add(p);
             }
         }

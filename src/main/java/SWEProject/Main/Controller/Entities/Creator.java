@@ -1,5 +1,7 @@
 package SWEProject.Main.Controller.Entities;
 
+import org.hibernate.loader.custom.Return;
+
 public class Creator {
 	private static Creator instance=null;
 	private Creator() {
@@ -28,13 +30,15 @@ public class Creator {
 		return null;
 	}
 	
-	public Store createStore(String type,Store store)
+	public Store createStore(String type,Store store,StoreOwner storeOwner)
 	{
-		if(type.equals("online store"))
+		if(type.equals("onlineStore"))
 		{
+			return new OnlineStore(store.storeName, storeOwner);
 		}
-		else if(type.equals("onsite store"))
+		else if(type.equals("onsiteStore"))
 		{
+			return new OnsiteStore(store.storeName, storeOwner);
 		}
 		return null;
 	}

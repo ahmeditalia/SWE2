@@ -1,27 +1,22 @@
 package SWEProject.Main.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import SWEProject.Main.Controller.Entities.OnlineStore;
-import SWEProject.Main.Controller.Entities.OnsiteStore;
-import SWEProject.Main.Controller.Entities.StoreIdentity;
+import org.springframework.web.bind.annotation.RequestParam;
+import SWEProject.Main.Controller.Entities.Store;
 import SWEProject.Main.Controller.Entities.StoreOwner;
-import SWEProject.Main.Controller.Entities.User;
-import SWEProject.Main.Controller.Repository.OnlineStoreRepository;
-import SWEProject.Main.Controller.Repository.OnsiteStoreRepository;
+import SWEProject.Main.Controller.Repository.StoreRepository;
 
 @Controller
 public class StoreOwnerController {
 
 	@Autowired
-	OnlineStoreRepository onlineStoreRepository;
-	@Autowired
-	OnsiteStoreRepository onsiteStoreRepository;
+	StoreRepository storeRepo;
 	
 	@GetMapping("/store-owner-view")
 	public String showStoreOwnerView()
@@ -31,12 +26,19 @@ public class StoreOwnerController {
 	@GetMapping("/add-store")
 	public String creationStoreView(Model model)
 	{
+		model.addAttribute("store",new String());
 		return "add-store";
 	}
 	@PostMapping("/add-store")
-	public String newStore()
+	public String newStore(@ModelAttribute Store store ,@RequestParam("type") String type)
 	{
-		
-		return "";
+		if(!storeRepo.exists(store.getStoreName()))
+		{
+			StoreOwner storeOwner=(StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			storeOwner.addStore(store,type);
+			storeRepo.save(store);
+			return "redirect:/store-owner-view";
+		}
+		return "redirect:/add-store?error";
 	}
 }
