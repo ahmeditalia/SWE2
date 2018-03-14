@@ -57,14 +57,11 @@ public class AccountController {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(user instanceof Admin)
 		{
-			System.out.println("admin");
 			return "redirect:/admin-view";
 		}
 		else if(user instanceof StoreOwner)
 		{
-			model.addAttribute(user);
-			System.out.println("storeowner");
-			return "redirect:/add-store";
+			return "redirect:/store-owner-view";
 		}
 		return "login";
 	}

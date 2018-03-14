@@ -29,11 +29,8 @@ public class StoreOwnerController {
 		return "store-owner-view";
 	}
 	@GetMapping("/add-store")
-	public String creationStoreView(@ModelAttribute User user)
+	public String creationStoreView(Model model)
 	{
-		//model.addAttribute("",)
-		onlineStoreRepository.save(new OnlineStore("toys",new StoreOwner("ahmed","ahmeditalia122@gmail.com","12345678")));
-		onsiteStoreRepository.save(new OnsiteStore("toys",new StoreOwner("ahmed","ahmeditalia122@gmail.com","12345678")));
 		return "add-store";
 	}
 	@PostMapping("/add-store")
