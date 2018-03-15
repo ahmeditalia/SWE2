@@ -8,6 +8,19 @@ body {
 	color: rgba(255, 255, 255, .5);
 }
 
+.notification {
+    color:white;
+    position:absolute;
+    right:45px;
+    top:45px;
+    background-color:red;
+    line-height:20px;
+    width:32px;
+    height:27px;
+    border-radius:20px;
+    padding-top:6px;
+    font-size:18px;
+}
 .avatar {
 	width: 100px;
 	height: 100px;
@@ -185,6 +198,67 @@ body {
 }
 
 /*end*/
+
+.addstore {
+	border-radius: 15px;
+	position: absolute;
+	padding: 40px 40px;
+	top: 55%;
+	left: 78%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 400px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+.addstore h3 {
+	margin: 0;
+	font-size:14px;
+	padding: 0 0 20px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
+.addstore p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+.addstore input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.addstore input[type="text"] {
+	border-bottom: 1px solid rgb(4, 255, 234);
+	height: 20px;
+	color: black;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.addstore input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+.addstore input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+
 .Box {
 	border-radius: 15px;
 	position: absolute;
@@ -268,7 +342,7 @@ body {
 	background: rgba(0, 0, 0, 0.534);
 }
 
-.storeownerview input[type="submit"] {
+.storeownerview input[type="submit"],button {
 	border: none;
 	outline: none;
 	font-size: 16px;
@@ -281,16 +355,18 @@ body {
 	margin-bottom: 30px;
 }
 
-.storeownerview input[type="submit"]:hover {
+.storeownerview input[type="submit"]:hover,button:hover {
 	background: white;
 	color: rgba(4, 4, 160, 0.87);
 	font-weight: bold;
 }
 
-.adminBox {
+
+
+.storeview {
 	border-radius: 15px;
 	position: absolute;
-	padding: 80px 40px;
+	padding: 60px 40px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -300,7 +376,7 @@ body {
 	background: rgba(0, 0, 0, 0.534);
 }
 
-.adminBox input[type="submit"] {
+.storeview input[type="submit"],button {
 	border: none;
 	outline: none;
 	font-size: 16px;
@@ -313,11 +389,88 @@ body {
 	margin-bottom: 30px;
 }
 
+
+.storeview button {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	width: 100%;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+
+.storeview input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+
+.storeview button:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
+.adminBox {
+	border-radius: 15px;
+	position: absolute;
+	padding: 60px 40px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+.adminBox input[type="submit"],button {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	width: 100%;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+
+.adminBox button {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	width: 100%;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+
+
 .adminBox input[type="submit"]:hover {
 	background: white;
 	color: rgba(4, 4, 160, 0.87);
 	font-weight: bold;
 }
+
+
+.adminBox button:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+
 
 .loginBox {
 	border-radius: 15px;
@@ -464,12 +617,46 @@ body {
 	font-weight: bold;
 }
 
+.showtableA input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 20px;
+	color: white;
+	cursor: pointer;
+	background: rgb(0, 102, 0);
+	border-radius: 50px;
+}
+
+.showtableA input[type="submit"]:hover {
+	background: white;
+	color: rgb(0, 102, 0);
+}
+
+
+.showtableR input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 20px;
+	color: #ffffff;
+	cursor: pointer;
+	background: rgb(158, 0, 0);
+	border-radius: 10px;
+}
+
+.showtableR input[type="submit"]:hover {
+	background: white;
+	color: RGB(255,0,0);
+}
+
 .Registration a {
 	color: white;
 	font-size: 14px;
 	font-weight: bold;
 	text-decoration: none;
 }
+
 
 .showtable {
 	border-collapse: collapse;
@@ -481,7 +668,18 @@ body {
 	padding: 80px 40px;
 }
 
+.showtableS {
+	border-collapse: collapse;
+	width: 70%;
+	left: 50%;
+	top: 35%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	padding: 80px 40px;
+}
+
 th, td {
+	font-weight:bold;
 	text-align: left;
 	padding: 8px;
 	font-size: 14px;
@@ -489,7 +687,10 @@ th, td {
 }
 
 tr:nth-child(even) {
-	background-color: #808080
+	background-color: #dce2dd;
+}
+tr:nth-child(odd) {
+	background-color: #8d968d;
 }
 
 .theader {

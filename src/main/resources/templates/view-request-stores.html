@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+<title>view-request-stores</title>
+</head>
+<body>
+	<div class="homebutton">
+		<form th:action="@{/admin-view}" method="get">
+			<input type="Submit" value="Admin Panel"></input>
+		</form>
+	</div>
+	<table class="showtableS">
+		<tr class="theader" style="background-color: #008040;">
+			<td class="tdshow">Store owner</td>
+			<td class="tdshow">Store</td>
+			<td class="tdshow">Accept</td>
+			<td class="tdshow">Reject</td>
+		</tr>
+		<tr th:each="store : ${stores}">
+			<td th:text="${store.storeOwner.username}"></td>
+			<td th:text="${store.storeName}"></td>
+			<td>
+				<form class="showtableA" th:action="@{/view-request-stores}" method="get">
+					<input type="Submit" value="accept"></input>
+				</form>
+			</td>
+			<td>
+				<form class="showtableR" th:action="@{/view-request-stores}" method="get">
+					<input type="Submit" value="reject"></input>
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

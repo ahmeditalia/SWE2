@@ -3,20 +3,49 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 <script type="text/javascript" src="/js/valid.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.slim.js"></script>
+<script type="text/javascript" src="/js/functions.js"></script>
+<script th:inline="javascript">	
+	$(document).ready(function() {
+		$("div#adds").hide(-10);
+		$("#addstore").click(function() {
+			$("div#adds").show(5000);
+		});
+		$("#addcancel").click(function() {
+			$("div#adds").hide(5000);
+		});
+	});
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Admin View</title>
+<title>Store Owner View</title>
 </head>
 <body>
 	<div class="storeownerview">
-	
-		<form name="add" th:action="@{/add-product-to-store}" method="get">
-			<input type="submit" value="Add Product"></input>
+		<form name="show" th:action="@{/store-view}" method="get">
+			<input type="submit" value="Show All Products"></input>
 		</form>
-		
-		<form name="show" th:action="@{/show-products-on-store}" method="get">
-			<input type="submit" value="Show All Products" ></input>
+		<button id="addstore">Add Store</button>
+	</div>
+	<div id="adds" class="addstore">
+		<form name="add" th:object="${store}" th:action="@{/add-store}" method="POST">
+			<p>Store Name:</p>
+			<input type="text" name="storeName" th:field="*{storeName}"></input>
+			<p>Store Location:</p>
+			<input type="text" name="location" th:field="*{location}"></input>
+			<p>Store Type:</p>
+			<input type="text" name="type" th:field="*{type}"></input>
+			<h3>Store Type:</h3>
+			<label class="container">Onsite 
+			<input type="radio" name="type2" value="onsite"></input> 
+			<span class="checkmark"></span>
+			</label> <br></br>
+			<label class="container">Online 
+			<input type="radio" name="type2" value="online"></input> 
+			<span class="checkmark"></span>
+			</label> <br></br>
+			<input type="submit" id="adddone" value="Add"></input> 
+			<button id="addcancel" value="Cancel">Cancel</button>
 		</form>
-		
 	</div>
 </body>
 </html>

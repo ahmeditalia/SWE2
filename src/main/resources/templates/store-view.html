@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
-<title>show all products</title>
+<script type="text/javascript" src="/js/valid.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.slim.js"></script>
+<script type="text/javascript" src="/js/functions.js"></script>
+<script th:inline="javascript">
+	
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Store Owner View</title>
 </head>
 <body>
 	<div class="homebutton">
-		<form th:action="@{/store-owner-view}"
-			th:Object="${user}" method="get">
-			<input type="Submit" value="Store Owner Panel"></input>
+		<form name="add" th:action="@{/add-product-to-store}" method="get">
+			<input type="submit" value="Add Product"></input>
 		</form>
+		<form name="add" th:action="@{/store-owner-view}" method="get">
+			<input type="submit" value="Store Owner Panel"></input>
+		</form>
+	</div>
+	<div class="homebutton">
+		<select>
+			<option value="">Stores</option>
+			<option th:each="store : ${stores}" th:value="${store.storeName}" 
+			th:text="${store.storeName}"></option>
+		</select>
 	</div>
 	<table class="showtable">
 		<tr class="theader" style="background-color: #008040;">

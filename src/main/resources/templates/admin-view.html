@@ -3,24 +3,41 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 <script type="text/javascript" src="/js/valid.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.slim.js"></script>
+<script th:inline="javascript">
+	$(document).ready(function() {
+		/*<![CDATA[*/
+		var N = /*[[${N}]]*/'default';
+		if (N < 1) {
+			$("div#not").hide(-1500);
+		}
+		/*]]>*/
+	});
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Admin View</title>
 </head>
 <body>
 	<div class="adminBox">
-	
+		<form name="add" th:action="@{/view-request-stores}" method="get">
+			<button>
+				Requests
+				<div id="not" class="notification" th:text="${N}"></div>
+			</button>
+		</form>
+
 		<form name="add" th:action="@{/add-product-to-system}" method="get">
 			<input type="submit" value="Add Product"></input>
 		</form>
-		
+
 		<form name="show" th:action="@{/show-all-product}" method="get">
-			<input type="submit" value="Show All Products" ></input>
+			<input type="submit" value="Show All Products"></input>
 		</form>
-		
+
 		<form name="logOut" th:action="@{/logout}" method="post">
-			<input type="submit" value="Log out" ></input>
-		</form>		
-		
+			<input type="submit" value="Log out"></input>
+		</form>
+
 	</div>
 </body>
 </html>

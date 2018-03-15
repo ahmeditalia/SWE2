@@ -7,9 +7,14 @@
 <title>Add Product</title>
 </head>
 <body>
+	 <div class="Box">			
+		<form name="cancel" th:action="@{/store-owner-view}" method="get">
+		<input type="submit" value="Cancel"></input>
+		</form>
+	</div>
 	<div class="Box">
 		<h2>Add Product To Store</h2>
-		<!--<form name="addProduct" th:action="@{/add-product-to-store}"
+		<form name="addProduct" th:action="@{/add-product-to-store}"
 			th:object="${product}" onsubmit="return addproductvalid()"
 			method="post">
 			<p>Name</p>
@@ -39,9 +44,9 @@
 			<input type="submit" value="Submit"></input>
 		</form>
 		
-		<form name="cancel" th:action="@{/admin-view}" method="get">
-		<input type="submit" value="Cancel"></input>
-		</form>-->
+		<form name="cancel" th:action="@{/store-owner-view}" method="get">
+			<input type="submit" value="Cancel"></input>
+		</form>
 	</div>
 </body>
 </html>
