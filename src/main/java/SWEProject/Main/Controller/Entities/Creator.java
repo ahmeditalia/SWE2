@@ -32,11 +32,11 @@ public class Creator {
 	
 	public Store createStore(String type,Store store,StoreOwner storeOwner)
 	{
-		if(type.equals("onlineStore"))
+		if(type.equals("online"))
 		{
 			return new OnlineStore(store.getStoreName(), storeOwner, store.getLocation(), store.getType());
 		}
-		else if(type.equals("onsiteStore"))
+		else if(type.equals("onsite"))
 		{
 			return new OnsiteStore(store.getStoreName(), storeOwner, store.getLocation(), store.getType());
 		}

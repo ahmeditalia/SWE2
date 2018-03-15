@@ -16,6 +16,7 @@ import SWEProject.Main.Controller.Entities.Product;
 import SWEProject.Main.Controller.Entities.Store;
 import SWEProject.Main.Controller.Entities.StoreOwner;
 import SWEProject.Main.Controller.Entities.SystemProduct;
+import SWEProject.Main.Controller.Entities.User;
 import SWEProject.Main.Controller.Repository.StoreRepository;
 
 @Controller
@@ -43,7 +44,7 @@ public class StoreOwnerController {
 	{
 		if(!storeRepo.exists(store.getStoreName()))
 		{
-			StoreOwner storeOwner=(StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			StoreOwner storeOwner=new StoreOwner((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 			storeOwner.addStore(store,type);
 			storeRepo.save(store);
 			return "redirect:/store-owner-view";

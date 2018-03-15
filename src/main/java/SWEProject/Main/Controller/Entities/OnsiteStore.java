@@ -2,7 +2,7 @@ package SWEProject.Main.Controller.Entities;
 
 
 import javax.persistence.Entity;
-@Entity(name = "OnsiteStore")
+@Entity
 public class OnsiteStore  extends Store {
 
 

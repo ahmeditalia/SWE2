@@ -3,44 +3,51 @@ package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name ="Store_Type")
+@Inheritance
 
 public class Store {
    
-	@Id
+
     protected String storeName;
 
-    @OneToMany(mappedBy="store",cascade=CascadeType.ALL)
     protected List<StoreProduct> products;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name="storeOwnerId")
+   
     protected StoreOwner storeOwner;
     protected String location;
     protected String type;
+    protected String status;
     
     public Store() {
-
+    	products=new ArrayList<StoreProduct>();
     }
 	public Store(String storeName) {
+    	products=new ArrayList<StoreProduct>();
 		this.storeName = storeName;
 	}
 	public Store(String storeName, StoreOwner storeOwner) {
+    	products=new ArrayList<StoreProduct>();
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
 	}
-	
-	
-	
-	public Store(String storeName, StoreOwner storeOwner, String location, String type) {
+	public Store(String storeName, StoreOwner storeOwner, String location, String type, String status) {
+    	products=new ArrayList<StoreProduct>();
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
 		this.location = location;
 		this.type = type;
+		this.status = status;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getLocation() {
 		return location;
@@ -54,6 +61,8 @@ public class Store {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	@Id
 	public String getStoreName() {
 		return storeName;
 	}
@@ -62,6 +71,7 @@ public class Store {
 		this.storeName = storeName;
 	}
 
+    @OneToMany(mappedBy="store",cascade=CascadeType.ALL)
 	public List<StoreProduct> getProducts() {
         return products;
     }
@@ -69,6 +79,10 @@ public class Store {
     public void setProducts(List<StoreProduct> products) {
         this.products = products;
     }
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="storeOwnerId")
     public StoreOwner getStoreOwner() {
 		return storeOwner;
 	}

@@ -2,7 +2,7 @@ package SWEProject.Main.Controller.Entities;
 
 
 import javax.persistence.Entity;
-@Entity(name = "OnlineStore")
+@Entity
 
 public class OnlineStore extends Store {
 
@@ -18,6 +18,7 @@ public class OnlineStore extends Store {
 		this.storeOwner = storeOwner;
 		this.location = location;
 		this.type = type;
+		this.status="Onhold";
 	}
 	public OnlineStore(){}
 }
