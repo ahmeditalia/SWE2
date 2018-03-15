@@ -10,6 +10,9 @@
 	<div class="Registration">
 		<img src="/img/signup.png" class="avatar"></img>
 		<h2>Register</h2>
+		<div th:if="${param.error}" >
+				Registration failed
+			</div>
 		<form action="#" name="Registrationform" th:action="@{/Registration}"
 			th:Object="${user}" onsubmit="return registervalid()" method="POST">
 			<p>UserName</p>
@@ -37,9 +40,7 @@
 			<span class="checkmark"></span>
 			</label><br></br>
 			<input type="Submit" value="Register"></input> <a th:href="@{/login}">Go To Login</a>
-			<div th:if="${param.error}" >
-				Invalid Parameters.
-			</div>
+			
 
 		</form>
 	</div>

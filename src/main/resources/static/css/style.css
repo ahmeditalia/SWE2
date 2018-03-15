@@ -68,6 +68,14 @@ body {
 	font-weight: bold;
 }
 
+.homebutton h3 {
+	margin-bottom:-15px;
+	font-weight: bold;
+	font-size:18px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
 .container {
 	display: block;
 	position: relative;
@@ -199,6 +207,13 @@ body {
 
 /*end*/
 
+
+.liststores{
+	width:150px;
+	height:30px;
+	background-color:#800000;
+	color:white;
+}
 .addstore {
 	border-radius: 15px;
 	position: absolute;
@@ -207,7 +222,7 @@ body {
 	left: 78%;
 	transform: translate(-50%, -50%);
 	width: 350px;
-	height: 400px;
+	height: 500px;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.534);
 }
