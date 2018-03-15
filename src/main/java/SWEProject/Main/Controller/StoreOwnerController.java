@@ -26,11 +26,11 @@ public class StoreOwnerController {
 	@GetMapping("/add-store")
 	public String creationStoreView(Model model)
 	{
-		model.addAttribute("store",new String());
+		model.addAttribute("store",new Store());
 		return "add-store";
 	}
 	@PostMapping("/add-store")
-	public String newStore(@ModelAttribute Store store ,@RequestParam("type") String type)
+	public String newStore(@ModelAttribute Store store ,@RequestParam("type2") String type)
 	{
 		if(!storeRepo.exists(store.getStoreName()))
 		{
@@ -39,6 +39,6 @@ public class StoreOwnerController {
 			storeRepo.save(store);
 			return "redirect:/store-owner-view";
 		}
-		return "redirect:/add-store?error";
+		return "redirect:/store-owner-view?error";
 	}
 }

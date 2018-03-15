@@ -8,7 +8,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name ="Store_Type")
 
-public abstract class Store {
+public class Store {
    
 	@Id
     protected String storeName;
@@ -20,7 +20,9 @@ public abstract class Store {
     @ManyToOne
     @JoinColumn(name="storeOwnerId")
     protected StoreOwner storeOwner;
-
+    protected String location;
+    protected String type;
+    
     public Store() {
 
     }
@@ -30,6 +32,27 @@ public abstract class Store {
 	public Store(String storeName, StoreOwner storeOwner) {
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
+	}
+	
+	
+	
+	public Store(String storeName, StoreOwner storeOwner, String location, String type) {
+		this.storeName = storeName;
+		this.storeOwner = storeOwner;
+		this.location = location;
+		this.type = type;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getStoreName() {
 		return storeName;

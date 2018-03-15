@@ -34,13 +34,12 @@ public class Creator {
 	{
 		if(type.equals("onlineStore"))
 		{
-			return new OnlineStore(store.storeName, storeOwner);
+			return new OnlineStore(store.getStoreName(), storeOwner, store.getLocation(), store.getType());
 		}
 		else if(type.equals("onsiteStore"))
 		{
-			return new OnsiteStore(store.storeName, storeOwner);
+			return new OnsiteStore(store.getStoreName(), storeOwner, store.getLocation(), store.getType());
 		}
 		return null;
 	}
-}
-  
+}  
