@@ -13,7 +13,7 @@ public class StoreOwner extends User{
 	@OneToMany(mappedBy="storeOwner",cascade=CascadeType.ALL)
 	List<Store> stores;
 	@OneToOne(cascade = CascadeType.ALL)
-	Operations operations;
+	Statistics statistics;
 	public StoreOwner() {
 	}
 	public StoreOwner(User user)

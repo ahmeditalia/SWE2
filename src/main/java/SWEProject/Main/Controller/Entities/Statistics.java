@@ -1,11 +1,12 @@
 package SWEProject.Main.Controller.Entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Statistics implements Operations {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
     public int numUserView;
     public int numUserBuy;
     public int soldProducts;
@@ -43,6 +44,14 @@ public class Statistics implements Operations {
 
     public void setSoldProducts(int soldProducts) {
         this.soldProducts = soldProducts;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
