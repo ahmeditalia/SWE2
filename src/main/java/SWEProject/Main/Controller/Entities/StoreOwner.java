@@ -7,11 +7,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class StoreOwner extends User{
 	@OneToMany(mappedBy="storeOwner",cascade=CascadeType.ALL)
 	List<Store> stores;
+	@OneToOne(cascade = CascadeType.ALL)
+	Statistics statistics;
 	public StoreOwner() {
 		stores=new ArrayList<Store>();
 	}
