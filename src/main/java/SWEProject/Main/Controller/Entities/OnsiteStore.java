@@ -12,13 +12,17 @@ public class OnsiteStore  extends Store {
 	public OnsiteStore(String storeName, StoreOwner storeOwner) {
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
+		this.status="Onhold";
+
 	}
 	
 	public OnsiteStore(String storeName, StoreOwner storeOwner, String location, String type) {
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
 		this.location = location;
-		this.type = type;
+		this.type = type;		
+		this.status="Onhold";
+
 	}
     public OnsiteStore(){}
 

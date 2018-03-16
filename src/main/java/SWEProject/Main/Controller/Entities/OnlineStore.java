@@ -12,6 +12,7 @@ public class OnlineStore extends Store {
 	public OnlineStore(String storeName, StoreOwner storeOwner) {
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
+		this.status="Onhold";
 	}
 	public OnlineStore(String storeName, StoreOwner storeOwner, String location, String type) {
 		this.storeName = storeName;
