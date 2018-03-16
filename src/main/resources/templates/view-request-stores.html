@@ -22,13 +22,13 @@
 			<td th:text="${store.storeOwner.username}"></td>
 			<td th:text="${store.storeName}"></td>
 			<td>
-				<form class="showtableA" th:action="@{/view-request-stores}" method="get">
-					<input type="Submit" value="accept"></input>
+				<form class="showtableA" th:action="@{/accept}" method="get">
+					<input type="Submit" name="storename" value="accept"></input>
 				</form>
 			</td>
 			<td>
-				<form class="showtableR" th:action="@{/view-request-stores}" method="get">
-					<input type="Submit" value="reject"></input>
+				<form class="showtableR" th:action="@{/reject}" method="get">
+					<input type="Submit" name="storename" value="reject"></input>
 				</form>
 			</td>
 		</tr>
