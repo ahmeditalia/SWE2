@@ -31,9 +31,8 @@ public class StoreOwner extends User{
 		this.email = email;
 		this.password = password;
 	}
-	public void addStore(Store store,String type)
+	public void addStore(Store store)
 	{
-		store=Creator.getInstance().createStore(type, store, this);
 		stores.add(store);
 	}
 }
