@@ -53,11 +53,8 @@ public class StoreOwnerController {
 
 	@GetMapping("/store-view")
 	public String StoreOwnerStores(Model model) {
-		Iterable<Store> sto = storeRepo.findAll();
-		List<Store> stores = new ArrayList<Store>();
-		for (Store p : sto) {
-			stores.add(p);
-		}
+		
+		List<Store> stores = storeRepo.findByStatus("accepted");
 		model.addAttribute("stores", stores);
 		return "store-view";
 	}

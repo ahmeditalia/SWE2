@@ -23,13 +23,13 @@
 			<td th:text="${store.storeName}"></td>
 			<td>
 				<form class="showtableA" th:action="@{/accept}" method="post">
-					<input type="hidden" name="storename" value="${store.storeName}"></input>
+					<input type="hidden" name="storename" th:value="${store.storeName}"></input>
 					<input type="Submit" value="accept"></input>
 				</form>
 			</td>
 			<td>
 				<form class="showtableR" th:action="@{/reject}" method="post">
-					<input type="hidden" name="storename" value="${store.storeName}"></input>
+					<input type="hidden" name="storename" th:value="${store.storeName}"></input>
 					<input type="Submit" value="reject"></input>
 				</form>
 			</td>

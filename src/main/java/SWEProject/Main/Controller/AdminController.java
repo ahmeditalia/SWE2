@@ -22,32 +22,30 @@ public class AdminController {
 
 	@GetMapping("/view-request-stores")
 	public String Viewrequests(Model model) {
-		Iterable<Store> sto = storeRepo.findAll();
-		List<Store> stores = new ArrayList<Store>();
-		for (Store p : sto) {
-			if (p.getStatus().equals("Onhold"))
-				stores.add(p);
-		}
+		List<Store> stores = storeRepo.findByStatus("Onhold");
 		model.addAttribute("stores", stores);
 		return "view-request-stores";
 	}
 	
 	@PostMapping("/accept")
-	public String accept(@RequestParam("storename") String type)
+	public String accept(@RequestParam("storename") String storeName)
 	{
-		
-		return "rediredt:/view-request-stores";
+		Store store=storeRepo.findOne(storeName);
+		store.setStatus("accepted");
+		storeRepo.save(store);
+		return "redirect:/view-request-stores";
 	}
 
 	@PostMapping("/reject")
-	public String reject(@RequestParam("storename") String type)
+	public String reject(@RequestParam("storename") String storeName)
 	{
-		
-		return "rediredt:/view-request-stores";
+		storeRepo.delete(storeName);
+		return "redirect:/view-request-stores";
 	}
 	@GetMapping("/admin-view")
 	public String loadView(Model model) {
-		model.addAttribute("N", 0);
+		int Count=storeRepo.countOnHold();
+		model.addAttribute("N", Count);
 		return "admin-view";
 	}
 
