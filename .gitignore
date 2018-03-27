@@ -4,3 +4,5 @@
 *.properties
 *.properties
 src/main/java/SWEProject/Main/Controller/Repository/SystemProductRepository.java
+*.xml
+*.iml
