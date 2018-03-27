@@ -29,19 +29,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/accept")
-	public String accept(@RequestParam("storename") String storeName)
+	public void accept(@RequestParam("storename") String storeName)
 	{
 		Store store=storeRepo.findOne(storeName);
 		store.setStatus("accepted");
 		storeRepo.save(store);
-		return "redirect:/view-request-stores";
 	}
 
 	@RequestMapping("/reject")
-	public String reject(@RequestParam("storename") String storeName)
+	public void reject(@RequestParam("storename") String storeName)
 	{
 		storeRepo.delete(storeName);
-		return "redirect:/view-request-stores";
 	}
 	@GetMapping("/admin-view")
 	public String loadView(Model model) {
