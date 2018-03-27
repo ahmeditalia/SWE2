@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SystemProductRepository extends CrudRepository<SystemProduct, Integer>{
 
-    List<SystemProduct> findByBrand(int brandId);
+    List<SystemProduct> findByBrand(String name);
     boolean existsByName(String name);
 
 }
