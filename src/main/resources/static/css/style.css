@@ -232,6 +232,16 @@ body {
 	background-color:#800000;
 	color:white;
 }
+
+.listbrand{
+	outline:none;
+	width:100%;
+	height:30px;
+	background-color:#800000;
+	color:white;
+}
+
+
 .addstore {
 	border-radius: 15px;
 	position: absolute;
