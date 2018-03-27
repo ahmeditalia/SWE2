@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import SWEProject.Main.Controller.Entities.Store;
@@ -27,20 +28,18 @@ public class AdminController {
 		return "view-request-stores";
 	}
 	
-	@PostMapping("/accept")
-	public String accept(@RequestParam("storename") String storeName)
+	@RequestMapping("/accept")
+	public void accept(@RequestParam("storename") String storeName)
 	{
 		Store store=storeRepo.findOne(storeName);
 		store.setStatus("accepted");
 		storeRepo.save(store);
-		return "redirect:/view-request-stores";
 	}
 
-	@PostMapping("/reject")
-	public String reject(@RequestParam("storename") String storeName)
+	@RequestMapping("/reject")
+	public void reject(@RequestParam("storename") String storeName)
 	{
 		storeRepo.delete(storeName);
-		return "redirect:/view-request-stores";
 	}
 	@GetMapping("/admin-view")
 	public String loadView(Model model) {
