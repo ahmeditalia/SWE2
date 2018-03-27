@@ -3,54 +3,116 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 <script type="text/javascript" src="/js/valid.js"></script>
-<script type="text/javascript" src="/js/jquery-3.3.1.slim.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="/js/functions.js"></script>
 <script th:inline="javascript">
 $(document).ready(function() {
+	$('#addproduct').hide(-10);
+	$("#products").hide(-10);
+	$("#addprodcttostore").click(function(){
+	    $("#products").hide();
+	    $('#addproduct').show();
+	    	
+	    });
+ 	$("#cancel").click(function(){
+ 	    $('#addproduct').hide();
+ 	    $("#products").show();  	
+ 	    });
 	$('#list').change(function() {
-		alert('DDD');
+		$.getJSON("/products",function(data){
+			$("#products").empty();
+			for(var i in data)
+			{
+				var tblRow = "<tr>" 
+			+ "<td>" + data[i].id + "</td>" 
+			+ "<td>" + data[i].name + "</td>" 
+           	+ "<td>" + data[i].price + "</td>"
+           	+ "<td>" + data[i].type + "</td>" 
+           	+ "<td>" + data[i].brand + "</td>" 
+           	+ "<td>" + data[i].category + "</td>" 
+           	+ "<td>" + data[i].quantity + "</td>" 
+           	+ "</tr>"
+           	$(tblRow).appendTo("#products tbody");
+			}
+	});
 	});	
 });
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Store Owner View</title>
 </head>
 <body>
+
 	<div class="homebutton">
-		<!-- <form name="add" th:action="@{/add-product-to-store}" method="get">
-			<input type="submit" value="Add Product"></input>
-		</form>-->
+		<form name="add"  method="get">
+			<input type="submit" id="addprodcttostore" value="Add Product"></input>
+		</form>
 		<form name="add" th:action="@{/store-owner-view}" method="get">
 			<input type="submit" value="Store Owner Panel"></input>
 		</form>
 	</div>
 	<div class="homebutton">
-		<h3>Stores:</h3><br></br>
+		<h3>Stores:</h3>
+		<br></br> 
 		<select id="list" class="liststores">
 			<option value=""></option>
-			<option th:each="store : ${stores}" th:value="${store.storeName}"
-				th:text="${store.storeName}"></option>
+			<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option>
 		</select>
 	</div>
 	<table id="products" class="showtable">
-		<tr class="theader" style="background-color: #008040;">
-			<td class="tdshow">ID</td>
-			<td class="tdshow">Name</td>
-			<td class="tdshow">Price</td>
-			<td class="tdshow">Type</td>
-			<td class="tdshow">Brand</td>
-			<td class="tdshow">Category</td>
-			<td class="tdshow">Quantity</td>
-		</tr>
-		<tr id="rows" th:each="product : ${products}">
-			<td th:text="${product.id}"></td>
-			<td th:text="${product.name}"></td>
-			<td th:text="${product.price}"></td>
-			<td th:text="${product.type}"></td>
-			<td th:text="${product.brand}"></td>
-			<td th:text="${product.category}"></td>
-			<td th:text="${product.quantity}"></td>
-		</tr>
+		<thead>
+			<tr class="theader" style="background-color: #008040;">
+				<th class="tdshow">ID</th>
+				<th class="tdshow">Name</th>
+				<th class="tdshow">Price</th>
+				<th class="tdshow">Type</th>
+				<th class="tdshow">Brand</th>
+				<th class="tdshow">Category</th>
+				<th class="tdshow">Quantity</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
 	</table>
+	<div id="addproduct" class="Box">
+		<h2>Add Product To Store</h2>
+		<form>
+			<p>Product Name</p>
+			<br></br>
+			<select id="ProductName" class="liststores">
+			<option value=""></option>
+			<option ></option>
+			</select>
+			<br></br><br></br>
+			<p>Price</p>
+			<input name="price" type="text"></input>
+			<div id="validprice" class="validadd"></div>
+			<br></br>
+			<p>Brand</p>
+			<br></br>
+			<select id="Brand" class="liststores">
+			<option value=""></option>
+			<option ></option>
+			</select>
+			<br></br><br></br>
+			<p>Category</p>
+			<br></br>
+			<select id="Category" class="liststores">
+			<option value=""></option>
+			<option ></option>
+			</select>
+			<br></br><br></br>
+			<p>Quantity</p>
+			<input name="quantity" type="text"></input>
+			<div id="validquantity" class="validadd"></div>
+			<br></br>
+			<input type="submit" value="Submit"></input>
+		</form>
+		<form name="cancel" th:action="@{/store-owner-view}" method="get">
+			<input type="submit" value="Cancel"></input>
+		</form>
+	</div>
 </body>
 </html>

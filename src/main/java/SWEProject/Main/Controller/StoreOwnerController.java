@@ -51,6 +51,13 @@ public class StoreOwnerController {
 		return "redirect:/store-owner-view?error";
 	}
 
+	/*test function*/
+	@GetMapping("/add-product-to-store")
+	public String addproduct() {
+		
+		return "add-product-to-store";
+	}
+	
 	@GetMapping("/store-view")
 	public String StoreOwnerStores(Model model) {
 		
