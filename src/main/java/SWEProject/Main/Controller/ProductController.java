@@ -49,9 +49,13 @@ public class ProductController {
 		brand.setName(product.getBrand().getName());
 		brand.setCategory(product.getBrand().getCategory());
 		brandRepository.save(brand);
-		product.setBrand(brand);
-		sysProductrepo.save(product);
-		return "redirect:/show-all-product";
+		if(!sysProductrepo.existsByName(product.getName()) && brandRepository.existsByName(brand.getName())) {
+			product.setBrand(brand);
+			sysProductrepo.save(product);
+			return "/add-product-to-system";
+		}
+		else
+			return "redirect:/show-all-product";
 	}
 
 	/*test fnction*/

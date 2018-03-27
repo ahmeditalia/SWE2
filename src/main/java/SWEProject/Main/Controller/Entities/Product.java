@@ -7,6 +7,7 @@ public abstract class Product {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
+	@Column(unique = true)
 	private String name;
 	@NotNull
 	@ManyToOne

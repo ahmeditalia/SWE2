@@ -4,6 +4,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import SWEProject.Main.Controller.Entities.SystemProduct;
 
+import java.util.List;
+
 public interface SystemProductRepository extends CrudRepository<SystemProduct, Integer>{
+
+    List<SystemProduct> findByBrand(int brandId);
+    boolean existsByName(String name);
 
 }
