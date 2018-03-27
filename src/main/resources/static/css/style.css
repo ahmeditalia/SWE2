@@ -635,7 +635,7 @@ body {
 	font-weight: bold;
 }
 
-.showtableA input[type="submit"] {
+.showtableA button,input[type="submit"] {
 	border: none;
 	outline: none;
 	font-size: 16px;
@@ -646,13 +646,13 @@ body {
 	border-radius: 50px;
 }
 
-.showtableA input[type="submit"]:hover {
+.showtableA button,input[type="submit"]:hover {
 	background: white;
 	color: rgb(0, 102, 0);
 }
 
 
-.showtableR input[type="submit"] {
+.showtableR button,input[type="submit"] {
 	border: none;
 	outline: none;
 	font-size: 16px;
@@ -663,7 +663,7 @@ body {
 	border-radius: 10px;
 }
 
-.showtableR input[type="submit"]:hover {
+.showtableR button,input[type="submit"]:hover {
 	background: white;
 	color: RGB(255,0,0);
 }
