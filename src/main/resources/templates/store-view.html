@@ -4,55 +4,17 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 <script type="text/javascript" src="/js/valid.js"></script>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="/js/functions.js"></script>
-<script th:inline="javascript">
-$(document).ready(function() {
-	$('#addproduct').hide(-10);
-	$("#products").hide(-10);
-	$("#addprodcttostore").click(function(){
-	    $("#products").hide();
-	    $('#addproduct').show();
-	    	
-	    });
- 	$("#cancel").click(function(){
- 	    $('#addproduct').hide();
- 	    $("#products").show();  	
- 	    });
-	$('#list').change(function() {
-		$.getJSON("/products",function(data){
-			$("#products").empty();
-			for(var i in data)
-			{
-				var tblRow = "<tr>" 
-			+ "<td>" + data[i].id + "</td>" 
-			+ "<td>" + data[i].name + "</td>" 
-           	+ "<td>" + data[i].price + "</td>"
-           	+ "<td>" + data[i].type + "</td>" 
-           	+ "<td>" + data[i].brand + "</td>" 
-           	+ "<td>" + data[i].category + "</td>" 
-           	+ "<td>" + data[i].quantity + "</td>" 
-           	+ "</tr>"
-           	$(tblRow).appendTo("#products tbody");
-			}
-	});
-	});	
-});
-
-</script>
+<script type="text/javascript" src="/js/store-view.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Store Owner View</title>
 </head>
 <body>
 
 	<div class="homebutton">
-		<form name="add"  method="get">
-			<input type="submit" id="addprodcttostore" value="Add Product"></input>
-		</form>
+		<button id="addprodcttostore" value="Add Product">Add Product</button>
 		<form name="add" th:action="@{/store-owner-view}" method="get">
 			<input type="submit" value="Store Owner Panel"></input>
 		</form>
-	</div>
-	<div class="homebutton">
 		<h3>Stores:</h3>
 		<br></br> 
 		<select id="list" class="liststores">
@@ -60,29 +22,30 @@ $(document).ready(function() {
 			<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option>
 		</select>
 	</div>
-	<table id="products" class="showtable">
-		<thead>
-			<tr class="theader" style="background-color: #008040;">
-				<th class="tdshow">ID</th>
-				<th class="tdshow">Name</th>
-				<th class="tdshow">Price</th>
-				<th class="tdshow">Type</th>
-				<th class="tdshow">Brand</th>
-				<th class="tdshow">Category</th>
-				<th class="tdshow">Quantity</th>
-			</tr>
-		</thead>
-		<tbody>
-			
-		</tbody>
-	</table>
+	<div id="table">
+		<table id="products" class="showtable">
+			<thead>
+				<tr class="theader" style="background-color: #008040;">
+					<th class="tdshow">ID</th>
+					<th class="tdshow">Name</th>
+					<th class="tdshow">Price</th>
+					<th class="tdshow">Type</th>
+					<th class="tdshow">Brand</th>
+					<th class="tdshow">Category</th>
+					<th class="tdshow">Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
 	<div id="addproduct" class="Box">
 		<h2>Add Product To Store</h2>
 		<form>
 			<p>Product Name</p>
 			<br></br>
 			<select id="ProductName" class="liststores">
-			<option value=""></option>
 			<option ></option>
 			</select>
 			<br></br><br></br>
@@ -93,14 +56,12 @@ $(document).ready(function() {
 			<p>Brand</p>
 			<br></br>
 			<select id="Brand" class="liststores">
-			<option value=""></option>
 			<option ></option>
 			</select>
 			<br></br><br></br>
 			<p>Category</p>
 			<br></br>
 			<select id="Category" class="liststores">
-			<option value=""></option>
 			<option ></option>
 			</select>
 			<br></br><br></br>
@@ -110,9 +71,7 @@ $(document).ready(function() {
 			<br></br>
 			<input type="submit" value="Submit"></input>
 		</form>
-		<form name="cancel" th:action="@{/store-owner-view}" method="get">
-			<input type="submit" value="Cancel"></input>
-		</form>
+		<button id="addproductcancel" value="Cancel">Cancel</button>
 	</div>
 </body>
 </html>

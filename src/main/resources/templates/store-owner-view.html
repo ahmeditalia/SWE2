@@ -4,18 +4,7 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 <script type="text/javascript" src="/js/valid.js"></script>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="/js/functions.js"></script>
-<script th:inline="javascript">	
-	$(document).ready(function() {
-		$("div#adds").hide(-10);
-		$("#addstore").click(function() {
-			$("div#adds").show(5000);
-		});
-		$("#addcancel").click(function() {
-			$("div#adds").hide(5000);
-		});
-	});
-</script>
+<script type="text/javascript" src="/js/store-owner-view.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Store Owner View</title>
 </head>
@@ -47,8 +36,8 @@
 			<span class="checkmark"></span>
 			</label> <br></br>
 			<input type="submit" id="adddone" value="Add"></input> 
-			<button id="addcancel" value="Cancel">Cancel</button>
 		</form>		
+		<button id="addcancel" value="Cancel">Cancel</button>
 	</div>
 </body>
 </html>
