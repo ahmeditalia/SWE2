@@ -44,14 +44,16 @@ public class ProductController {
 	}
 
 	@PostMapping("/add-product-to-system")
-	public String addProduct(@ModelAttribute SystemProduct product) {
-		Brand brand = new Brand();
-		brand.setName(product.getBrand().getName());
-		brand.setCategory(product.getBrand().getCategory());
-		brandRepository.save(brand);
-		product.setBrand(brand);
-		sysProductrepo.save(product);
-		return "redirect:/show-all-product";
+	public String addProduct(@ModelAttribute SystemProduct product, @RequestParam String brand) {
+
+		if(!sysProductrepo.existsByName(product.getName())) {
+			Brand productBrand = brandRepository.findBrandByName(brand);
+			product.setBrand(productBrand);
+			sysProductrepo.save(product);
+			return "redirect:/show-all-product";
+		}
+		else
+			return "/add-product-to-system";
 	}
 
 	/*test fnction*/
@@ -61,7 +63,7 @@ public class ProductController {
 		List<Product> products = new ArrayList<Product>();
 		for (int i = 0; i < 10; i++) {
 			storeProduct = new StoreProduct();
-			storeProduct.setBrand(new Brand("" + i, "" + i * 2));	
+			storeProduct.setBrand(new Brand("" + i, "" + i * 2));
 			storeProduct.setId(i);
 			storeProduct.setName("" + i);
 			storeProduct.setQuantity(i * i);

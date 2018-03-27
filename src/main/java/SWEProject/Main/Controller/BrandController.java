@@ -5,11 +5,10 @@ import SWEProject.Main.Controller.Repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class BrandController {
@@ -24,11 +23,26 @@ public class BrandController {
 	// }
 
 	@RequestMapping("/add-brand")
-	public String addBrand(@RequestParam String name,@RequestParam String category) {
-		Brand brand = new Brand();
-		brand.setCategory(category);
-		brand.setName(name);
-		repo.save(brand);
+	public String addBrand(@RequestParam String brandname,@RequestParam String brandcategory) {
+
+		if(!repo.existsByName(brandname)) {
+			Brand brand = new Brand();
+			brand.setCategory(brandcategory);
+			brand.setName(brandname);
+			repo.save(brand);
+		}
 		return "redirect:/admin-view";
+	}
+
+	@RequestMapping("/brands")
+	public @ResponseBody List<Brand> brands() {
+
+		Iterable<Brand> allBrands = repo.findAll();
+		List<Brand> brands = new ArrayList<Brand>();
+
+		for (Brand b : allBrands) {
+			brands.add(b);
+		}
+		return brands;
 	}
 }
