@@ -61,7 +61,7 @@ public class StoreController {
             }
             return brands;
         }
-        Brands = brepo.findByProduct(pname);
+        Brands = brepo.findByProducts(pname);
         for (Brand p : Brands) {
             brands.add(p);
         }
