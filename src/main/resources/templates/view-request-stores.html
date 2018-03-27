@@ -24,12 +24,8 @@
 		<tr th:each="store : ${stores}">
 			<td th:text="${store.storeOwner.username}"></td>
 			<td th:text="${store.storeName}"></td>
-			<td><form class="showtableA">
-					<button id="accept" name="btnacc" th:value="${store.storeName}">accept</button>
-				</form></td>
-			<td><form class="showtableR">
-					<button id="reject" name="btnrej" th:value="${store.storeName}">reject</button>
-				</form></td>
+			<td><button id="accept" name="btnacc" th:value="${store.storeName}">accept</button></td>
+			<td><button id="reject" name="btnrej" th:value="${store.storeName}">reject</button></td>
 		</tr>
 	</table>
 </body>
