@@ -3,6 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+<script type="text/javascript" src="/js/valid.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/js/view-request-stores.js"></script>
 <title>view-request-stores</title>
 </head>
 <body>
@@ -11,7 +14,7 @@
 			<input type="Submit" value="Admin Panel"></input>
 		</form>
 	</div>
-	<table class="showtableS">
+	<table id="requesttable" class="showtableS">
 		<tr class="theader" style="background-color: #008040;">
 			<td class="tdshow">Store owner</td>
 			<td class="tdshow">Store</td>
@@ -21,18 +24,8 @@
 		<tr th:each="store : ${stores}">
 			<td th:text="${store.storeOwner.username}"></td>
 			<td th:text="${store.storeName}"></td>
-			<td>
-				<form class="showtableA" th:action="@{/accept}" method="post">
-					<input type="hidden" name="storename" th:value="${store.storeName}"></input>
-					<input type="Submit" value="accept"></input>
-				</form>
-			</td>
-			<td>
-				<form class="showtableR" th:action="@{/reject}" method="post">
-					<input type="hidden" name="storename" th:value="${store.storeName}"></input>
-					<input type="Submit" value="reject"></input>
-				</form>
-			</td>
+			<td><button id="accept" name="btnacc" th:value="${store.storeName}">accept</button></td>
+			<td><button id="reject" name="btnrej" th:value="${store.storeName}">reject</button></td>
 		</tr>
 	</table>
 </body>
