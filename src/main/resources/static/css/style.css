@@ -156,7 +156,9 @@ body {
 	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 	color: rgb(253, 253, 253);
 }
-
+.Box option{
+	width: 100%;
+}
 .addtosystem p {
 	margin: 0;
 	padding: 0;
@@ -209,6 +211,7 @@ body {
 
 
 .liststores{
+	outline:none;
 	width:150px;
 	height:30px;
 	background-color:#800000;
@@ -677,9 +680,9 @@ body {
 	border-collapse: collapse;
 	width: 70%;
 	left: 50%;
-	top: 10%;
+	top: 40%;
 	transform: translate(-50%, -50%);
-	position: absolute;
+	position: fixed;
 	padding: 80px 40px;
 }
 
@@ -693,7 +696,7 @@ body {
 	padding: 80px 40px;
 }
 
-th, td {
+th, td ,thead{
 	font-weight:bold;
 	text-align: left;
 	padding: 8px;

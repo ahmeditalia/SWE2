@@ -7,43 +7,40 @@
 <title>Add Product</title>
 </head>
 <body>
-	 <div class="Box">			
-		<form name="cancel" th:action="@{/store-owner-view}" method="get">
-		<input type="submit" value="Cancel"></input>
-		</form>
-	</div>
 	<div class="Box">
 		<h2>Add Product To Store</h2>
-		<form name="addProduct" th:action="@{/add-product-to-store}"
-			th:object="${product}" onsubmit="return addproductvalid()"
-			method="post">
-			<p>Name</p>
-			<input name="name" type="text" th:field="*{name}"></input>
-			<div id="validname" class="validadd"></div>
+		<form>
+			<p>Product Name</p>
 			<br></br>
-			<p>Type</p>
-			<input name="type" type="text" th:field="*{type}"></input>
-			<div id="validtype" class="validadd"></div>
-			<br></br>
+			<select id="ProductName" class="liststores">
+			<option value=""></option>
+			<option ></option>
+			</select>
+			<br></br><br></br>
 			<p>Price</p>
-			<input name="price" type="text" th:field="*{price}"></input>
+			<input name="price" type="text"></input>
 			<div id="validprice" class="validadd"></div>
 			<br></br>
 			<p>Brand</p>
-			<input name="brand" type="text" th:field="*{brand}"></input>
-			<div id="validbrand" class="validadd"></div>
 			<br></br>
+			<select id="Brand" class="liststores">
+			<option value=""></option>
+			<option ></option>
+			</select>
+			<br></br><br></br>
 			<p>Category</p>
-			<input name="category" type="text" th:field="*{category}"></input>
-			<div id="validcategory" class="validadd"></div>
 			<br></br>
+			<select id="Category" class="liststores">
+			<option value=""></option>
+			<option ></option>
+			</select>
+			<br></br><br></br>
 			<p>Quantity</p>
-			<input name="quantity" type="text" th:field="*{quantity}"></input>
+			<input name="quantity" type="text"></input>
 			<div id="validquantity" class="validadd"></div>
 			<br></br>
 			<input type="submit" value="Submit"></input>
 		</form>
-		
 		<form name="cancel" th:action="@{/store-owner-view}" method="get">
 			<input type="submit" value="Cancel"></input>
 		</form>
