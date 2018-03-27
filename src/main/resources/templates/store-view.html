@@ -18,7 +18,7 @@
 		<h3>Stores:</h3>
 		<br></br> 
 		<select id="list" class="liststores">
-			<option value=""></option>
+			<option value="ALL">ALL</option>
 			<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option>
 		</select>
 	</div>

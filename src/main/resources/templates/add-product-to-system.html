@@ -2,14 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
-	<script type="text/javascript" src="/js/valid.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="/js/valid.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/js/add-product-to-system.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Add Product</title>
 </head>
 <body>
 	<div class="addtosystem">
 		<h2>Add Product To System</h2>
-		<form name="addProduct" action="#" th:object="${product}" th:action="@{/add-product-to-system}"
+		<form name="addProduct" th:object="${product}" th:action="@{/add-product-to-system}"
 			  onsubmit="return addproductvalid()"
 			method="post">
 			<p>Name</p>
@@ -17,13 +19,15 @@
 			<div id="validname" class="validadd"></div>
 			<br></br>
 			<p>Brand</p>
-			<input name="brand" type="text" th:field="*{brand.name}"></input>
-			<div id="validbrand" class="validadd"></div>
 			<br></br>
+			<select id="Brand" class="listbrand">
+			</select>
+			<br></br><br></br>
 			<p>Category</p>
-			<input name="category" type="text" th:field="*{brand.category}"></input>
-			<div id="validcategory" class="validadd"></div>
 			<br></br>
+			<select id="Category" class="listbrand">
+			</select>
+			<br></br><br></br>
 			<p>Type</p>
 			<input name="type" type="text" th:field="*{type}"></input>
 			<div id="validtype" class="validadd"></div>
