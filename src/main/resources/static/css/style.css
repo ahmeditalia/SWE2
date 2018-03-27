@@ -233,7 +233,7 @@ body {
 	color:white;
 }
 
-.listbrand{
+.listbrand,.lists{
 	outline:none;
 	width:100%;
 	height:30px;
