@@ -16,6 +16,7 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class StoreController {
     @Autowired
@@ -68,6 +69,18 @@ public class StoreController {
         return brands;
     }
 
+    @RequestMapping("/statistics")
+    @ResponseBody
+    public Statistics showstat()
+    {
+    	//example
+    	Random rand = new Random();
+    	int  n = rand.nextInt(250);
+    	int m=rand.nextInt(n);
+    	Statistics statistics=new Statistics(n, m, rand.nextInt(m));
+    	return statistics;
+    }
+    
 
     @PostMapping("/{sname}/add-product-store")
     public String addProduct(@ModelAttribute StoreProduct product, @PathVariable String sname){

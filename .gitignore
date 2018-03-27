@@ -8,3 +8,4 @@ src/main/java/SWEProject/Main/Controller/Repository/SystemProductRepository.java
 *.iml
 *.xml
 *.iml
+src/main/resources/application.properties
