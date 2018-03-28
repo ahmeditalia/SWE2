@@ -24,18 +24,12 @@ public class StoreController {
     private StoreProductRepository prepo;
     private SystemProductRepository sprepo;
     private BrandRepository brepo;
-    @GetMapping("/{oname}/add-product-store")
-    public String showproductsform(Model model, @PathVariable String oname){
-        model.addAttribute("product",new StoreProduct());
-        String url="/"+oname+"/add-product-store";
-        return "add-product-to-store";
-    }
 
     @RequestMapping("/productstore")
     public @ResponseBody List<SystemProduct> products(@RequestParam ("bname")String bname) {
         Iterable<SystemProduct> Products ;
         List<SystemProduct> products = new ArrayList<SystemProduct>();
-        if(bname.equals("zero")) {
+        if(bname.equals("")) {
             Products=sprepo.findAll();
             for (SystemProduct p : Products) {
                 products.add(p);
@@ -55,7 +49,7 @@ public class StoreController {
     public @ResponseBody List<Brand> brands(@RequestParam("pname") String pname) {
         Iterable<Brand> Brands ;
         List<Brand> brands = new ArrayList<Brand>();
-        if(pname.equals("zero")) {
+        if(pname.equals("")) {
             Brands = brepo.findAll();
             for (Brand p : Brands) {
                 brands.add(p);
@@ -82,18 +76,17 @@ public class StoreController {
     }
     
 
-    @PostMapping("/{sname}/add-product-store")
-    public String addProduct(@ModelAttribute StoreProduct product, @PathVariable String sname){
+    @RequestMapping("/add-product-store")
+    public void addProduct(@RequestParam String p, @RequestParam String sname){
         Store s=repo.findOne(sname);
+        StoreProduct product=prepo.findByname(p);
         s.addProduct(product);
         repo.save(s);
         prepo.save(product);
-        String url = "redirect:/"+ sname + "/show-all-product-store";
-        return url;
     }
 
 
-    @RequestMapping("/{oname}/{sname}/show-all-product-store/")
+    @RequestMapping("/show-all-product-store")
     public String showAllProducts(Model model,  @PathVariable String oname, @PathVariable String sname)
     {
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );

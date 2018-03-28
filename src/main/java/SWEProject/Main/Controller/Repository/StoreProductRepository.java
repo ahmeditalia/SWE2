@@ -1,9 +1,12 @@
 package SWEProject.Main.Controller.Repository;
 
+import SWEProject.Main.Controller.Entities.Brand;
 import org.springframework.data.repository.CrudRepository;
 
 import SWEProject.Main.Controller.Entities.StoreProduct;
 
-public interface StoreProductRepository extends CrudRepository<StoreProduct, Integer>{
+import java.util.List;
 
+public interface StoreProductRepository extends CrudRepository<StoreProduct, Integer>{
+    StoreProduct findByname(String name);
 }
