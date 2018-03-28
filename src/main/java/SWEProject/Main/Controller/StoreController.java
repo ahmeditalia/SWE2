@@ -44,11 +44,30 @@ public class StoreController {
         Brand b=brepo.findBrandByName(bname);
         for(int i=0;i<b.getProducts().size();i++)
         products.add((SystemProduct)b.getProducts().get(i));
-        System.out.println("ppppppppppppppp"+products.get(0).getName());
         return products;
 
     }
 
+    @RequestMapping("/Allbrandstore")
+    public @ResponseBody List<Brand> brands() {
+        Iterable<Brand> Brands ;
+        List<Brand> brands = new ArrayList<Brand>();
+            Brands = brepo.findAll();
+            for (Brand p : Brands) {
+                brands.add(p);
+            }
+            return brands;
+    }
+    @RequestMapping("/Allproductstore")
+    public @ResponseBody List<SystemProduct> products() {
+        Iterable<SystemProduct> Products ;
+        List<SystemProduct> products = new ArrayList<SystemProduct>();
+            Products=sprepo.findAll();
+            for (SystemProduct p : Products) {
+                products.add(p);
+            }
+            return products;
+    }
 
     @RequestMapping("/brandstore")
     public @ResponseBody List<Brand> brands(@RequestParam("pname") String pname) {
@@ -64,7 +83,6 @@ public class StoreController {
         SystemProduct s=sprepo.findOneByName(pname);
         Brand b=s.getBrand();
         brands.add(b);
-        System.out.println("\n+bbbbbbbbbbbbbbbbbbbbbbb"+b.getName());
         return brands;
     }
 
@@ -91,23 +109,4 @@ public class StoreController {
     }
 
 
-    @RequestMapping("/show-all-product-store")
-    public String showAllProducts(Model model,  @PathVariable String oname, @PathVariable String sname)
-    {
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
-        EntityManager em = emfactory.createEntityManager();
-
-        List AllProducts= em.createQuery("SELECT a FROM StoreProduct a", StoreProduct.class).getResultList();
-        List<StoreProduct> allProducts=AllProducts;
-
-        List<StoreProduct> products=new ArrayList<StoreProduct>();
-        for(StoreProduct p:allProducts)
-        {
-            if(p.getStore().getStoreName().equals(sname)){
-                products.add(p);
-            }
-        }
-        model.addAttribute("products",products);
-        return "show-products-on-store";
-    }
 }
