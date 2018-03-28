@@ -2,25 +2,26 @@ $(document).ready(
 		function() {
 			$("div#addproduct").hide();
 			$("div#statistics").hide();
-			$("#addprodcttostore").click(function() {
-				$("div#table").hide(500);
-				$("div#addproduct").show(900);
-					$.getJSON("/brandstore", {pname : "product1"},  function(data) {
-                				for ( var i in data) {
-                					$("#Brand").append($("<option></option>").text(data[i].name));
-                					$("#Brand").append($("<option></option>").text(data[i].category));
-                				}
-                			});
-
-                			$.getJSON("/productstore", {
-                				bname : "1"
-                			}, function(data) {
-                				for ( var i in data) {
-                					$("#ProductName").append($("<option></option>").val(data[i].name));
-                				}
-                			});
-
-			});
+			$("#addprodcttostore").click(
+					function() {
+						$("div#table").hide(500);
+						$("div#addproduct").show(900);
+						$("#ProductName option").remove();
+						$("#Brand option").remove();
+						$("#Category option").remove();
+						$.getJSON("/brands", function(data) {
+							for ( var i in data) {
+								$("#Brand").append($("<option></option>").text(data[i].name));
+								$("#Category").append($("<option></option>").text(data[i].category));
+								alert(data[i].name);
+							}
+						});
+						$.getJSON("/allSystemProduct", function(data) {
+							for ( var i in data) {
+								$("#ProductName").append($("<option></option>").text(data[i].name));
+							}
+						});
+					});
 			$("#addproductcancel").click(function() {
 				$("div#addproduct").hide(500);
 				$("div#table").show(900);
@@ -28,18 +29,20 @@ $(document).ready(
 
 			$('#ProductName').change(
 					function() {
-						$.getJSON("/brandstore", {pname : $('#ProductName').text()}, function(data) {
+						$.getJSON("/brandOfProduct", {pname : $('#ProductName').text()}, function(data) {
 							$("#Brand").append($("<option></option>").text(data[i].name));
-							$("#Brand").append($("<option></option>").text(data[i].category));
+							$("#Category").append($("<option></option>").text(data[i].category));
+							alert('e');
 						});
 					});
 
 			$('#Brand').change(
 					function() {
-						$.getJSON("/productstore", {bname : $('#Brand').text()}, function(data) {
+						$.getJSON("/productsOfBrand", {bname : $('#Brand').text()}, function(data) {
 							for ( var i in data) {
 								$("#ProductName").append($("<option></option>").text(data[i].name));
 							}
+							alert('f');
 						});
 					});
 
@@ -62,17 +65,15 @@ $(document).ready(
 						});
 						updatediv();
 					});
-			
-			
-			
+
 		});
-function updatediv(){
+function updatediv() {
 	$("#statistics p").remove();
-	$.getJSON("/stat",function(data){
-		var divcontent = "<p>Number Of Views "+data.numUserView+"</p>"+
-						"<p>Number Of Buyers "+data.numUserBuy+"</p>"+
-						"<p>Number Of Sold Products "+data.soldProducts+"</p>";
+	$.getJSON("/stat", function(data) {
+		var divcontent = "<p>Number Of Views " + data.numUserView + "</p>"
+				+ "<p>Number Of Buyers " + data.numUserBuy + "</p>"
+				+ "<p>Number Of Sold Products " + data.soldProducts + "</p>";
 		$("div#statistics").append(divcontent);
-		window.setTimeout(updatediv,10000);
+		window.setTimeout(updatediv, 10000);
 	});
 }

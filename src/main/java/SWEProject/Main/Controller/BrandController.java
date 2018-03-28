@@ -1,7 +1,10 @@
 package SWEProject.Main.Controller;
 
 import SWEProject.Main.Controller.Entities.Brand;
+import SWEProject.Main.Controller.Entities.SystemProduct;
 import SWEProject.Main.Controller.Repository.BrandRepository;
+import SWEProject.Main.Controller.Repository.SystemProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,8 @@ public class BrandController {
 
 	@Autowired
 	private BrandRepository repo;
+    @Autowired
+    private SystemProductRepository sprepo;
 
 	// @GetMapping("/add-brand")
 	// public String addBrand(Model model){
@@ -35,7 +40,8 @@ public class BrandController {
 	}
 
 	@RequestMapping("/brands")
-	public @ResponseBody List<Brand> brands() {
+	@ResponseBody
+	public List<Brand> brands() {
 
 		Iterable<Brand> allBrands = repo.findAll();
 		List<Brand> brands = new ArrayList<Brand>();
@@ -45,4 +51,11 @@ public class BrandController {
 		}
 		return brands;
 	}
+	
+    @RequestMapping("/brandOfProduct")
+    public @ResponseBody Brand brands(@RequestParam("pname") String pname) {
+        SystemProduct s=sprepo.findOneByName(pname);
+        Brand b=s.getBrand();
+        return b;
+    }
 }

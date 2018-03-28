@@ -2,6 +2,9 @@ package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 @Entity
@@ -16,6 +19,7 @@ public class Brand {
     private String category;
 
     @OneToMany(mappedBy="brand",cascade=CascadeType.ALL)
+    @JsonManagedReference
     List<Product> products;
     
     public Brand(String name, String category) {

@@ -2,6 +2,9 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 @Entity
 public abstract class Product {
 	@Id
@@ -11,6 +14,7 @@ public abstract class Product {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="brandId")
+	@JsonBackReference
 	private Brand brand;
 	@NotNull
 	private String type;

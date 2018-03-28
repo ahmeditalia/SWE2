@@ -84,4 +84,26 @@ public class ProductController {
 		model.addAttribute("products", products);
 		return "show-all-product";
 	}
+	
+	@RequestMapping("/productsOfBrand")
+	public @ResponseBody List<SystemProduct> productsOfBrand(@RequestParam("bname") String bname) {
+		List<SystemProduct> products = new ArrayList<SystemProduct>();
+		Brand b = brandRepository.findBrandByName(bname);
+		for (int i = 0; i < b.getProducts().size(); i++)
+			products.add((SystemProduct) b.getProducts().get(i));
+		return products;
+	}
+
+	@RequestMapping("/allSystemProduct")
+	@ResponseBody
+	public List<SystemProduct> allSystemProduct() {
+		Iterable<SystemProduct> Products;
+		List<SystemProduct> products = new ArrayList<SystemProduct>();
+		Products = sysProductrepo.findAll();
+		for (SystemProduct p : Products) {
+			products.add(p);
+		}
+		return products;
+	}
+
 }
