@@ -6,14 +6,14 @@ import javax.validation.constraints.NotNull;
 public abstract class Product {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Integer id;
-	private String name;
+	protected Integer id;
+	protected String name;
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="brandId")
-	private Brand brand;
+	protected Brand brand;
 	@NotNull
-	private String type;
+	protected String type;
 
 	public Integer getId() {
 		return id;

@@ -54,6 +54,8 @@ important links
 https://spring.io/guides/gs/rest-service/
 https://spring.io/guides/gs/serving-web-content/
 https://spring.io/guides/gs/accessing-data-mysql/
+https://hellokoding.com/jpa-many-to-many-relationship-mapping-example-with-spring-boot-maven-and-mysql/
+https://www.thoughts-on-java.org/complete-guide-inheritance-strategies-jpa-hibernate/
 
 
 
