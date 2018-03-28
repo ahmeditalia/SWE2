@@ -44,10 +44,10 @@ public class ProductController {
 	}
 
 	@PostMapping("/add-product-to-system")
-	public String addProduct(@ModelAttribute SystemProduct product, @RequestParam String brand) {
+	public String addProduct(@ModelAttribute SystemProduct product) {
 
 		if(!sysProductrepo.existsByName(product.getName())) {
-			Brand productBrand = brandRepository.findBrandByName(brand);
+			Brand productBrand = brandRepository.findBrandByName(product.getBrand().getName());
 			product.setBrand(productBrand);
 			sysProductrepo.save(product);
 			return "redirect:/show-all-product";
