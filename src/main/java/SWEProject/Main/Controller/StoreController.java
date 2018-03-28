@@ -77,12 +77,12 @@ public class StoreController {
     
 
     @RequestMapping("/add-product-store")
-    public void addProduct(@ModelAttribute StoreProduct product, @RequestParam String sname){
+    public void addProduct(@RequestParam String p, @RequestParam String sname){
         Store s=repo.findOne(sname);
+        StoreProduct product=prepo.findByname(p);
         s.addProduct(product);
         repo.save(s);
         prepo.save(product);
-        String url = "redirect:/"+ sname + "/show-all-product-store";
     }
 
 
