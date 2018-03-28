@@ -302,6 +302,20 @@ body {
 }
 
 
+.statistics {
+	border-radius: 15px;
+	position: absolute;
+	padding: 40px 40px;
+	top: 56%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+
+
 .Box {
 	border-radius: 15px;
 	position: absolute;
