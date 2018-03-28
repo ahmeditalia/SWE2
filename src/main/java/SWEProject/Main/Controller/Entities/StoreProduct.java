@@ -8,7 +8,7 @@ public class StoreProduct extends Product {
     @NotNull
     private int quantity;
     private String type;
-
+    private double price;
     @ManyToOne
     @JoinColumn(name = "storeName", insertable = false, updatable = false)
     private Store store;
@@ -40,4 +40,12 @@ public class StoreProduct extends Product {
     }
 
     public StoreProduct(){}
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

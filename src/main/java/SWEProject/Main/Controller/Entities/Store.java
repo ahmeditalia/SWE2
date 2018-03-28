@@ -93,4 +93,5 @@ public class Store {
     public void addProduct(StoreProduct s){
         products.add(s);
     }
+
 }

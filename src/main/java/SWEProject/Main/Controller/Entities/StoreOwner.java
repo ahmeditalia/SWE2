@@ -35,4 +35,12 @@ public class StoreOwner extends User{
 	{
 		stores.add(store);
 	}
+
+	public Statistics getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
+	}
 }

@@ -65,7 +65,7 @@ public class Statistics implements Operations {
     }
 
     @Override
-    public void increamentSoldProducts() {
-        soldProducts++;
+    public void increamentSoldProducts(int numProducts) {
+        soldProducts+=numProducts;
     }
 }

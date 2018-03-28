@@ -33,8 +33,6 @@ public class ProductController {
 	@Autowired
 	private SystemProductRepository sysProductrepo;
 	@Autowired
-	private StoreProductRepository storeProductRepo;
-	@Autowired
 	private BrandRepository brandRepository;
 
 	@GetMapping("/add-product-to-system")

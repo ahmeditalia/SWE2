@@ -1,11 +1,8 @@
 package SWEProject.Main.Controller;
 
 import SWEProject.Main.Controller.Entities.*;
-import SWEProject.Main.Controller.Repository.BrandRepository;
-import SWEProject.Main.Controller.Repository.StoreProductRepository;
+import SWEProject.Main.Controller.Repository.*;
 
-import SWEProject.Main.Controller.Repository.StoreRepository;
-import SWEProject.Main.Controller.Repository.SystemProductRepository;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +20,19 @@ import java.util.Random;
 @Controller
 public class StoreController {
 	@Autowired
-	private StoreRepository repo;
+	private StoreRepository sepo;
 	@Autowired
 	private StoreProductRepository prepo;
 	@Autowired
 	private SystemProductRepository sprepo;
 	@Autowired
 	private BrandRepository brepo;
+	@Autowired
+	private StoreOwnerRepository sorepo;
+	@Autowired
+	private StatisticsRepository statrepo;
+	@Autowired
+	private NormalUserRepository nurepo;
 
 	
 	@RequestMapping("/statistics")
@@ -44,12 +47,58 @@ public class StoreController {
 	}
 
 	@RequestMapping("/add-product-store")
-	public void addProduct(@RequestParam String p, @RequestParam String sname) {
-		Store s = repo.findOne(sname);
-		StoreProduct product = prepo.findByname(p);
-		s.addProduct(product);
-		repo.save(s);
-		prepo.save(product);
-	}
+	public void addProduct(@RequestParam StoreProduct p, @RequestParam String sname) {
+		Store s = sepo.findOneByStoreName(sname);
+			s.addProduct(p);
+			prepo.save(p);
+			sepo.save(s);
 
-}
+	}
+	@RequestMapping("/ShowAllStores")
+	public @ResponseBody List<Store> showAllStores(){
+		Iterable<Store> str = sepo.findAll();
+		List<Store> stores = new ArrayList<Store>();
+		for (Store s : str) {
+			stores.add(s);
+		}
+		return  stores;
+	}
+	@RequestMapping("/openStore")
+	public @ResponseBody List<StoreProduct> openStore( @RequestParam String sname){
+		List<StoreProduct> sProducts = new ArrayList<StoreProduct>();
+		Store s=sepo.findOneByStoreName(sname);
+		for (int i=0;i<s.getProducts().size();i++) {
+			sProducts.add(s.getProducts().get(i));
+		}
+		StoreOwner storeOwner=s.getStoreOwner();
+		Statistics statistics=storeOwner.getStatistics();
+		statistics.increamentUserViews();
+		storeOwner.setStatistics(statistics);
+		statrepo.save(statistics);
+		sorepo.save(storeOwner);
+		return  sProducts;
+	}
+	@RequestMapping("/buyProduct")
+	public @ResponseBody boolean buyProduct(@RequestParam String spname,@RequestParam String normaluname,@RequestParam String storeName,@RequestParam int amounts) {
+			NormalUser normalUser=nurepo.findOneByUserName(normaluname);
+			StoreProduct storeProduct=prepo.findBynameAndStoreName(spname,storeName);
+		Store store=sepo.findOneByStoreName(storeName);
+			if(normalUser.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-amounts<0){
+				return false;
+			}
+		double balance=normalUser.getBalance()-storeProduct.getPrice();
+		normalUser.setBalance(balance);
+		nurepo.save(normalUser);
+		storeProduct.setQuantity(storeProduct.getQuantity()-amounts);
+		prepo.save(storeProduct);
+		
+		StoreOwner storeOwner=store.getStoreOwner();
+		Statistics statistics=storeOwner.getStatistics();
+		statistics.increamentUserBuy();
+		statistics.increamentSoldProducts(amounts);
+		storeOwner.setStatistics(statistics);
+		statrepo.save(statistics);
+		sorepo.save(storeOwner);
+		return true;
+		}
+	}
