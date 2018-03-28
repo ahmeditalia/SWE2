@@ -6,7 +6,9 @@ import SWEProject.Main.Controller.Repository.StoreProductRepository;
 
 import SWEProject.Main.Controller.Repository.StoreRepository;
 import SWEProject.Main.Controller.Repository.SystemProductRepository;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +19,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
+@Controller
 public class StoreController {
     @Autowired
     private StoreRepository repo;
+    @Autowired
     private StoreProductRepository prepo;
+    @Autowired
     private SystemProductRepository sprepo;
+    @Autowired
     private BrandRepository brepo;
 
     @RequestMapping("/productstore")
@@ -36,10 +41,10 @@ public class StoreController {
             }
             return products;
         }
-        Products=sprepo.findByBrand(bname);
-        for (SystemProduct p : Products) {
-            products.add(p);
-        }
+        Brand b=brepo.findBrandByName(bname);
+        for(int i=0;i<b.getProducts().size();i++)
+        products.add((SystemProduct)b.getProducts().get(i));
+        System.out.println("ppppppppppppppp"+products.get(0).getName());
         return products;
 
     }
@@ -56,10 +61,10 @@ public class StoreController {
             }
             return brands;
         }
-        Brands = brepo.findByProducts(pname);
-        for (Brand p : Brands) {
-            brands.add(p);
-        }
+        SystemProduct s=sprepo.findOneByName(pname);
+        Brand b=s.getBrand();
+        brands.add(b);
+        System.out.println("\n+bbbbbbbbbbbbbbbbbbbbbbb"+b.getName());
         return brands;
     }
 
