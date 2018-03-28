@@ -60,5 +60,19 @@ $(document).ready(
 								$("#products tbody").append(tblRow);
 							}
 						});
+						updatediv();
 					});
+			
+			
+			
 		});
+function updatediv(){
+	$("#statistics p").remove();
+	$.getJSON("/stat",function(data){
+		var divcontent = "<p>Number Of Views "+data.numUserView+"</p>"+
+						"<p>Number Of Buyers "+data.numUserBuy+"</p>"+
+						"<p>Number Of Sold Products "+data.soldProducts+"</p>";
+		$("div#statistics").append(divcontent);
+		window.setTimeout(updatediv,10000);
+	});
+}
