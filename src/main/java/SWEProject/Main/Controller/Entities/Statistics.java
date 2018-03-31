@@ -10,6 +10,8 @@ public class Statistics implements Operations {
     public int numUserView;
     public int numUserBuy;
     public int soldProducts;
+    @OneToOne(cascade = CascadeType.ALL)
+    public Store store;
     public Statistics() {
         this.numUserView = 0;
         this.numUserBuy = 0;
@@ -52,6 +54,14 @@ public class Statistics implements Operations {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Store getStoreOwner() {
+        return store;
+    }
+
+    public void setStoreOwner(Store store) {
+        this.store = store;
     }
 
     @Override

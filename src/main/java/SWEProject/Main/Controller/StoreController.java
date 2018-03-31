@@ -3,17 +3,11 @@ package SWEProject.Main.Controller;
 import SWEProject.Main.Controller.Entities.*;
 import SWEProject.Main.Controller.Repository.*;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -47,12 +41,11 @@ public class StoreController {
 	}
 
 	@RequestMapping("/add-product-store")
-	public void addProduct(@RequestParam StoreProduct p, @RequestParam String sname) {
-		Store s = sepo.findOneByStoreName(sname);
-			s.addProduct(p);
-			prepo.save(p);
-			sepo.save(s);
-
+	public void addProduct(@RequestParam StoreProduct p, @RequestParam String sName,double price,int quantity) {
+		Store s = sepo.findOneByStoreName(sName);
+		p.setStore(s);
+		s.addProduct(p);
+		prepo.save(p);
 	}
 	@RequestMapping("/ShowAllStores")
 	public @ResponseBody List<Store> showAllStores(){
@@ -70,35 +63,24 @@ public class StoreController {
 		for (int i=0;i<s.getProducts().size();i++) {
 			sProducts.add(s.getProducts().get(i));
 		}
-		StoreOwner storeOwner=s.getStoreOwner();
-		Statistics statistics=storeOwner.getStatistics();
-		statistics.increamentUserViews();
-		storeOwner.setStatistics(statistics);
-		statrepo.save(statistics);
-		sorepo.save(storeOwner);
+		statrepo.updateNumUserView(sname);
 		return  sProducts;
 	}
 	@RequestMapping("/buyProduct")
-	public @ResponseBody boolean buyProduct(@RequestParam String spname,@RequestParam String normaluname,@RequestParam String storeName,@RequestParam int amounts) {
-			NormalUser normalUser=nurepo.findOneByUserName(normaluname);
-			StoreProduct storeProduct=prepo.findBynameAndStoreName(spname,storeName);
+	public @ResponseBody boolean buyProduct(@RequestParam String spname,@RequestParam String normaluname,@RequestParam String storeName,@RequestParam int quantity) {
+			NormalUser normalUser=nurepo.findOneByUsername(normaluname);
+			StoreProduct storeProduct=prepo.findByNameAndStore(spname,storeName);
 		Store store=sepo.findOneByStoreName(storeName);
-			if(normalUser.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-amounts<0){
+			if(normalUser.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-quantity<0){
 				return false;
 			}
 		double balance=normalUser.getBalance()-storeProduct.getPrice();
 		normalUser.setBalance(balance);
-		nurepo.save(normalUser);
-		storeProduct.setQuantity(storeProduct.getQuantity()-amounts);
-		prepo.save(storeProduct);
-		
-		StoreOwner storeOwner=store.getStoreOwner();
-		Statistics statistics=storeOwner.getStatistics();
-		statistics.increamentUserBuy();
-		statistics.increamentSoldProducts(amounts);
-		storeOwner.setStatistics(statistics);
-		statrepo.save(statistics);
-		sorepo.save(storeOwner);
+		prepo.updateQuantity(quantity,storeName,storeProduct.getId());
+		nurepo.updateBalance(storeProduct.getPrice(),normalUser.getUsername());
+		statrepo.updateNumUserBuy(storeName);
+		statrepo.updateNumUserView(storeName);
+		statrepo.updateSoldProducts(storeName,quantity);
 		return true;
 		}
 	}

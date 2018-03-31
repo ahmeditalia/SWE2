@@ -51,7 +51,7 @@ public class ProductController {
 			return "redirect:/show-all-product";
 		}
 		else
-			return "/add-product-to-system";
+			return "redirect:/add-product-to-system";
 	}
 
 	/*test fnction*/
