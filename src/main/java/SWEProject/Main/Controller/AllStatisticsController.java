@@ -25,16 +25,4 @@ public class AllStatisticsController {
         AllStatistics a=allStatisticsRepo.findByOperationAndEntity(operation,entity);
         allStatisticsRepo.updateAdded(a.getId());
     }
-    @RequestMapping("/statistics")
-    @ResponseBody
-    public List<AllStatistics> showstat() {
-        // example
-        Random rand = new Random();
-        int n = rand.nextInt(250);
-        int m = rand.nextInt(n);
-        Statistics statistics = new Statistics(n, m, rand.nextInt(m));
-        return statistics;
-    }
-
-
 }
