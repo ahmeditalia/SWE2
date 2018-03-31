@@ -79,3 +79,7 @@ public class Statistics implements Operations {
         soldProducts+=numProducts;
     }
 }
+
+
+
+
