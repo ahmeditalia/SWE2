@@ -21,6 +21,7 @@ import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,16 +43,13 @@ public class ProductController {
 	}
 
 	@PostMapping("/add-product-to-system")
-	public String addProduct(@ModelAttribute SystemProduct product) {
-
+	@ResponseBody
+	public void addProduct(@RequestBody SystemProduct product) {
 		if(!sysProductrepo.existsByName(product.getName())) {
 			Brand productBrand = brandRepository.findBrandByName(product.getBrand().getName());
 			product.setBrand(productBrand);
 			sysProductrepo.save(product);
-			return "redirect:/show-all-product";
 		}
-		else
-			return "redirect:/add-product-to-system";
 	}
 
 	/*test fnction*/

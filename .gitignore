@@ -10,3 +10,5 @@ src/main/java/SWEProject/Main/Controller/Repository/SystemProductRepository.java
 *.iml
 src/main/resources/application.properties
 .classpath
+src/main/resources/application.properties
+src/main/resources/application.properties
