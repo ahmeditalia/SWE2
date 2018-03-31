@@ -71,18 +71,19 @@ public class ProductController {
 	}
 
 	@RequestMapping("/show-all-product")
-	public String showAllProducts(Model model) {
+	@ResponseBody
+	public List<Product>  showAllProducts() {
 		Iterable<SystemProduct> pro = sysProductrepo.findAll();
 		List<Product> products = new ArrayList<Product>();
 		for (Product p : pro) {
 			products.add(p);
 		}
-		model.addAttribute("products", products);
-		return "show-all-product";
+		return products;
 	}
 	
 	@RequestMapping("/productsOfBrand")
-	public @ResponseBody List<SystemProduct> productsOfBrand(@RequestParam("bname") String bname) {
+	@ResponseBody
+	public  List<SystemProduct> productsOfBrand(@RequestBody String bname) {
 		List<SystemProduct> products = new ArrayList<SystemProduct>();
 		Brand b = brandRepository.findBrandByName(bname);
 		for (int i = 0; i < b.getProducts().size(); i++)

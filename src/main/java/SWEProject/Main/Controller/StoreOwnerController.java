@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import SWEProject.Main.Controller.Entities.Creator;
 import SWEProject.Main.Controller.Entities.OnlineStore;
@@ -39,7 +36,8 @@ public class StoreOwnerController {
 	 * return "add-store"; }
 	 */
 	@PostMapping("/add-store")
-	public String newStore(@ModelAttribute Store store, @RequestParam("type2") String type) {
+	@ResponseBody
+	public String newStore(@RequestBody Store store, @RequestBody String type) {
 		if (!storeRepo.exists(store.getStoreName())) {
 			StoreOwner storeOwner = new StoreOwner(
 					(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -59,10 +57,9 @@ public class StoreOwnerController {
 	}
 	
 	@GetMapping("/store-view")
-	public String StoreOwnerStores(Model model) {
+	public List<Store> StoreOwnerStores() {
 		
 		List<Store> stores = storeRepo.findByStatus("accepted");
-		model.addAttribute("stores", stores);
-		return "store-view";
+		return stores;
 	}
 }

@@ -41,14 +41,16 @@ public class StoreController {
 	}
 
 	@RequestMapping("/add-product-store")
-	public void addProduct(@RequestParam StoreProduct p, @RequestParam String sName,double price,int quantity) {
+	@ResponseBody
+	public void addProduct(@RequestBody StoreProduct p, @RequestBody String sName,@RequestBody double price,@RequestBody int quantity) {
 		Store s = sepo.findOneByStoreName(sName);
 		p.setStore(s);
 		s.addProduct(p);
 		prepo.save(p);
 	}
 	@RequestMapping("/ShowAllStores")
-	public @ResponseBody List<Store> showAllStores(){
+	@ResponseBody
+	public  List<Store> showAllStores(){
 		Iterable<Store> str = sepo.findAll();
 		List<Store> stores = new ArrayList<Store>();
 		for (Store s : str) {
@@ -57,7 +59,8 @@ public class StoreController {
 		return  stores;
 	}
 	@RequestMapping("/openStore")
-	public @ResponseBody List<StoreProduct> openStore( @RequestParam String sname){
+	@ResponseBody
+	public  List<StoreProduct> openStore(@RequestBody String sname){
 		List<StoreProduct> sProducts = new ArrayList<StoreProduct>();
 		Store s=sepo.findOneByStoreName(sname);
 		for (int i=0;i<s.getProducts().size();i++) {
@@ -67,7 +70,8 @@ public class StoreController {
 		return  sProducts;
 	}
 	@RequestMapping("/buyProduct")
-	public @ResponseBody boolean buyProduct(@RequestParam String spname,@RequestParam String normaluname,@RequestParam String storeName,@RequestParam int quantity) {
+	@ResponseBody
+	public  boolean buyProduct(@RequestBody String spname,@RequestBody String normaluname,@RequestBody String storeName,@RequestBody int quantity) {
 			NormalUser normalUser=nurepo.findOneByUsername(normaluname);
 			StoreProduct storeProduct=prepo.findByNameAndStore(spname,storeName);
 		Store store=sepo.findOneByStoreName(storeName);
