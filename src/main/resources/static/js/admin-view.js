@@ -7,7 +7,7 @@ $(document).ready(function() {
     
 		$("#addbrandtosystem").click(function() {
 			
-			// clear div
+			$("#adminwindow").empty();
 			var v="<form id=\"addbrand\" name=\"addbrand\">"
 			+"<p>Brand Name</p>"
 			+"<input id=\"namebrand\" name=\"brandname\" type=\"text\"></input>"
@@ -20,10 +20,10 @@ $(document).ready(function() {
 			+"</form>"
 			+"<button id=\"submitbrand\"  value=\"Add Brand\">Add Brand</input>"
 			+"<button id=\"addbrandcancel\" value=\"Cancel\">Cancel</button>";
-		$("#addbrand").append(v);
+		$("#adminwindow").append(v);
 
 		$("#addbrandcancel").click(function() {
-			$("div#addbrand").hide(500);
+			$("div#adminwindow").hide(500);
 		});
 		
 		$("#submitbrand").click(function() {
@@ -44,8 +44,8 @@ $(document).ready(function() {
 		
 
 		$("#addproduct").click(function() {
-			// clear div
-			
+
+			$("#adminwindow").empty();
 			var v="<h2>Add Product To System</h2>"
 				+"<form name=\"addProduct\">"
 				+"<p>Name</p>"
@@ -68,7 +68,7 @@ $(document).ready(function() {
 				+"</form>"
 				+"<button id=\"create\" value=\"submit\">Submit</button>"
 				+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
-			$("#addbrand").append(v);
+			$("#adminwindow").append(v);
 			
 			$.getJSON("/brands", function(data) {
 				$("#brand option").remove();
@@ -80,7 +80,7 @@ $(document).ready(function() {
 			});
 			
 			$("#cancel").click(function() {
-				$("div#addbrand").hide(500);
+				$("div#adminwindow").hide(500);
 			});
 			$("#create").click(function() {
 				if(addproductvalid()==true)
@@ -102,6 +102,8 @@ $(document).ready(function() {
 		
 		
 		$("#Requests").click(function() {
+
+			$("#adminwindow").empty();
 			var table="<table id=\"requesttable\" class=\"showtableS\">"
 				+"<thead>"
 		+"<tr class=\"theader\" style=\"background-color: #008040;\">"
@@ -112,7 +114,7 @@ $(document).ready(function() {
 		+"</tr></thead>"
 		+"<tbody id=\"body\"></tbody>"
 		+"</table>";
-			$("#addbrand").append(table);
+			$("#adminwindow").append(table);
 			$.getJSON("/view-request-stores", function(data) {
 				for(var i in data)
 				{
@@ -154,6 +156,8 @@ $(document).ready(function() {
 		});
 		
 		$("#showallproducts").click(function() {
+
+			$("#adminwindow").empty();
 			var table="<table id=\"showProducts\" class=\"showtable\">"
 				+"<thead>"
 				+"<tr class=\"theader\" style=\"background-color: #008040;\">"
@@ -165,7 +169,7 @@ $(document).ready(function() {
 				+"</tr></thead>"
 				+"<tbody id=\"body\"></tbody>"
 				+"</table>";
-			$("#addbrand").append(table);
+			$("#adminwindow").append(table);
 			$.getJSON("/allSystemProduct", function(data) {
 				for(var i in data)
 				{

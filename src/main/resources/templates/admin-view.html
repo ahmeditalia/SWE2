@@ -10,14 +10,16 @@
 </head>
 <body>
 	<div class="btn-bar">
-		<button>
+		<button id="Requests">
 			Requests
-			<div id="not" class="notification" th:text="${N}"></div>
+			<div id="not" class="notification"></div>
 		</button>
-		<button>Add Product</button>
-		<button>Add Brand</button>
+		<button id="addproduct">Add Product</button>
+		<button id="addbrandtosystem">Add Brand</button>
+		<button id="showallproducts">Show All Product</button>
 		<button>Log out</button>
 	</div>
+	<div id="adminwindow"></div>
 	<!-- 
 	<div class="adminBox">
 		<form name="add" th:action="@{/view-request-stores}" method="get">
