@@ -1,7 +1,48 @@
 $(document).ready(
 		function() {
-			$("div#addproduct").hide();
-			$("div#statistics").hide();
+//			$("div#addproduct").hide();
+//			$("div#statistics").hide();
+			$('#addproduct').click(function(){
+				var addproduct = 
+					"<div id=\"addproduct\" class=\"Box\">"
+						+"<h2>Add Product To Store</h2>"
+						+"<form>"
+							+"<p>Product Name</p>"
+							+"<br></br>"
+							+"<select id=\"ProductName\" class=\"lists\">"
+							+"<option ></option>"
+							+"</select>"
+							+"<br></br><br></br>"
+							+"<p>Price</p>"
+							+"<input name=\"price\" type=\"text\"></input>"
+							+"<div id=\"validprice\" class=\"validadd\"></div>"
+							+"<br></br>"
+							+"<p>Brand</p>"
+							+"<br></br>"
+							+"<select id=\"Brand\" class=\"lists\">"
+							+"<option ></option>"
+							+"</select>"
+							+"<br></br><br></br>"
+							+"<p>Category</p>"
+							+"<br></br>"
+							+"<select id=\"Category\" class=\"lists\">"
+							+"<option ></option>"
+							+"</select>"
+							+"<br></br><br></br>"
+							+"<p>Quantity</p>"
+							+"<input name=\"quantity\" type=\"text\"></input>"
+							+"<div id=\"validquantity\" class=\"validadd\"></div>"
+							+"<br></br>"
+							+"<input type=\"submit\" value=\"Submit\"></input>"
+						+"</form>"
+						+"<button id=\"addproductcancel\" value=\"Cancel\">Cancel</button>"
+					+"</div>"
+			});
+//			$("#addproductcancel").click(function() {
+//				$("div#addproduct").hide(500);
+//				$("div#table").show(900);
+//			});
+			
 			$("#addprodcttostore").click(
 					function() {
 						$("div#table").hide(500);
@@ -48,6 +89,23 @@ $(document).ready(
 
 			$('#list').change(
 					function() {
+						var table= "<table id=\"products\" class=\"showtable\">"
+							+"<thead>"
+								+"<tr class=\"theader\" style=\"background-color: #008040;\">"
+									+"<th class=\"tdshow\">ID</th>"
+									+"<th class=\"tdshow\">Name</th>"
+									+"<th class=\"tdshow\">Price</th>"
+									+"<th class=\"tdshow\">Type</th>"
+									+"<th class=\"tdshow\">Brand</th>"
+									+"<th class=\"tdshow\">Category</th>"
+									+"<th class=\"tdshow\">Quantity</th>"
+								+"</tr>"
+							+"</thead>"
+							+"<tbody>"
+								
+							+"</tbody>"
+						+"</table>"
+					$('#table').append(table);
 						$.getJSON("/products", function(data) {
 							$("#products tbody").remove();
 							$("#products").append('<tbody></tbody>');

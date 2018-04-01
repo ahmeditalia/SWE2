@@ -9,6 +9,16 @@
 <title>Admin View</title>
 </head>
 <body>
+	<div class="btn-bar">
+		<button>
+			Requests
+			<div id="not" class="notification" th:text="${N}"></div>
+		</button>
+		<button>Add Product</button>
+		<button>Add Brand</button>
+		<button>Log out</button>
+	</div>
+	<!-- 
 	<div class="adminBox">
 		<form name="add" th:action="@{/view-request-stores}" method="get">
 			<button>
@@ -40,6 +50,6 @@
 			<input id="submitbrand" type="submit" value="Add Brand"></input>
 		</form>
 		<button id="addbrandcancel" value="Cancel">Cancel</button>
-	</div>
+	</div>-->
 </body>
 </html>
