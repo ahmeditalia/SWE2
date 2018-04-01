@@ -1,28 +1,47 @@
 function updatediv() {
-	$("#statistics p").remove();
-	$.getJSON("/stat", function(data) {
-		var divcontent = "<p>Number Of Views " + data.numUserView + "</p>"
-				+ "<p>Number Of Buyers " + data.numUserBuy + "</p>"
-				+ "<p>Number Of Sold Products " + data.soldProducts + "</p>";
-		$("div#statistics").append(divcontent);
+	var select=$("#list option:selected").val();
+	if(select == "All"){
+		$("#list > option").each(function() {			
+			setTimeout(function(){
+				$("#statistics p").remove();
+				$.getJSON("/stat", {sname:this.value},function(data) {
+					var divcontent = "<p>Number Of Views " + data.numUserView + "</p>"
+							+ "<p>Number Of Buyers " + data.numUserBuy + "</p>"
+							+ "<p>Number Of Sold Products " + data.soldProducts + "</p>";
+					$("div#statistics").append(divcontent);
+				});
+		    }, 5000);
+		}
 		window.setTimeout(updatediv, 10000);
-	});
+	}else{
+		$("#statistics p").remove();
+		$.getJSON("/stat", {sname:select},function(data) {
+			var divcontent = "<p>Number Of Views " + data.numUserView + "</p>"
+					+ "<p>Number Of Buyers " + data.numUserBuy + "</p>"
+					+ "<p>Number Of Sold Products " + data.soldProducts + "</p>";
+			$("div#statistics").append(divcontent);
+		});
+		window.setTimeout(updatediv, 10000);
+	}
 }
 
 $(document).ready(function() {	
-	$('#storepanelview').hide();
-	$("#stotrpanel").click(function() {
-		$('#storepanelview').toggle(700);
-//		$.getJSON("/store-view", function(data) {
-//			for ( var i in data) {
-//				$("#list").append($("<option></option>").text(data[i].name));
-//			}
-//		});
-		$('#addproduct').click(function(){
+	updatediv();
+		$.getJSON("/store-view", function(data) {
+			for ( var i in data) {
+				$("#list").append($("<option></option>").text(data[i].name));
+			}
+		});
+		$('#addprodcttostore').click(function(){
+			if($("#list option:selected").val() == "All"){
+				alert('No Choosen Store !');
+				return;
+			}
+			$('#storeownerwindow').empty();
 			var addproduct = 
 				"<div id=\"addproduct\" class=\"Box\">"
 					+"<h2>Add Product To Store</h2>"
-					+"<form>"
+					//+"<form>"
 						+"<p>Product Name</p>"
 						+"<br></br>"
 						+"<select id=\"ProductName\" class=\"lists\">"
@@ -30,7 +49,7 @@ $(document).ready(function() {
 						+"</select>"
 						+"<br></br><br></br>"
 						+"<p>Price</p>"
-						+"<input name=\"price\" type=\"text\"></input>"
+						+"<input id=\"price\" name=\"price\" type=\"text\"></input>"
 						+"<div id=\"validprice\" class=\"validadd\"></div>"
 						+"<br></br>"
 						+"<p>Brand</p>"
@@ -39,58 +58,67 @@ $(document).ready(function() {
 						+"<option ></option>"
 						+"</select>"
 						+"<br></br><br></br>"
+						+"<div style=\"display:none\">
 						+"<p>Category</p>"
 						+"<br></br>"
 						+"<select id=\"Category\" class=\"lists\">"
 						+"<option ></option>"
 						+"</select>"
+						+"</div>"
 						+"<br></br><br></br>"
 						+"<p>Quantity</p>"
-						+"<input name=\"quantity\" type=\"text\"></input>"
+						+"<input id=\"quantity\" name=\"quantity\" type=\"text\"></input>"
 						+"<div id=\"validquantity\" class=\"validadd\"></div>"
 						+"<br></br>"
-						+"<input type=\"submit\" value=\"Submit\"></input>"
-					+"</form>"
+						+"<button id=\"submitprodcttostore\" value=\"Submit\">Submit</button>"
+					//+"</form>"
 					+"<button id=\"addproductcancel\" value=\"Cancel\">Cancel</button>"
 				+"</div>"
-		});
-		$("#addprodcttostore").click(function() {
-					$("div#table").hide(500);
-					$("div#addproduct").show(900);
-					$("#ProductName option").remove();
-					$("#Brand option").remove();
-					$("#Category option").remove();
-					$.getJSON("/brands", function(data) {
-						for ( var i in data) {
-							$("#Brand").append($("<option></option>").text(data[i].name));
-							$("#Category").append($("<option></option>").text(data[i].category));
-							alert(data[i].name);
-						}
-					});
-					$.getJSON("/allSystemProduct", function(data) {
-						for ( var i in data) {
-							$("#ProductName").append($("<option></option>").text(data[i].name));
-						}
-					});
+				$('#storeownerwindow').append(addproduct);
+				$("#ProductName option").remove();
+				$("#Brand option").remove();
+				$("#Category option").remove();
+				$.getJSON("/brands", function(data) {
+					for ( var i in data) {
+						$("#Brand").append($("<option></option>").text(data[i].name));
+						$("#Category").append($("<option></option>").text(data[i].category));
+					}
 				});
-		$("#addproductcancel").click(function() {
-			$("div#addproduct").hide(500);
-			$("div#table").show(900);
-		});
-		$('#ProductName').change(function() {
+				$.getJSON("/allSystemProduct", function(data) {
+					for ( var i in data) {
+						$("#ProductName").append($("<option></option>").text(data[i].name));
+					}
+				});
+				$('#ProductName').change(function() {
 					$.getJSON("/brandOfProduct", {pname : $('#ProductName').text()}, function(data) {
 						$("#Brand").append($("<option></option>").text(data[i].name));
 						$("#Category").append($("<option></option>").text(data[i].category));
-						alert('e');
-					});
-		});
-		$('#Brand').change(function() {
-					$.getJSON("/productsOfBrand", {bname : $('#Brand').text()}, function(data) {
-						for ( var i in data) {
-							$("#ProductName").append($("<option></option>").text(data[i].name));
+				});
+				});
+				$('#Brand').change(function() {
+						$.getJSON("/productsOfBrand", {bname : $('#Brand').text()}, function(data) {
+							for ( var i in data) {
+								$("#ProductName").append($("<option></option>").text(data[i].name));
 						}
-						alert('f');
-					});
+				});
+				$("#submitprodcttostore").click(function() {
+					var vbrand={"name": $("#Brand option:selected").val() , "category": $("#Category option:selected").val()};
+					var vproduct={"name": $("#ProductName option:selected").val() , "brand": $("#Brand option:selected").val(),
+							"price": $("#price").val(),"quantity": $("#quantity").val(),"store"{"storeName":$("#list option:selected").val()}};
+					$.ajax({
+					      type: "POST",
+					      contentType : 'application/json; charset=utf-8',
+					      dataType : 'json',
+					      url: "/add-product-store",
+					      data: JSON.stringify(vproduct)
+					 });
+				});
+				$("#addproductcancel").click(function() {
+					$('#storeownerwindow').empty();
+				});
+		});
+		
+		
 		});
 		$('#list').change(function() {
 					var table= "<table id=\"products\" class=\"showtable\">"
@@ -127,38 +155,36 @@ $(document).ready(function() {
 					});
 					updatediv();
 		});
-	});
 	
 	$("#addstore").click(function() {
-		$("div#addstore").show(1000);
-	});
-	$("#show-all-products").click(function() {
-		var table = "<table id=\"allproducts\" class=\"showtable\">"
-			+"<thead>"
-				+"<tr class=\"theader\" style=\"background-color: #008040;\">"
-					+"<td class=\"tdshow\">ID</td>"
-					+"<td class=\"tdshow\">Name</td>"
-					+"<td class=\"tdshow\">Type</td>"
-					+"<td class=\"tdshow\">Brand</td>"
-					+"<td class=\"tdshow\">Category</td>"
-				+"</tr>"
-			+"</thead>"
-		+"</table>";
-		$.getJSON("/products", function(data) {
-			$("#allproducts tbody").remove();
-			$("#products").append('<tbody></tbody>');
-			for ( var i in data) {
-				var tblRow = "<tr>" + "<td>" + data[i].id
-						+ "</td>" + "<td>" + data[i].name
-						+ "</td>" + "<td>" + data[i].type
-						+ "</td>" + "<td>" + data[i].brand.name
-						+ "</td>" + "<td>" + data[i].brand.quantity
-						+ "</td>" + "</tr>"
-				$("#allproducts tbody").append(tblRow);
-			}
+		var addstore= 
+			+"<div id=\"addstore\" class=\"addstore\">"
+				+"<form name=\"add\"method=\"POST\">"
+					+"<p>Store Name:</p>"
+					+"<input type=\"text\" name=\"storeName\"></input>"
+					+"<p>Store Location:</p>"
+					+"<input type=\"text\" name=\"location\"></input>"
+					+"<p>Store Type:</p>"
+					+"<input type=\"text\" name=\"type\" ></input>"
+					+"<h3>Store Type:</h3>"
+					+"<label class=\"container\">Onsite"
+					+"<input type=\"radio\" name=\"type2\" value=\"onsite\"></input>"
+					+"<span class=\"checkmark\"></span>"
+					+"</label> <br></br>"
+					+"<label class=\"container\">Online"
+					+"<input type=\"radio\" name=\"type2\" value=\"online\"></input>"
+					+"<span class=\"checkmark\"></span>"
+					+"</label> <br></br>"
+				+"</form>"
+				+"<button id=\"adddone\" value=\"Add\">Submit</button>"
+				+"<button id=\"addcancel\" value=\"Cancel\">Cancel</button>"
+			+"</div>" +
+		$("#adddone").click(function() {
+				
+		});
+		$("#addcancel").click(function() {
+				
 		});
 	});
-	$("#addcancel").click(function() {
-		$("div#addstore").hide(1000);
-	});
+	
 });

@@ -81,6 +81,7 @@ body {
 .storenav ul{
   overflow: hidden;
   list-style-type: none;
+  margin-right: 8px;
 }
 .storenav li{
   float: left;
@@ -128,6 +129,23 @@ body {
 }
 .topnav .search-container button:hover {
   background: #ccc;
+}
+
+.divlist{
+	border-radius: 0;
+	outline:0;
+    background-color: #28282b; 
+    color: white; 
+    text-align:left;
+    margin-bottom: 0;
+    margin-left: 5px; 
+    cursor: pointer; 
+    display: block; 
+    font-size:14px;
+}
+.divlist:hover {
+	background-color: #c0c0c0;
+    color: black;
 }
 
 

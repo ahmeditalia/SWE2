@@ -10,11 +10,19 @@
 </head>
 <body>
 	<div class="btn-bar">
-		<button id="stotrpanel">Store Panel</button>
-		<button id="show-all-products">Show All Products</button>
-		<button id="addstore">Add Store</button>
-		<button id="statistics">statistics</button>
 		<button id="logout">Log out</button>
+		<button id="addprodcttostore">Add Store Product</button>
+		<button id="addstore">Add Store</button>
+		<div class="divlist">
+				Stores:
+				<select id="list" class="liststores">
+					<option value="ALL">All</option>
+					<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option>
+				</select>
+		</div>
+		<div id="statistics">
+			
+		</div>
 	</div>
 	<!--<div class="storeownerview">
 		<form name="show" th:action="@{/store-view}" method="get">
@@ -25,19 +33,21 @@
 			<input type="submit" value="Log out"></input>
 		</form>
 	</div>-->
-	<div id="storepanelview" class="storenav">
-		<ul>
-			<li>
-				<button id="addprodcttostore" value="Add Product">Add Product</button>
-			</li>
-			<li>
-				Stores:
-				<select id="list" class="liststores">
-					<option value="ALL">ALL</option>
-					<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option>
-				</select>
-			</li>
-		</ul>
+<!-- 	<div id="storepanelview" class="storenav"> -->
+<!-- 		<ul> -->
+<!-- 			<li> -->
+<!-- 				<button id="addprodcttostore" value="Add Product">Add Product</button> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				Stores: -->
+<!-- 				<select id="list" class="liststores"> -->
+<!-- 					<option value="ALL">All</option> -->
+<!-- 					<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option> -->
+<!-- 				</select> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
+	<div id="storeownerwindow">
 	</div>
 <!-- 	<div id="addstore" class="addstore"> -->
 <!-- 		<form name="add" th:object="${store}" th:action="@{/add-store}" method="POST"> -->
