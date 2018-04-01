@@ -21,6 +21,7 @@ import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +34,6 @@ public class ProductController {
 	@Autowired
 	private SystemProductRepository sysProductrepo;
 	@Autowired
-	private StoreProductRepository storeProductRepo;
-	@Autowired
 	private BrandRepository brandRepository;
 
 	@GetMapping("/add-product-to-system")
@@ -44,16 +43,13 @@ public class ProductController {
 	}
 
 	@PostMapping("/add-product-to-system")
-	public String addProduct(@ModelAttribute SystemProduct product) {
-
+	@ResponseBody
+	public void addProduct(@RequestBody SystemProduct product) {
 		if(!sysProductrepo.existsByName(product.getName())) {
 			Brand productBrand = brandRepository.findBrandByName(product.getBrand().getName());
 			product.setBrand(productBrand);
 			sysProductrepo.save(product);
-			return "redirect:/show-all-product";
 		}
-		else
-			return "/add-product-to-system";
 	}
 
 	/*test fnction*/
@@ -73,20 +69,10 @@ public class ProductController {
 		}
 		return products;
 	}
-
-	@RequestMapping("/show-all-product")
-	public String showAllProducts(Model model) {
-		Iterable<SystemProduct> pro = sysProductrepo.findAll();
-		List<Product> products = new ArrayList<Product>();
-		for (Product p : pro) {
-			products.add(p);
-		}
-		model.addAttribute("products", products);
-		return "show-all-product";
-	}
 	
 	@RequestMapping("/productsOfBrand")
-	public @ResponseBody List<SystemProduct> productsOfBrand(@RequestParam("bname") String bname) {
+	@ResponseBody
+	public  List<SystemProduct> productsOfBrand(@RequestBody String bname) {
 		List<SystemProduct> products = new ArrayList<SystemProduct>();
 		Brand b = brandRepository.findBrandByName(bname);
 		for (int i = 0; i < b.getProducts().size(); i++)
@@ -96,11 +82,10 @@ public class ProductController {
 
 	@RequestMapping("/allSystemProduct")
 	@ResponseBody
-	public List<SystemProduct> allSystemProduct() {
-		Iterable<SystemProduct> Products;
-		List<SystemProduct> products = new ArrayList<SystemProduct>();
-		Products = sysProductrepo.findAll();
-		for (SystemProduct p : Products) {
+	public List<Product> allSystemProduct() {
+		Iterable<SystemProduct> Products= sysProductrepo.findAll();
+		List<Product> products = new ArrayList<Product>();
+		for (Product p : Products) {
 			products.add(p);
 		}
 		return products;

@@ -5,5 +5,5 @@ import javax.persistence.Entity;
 public interface Operations {
 public void increamentUserViews();
     public void increamentUserBuy();
-    public void increamentSoldProducts();
+    public void increamentSoldProducts(int numProducts);
 }

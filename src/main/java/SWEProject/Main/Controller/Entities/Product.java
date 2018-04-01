@@ -3,21 +3,22 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
 public abstract class Product {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Integer id;
-	private String name;
+	protected Integer id;
+	protected String name;
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="brandId")
-	@JsonBackReference
-	private Brand brand;
+    @JsonManagedReference
+	protected Brand brand;
 	@NotNull
-	private String type;
+	protected String type;
 
 	public Integer getId() {
 		return id;

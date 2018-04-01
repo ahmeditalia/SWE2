@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import SWEProject.Main.Controller.Entities.Admin;
 import SWEProject.Main.Controller.Entities.Creator;
 import SWEProject.Main.Controller.Entities.StoreOwner;
@@ -27,17 +24,15 @@ public class AccountController {
 		return "Registration";
 	}
 
-	
 	@PostMapping("/Registration")
-	public String registration(@ModelAttribute User user, @RequestParam("type") String type)
+	@ResponseBody
+	public void registration(@RequestBody User user, @RequestBody String type)
 	{
 		if(!userRepository.exists(user.getUsername()))
 		{
 			user=creator.createUser(type, user);
 			userRepository.save(user);
-			return "redirect:/login";
 		}
-		return "redirect:/Registration?error";
 	}
 	
 	@GetMapping("/login")

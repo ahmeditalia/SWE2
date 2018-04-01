@@ -3,11 +3,7 @@ package SWEProject.Main.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import SWEProject.Main.Controller.Entities.Store;
 import SWEProject.Main.Controller.Entities.StoreOwner;
@@ -21,14 +17,15 @@ public class AdminController {
 	@Autowired
 	StoreRepository storeRepo;
 
-	@GetMapping("/view-request-stores")
-	public String Viewrequests(Model model) {
+	@RequestMapping("/view-request-stores")
+	@ResponseBody
+	public List<Store> Viewrequests() {
 		List<Store> stores = storeRepo.findByStatus("Onhold");
-		model.addAttribute("stores", stores);
-		return "view-request-stores";
+		return stores;
 	}
 	
-	@RequestMapping("/accept")
+	@PostMapping("/accept")
+	@ResponseBody
 	public void accept(@RequestParam("storename") String storeName)
 	{
 		Store store=storeRepo.findOne(storeName);
@@ -36,16 +33,22 @@ public class AdminController {
 		storeRepo.save(store);
 	}
 
-	@RequestMapping("/reject")
+	@PostMapping("/reject")
+	@ResponseBody
 	public void reject(@RequestParam("storename") String storeName)
 	{
 		storeRepo.delete(storeName);
 	}
 	@GetMapping("/admin-view")
-	public String loadView(Model model) {
-		int Count=storeRepo.countOnHold();
-		model.addAttribute("N", Count);
+	public String loadView() {
 		return "admin-view";
+	}
+	
+	@PostMapping("/requestNumber")
+	@ResponseBody
+	public int requestNumber()
+	{
+		return storeRepo.countOnHold();
 	}
 
 }

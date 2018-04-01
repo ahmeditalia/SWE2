@@ -21,8 +21,10 @@ public class Store {
     protected String location;
     protected String type;
     protected String status;
-    
-    public Store() {
+	/*@OneToOne(mappedBy="store",cascade = CascadeType.ALL)
+	protected Statistics statistics;*/
+
+	public Store() {
     	products=new ArrayList<StoreProduct>();
     }
 	public Store(String storeName) {
@@ -79,8 +81,16 @@ public class Store {
     public void setProducts(List<StoreProduct> products) {
         this.products = products;
     }
-    
-    @NotNull
+
+	/*public Statistics getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
+	}
+*/
+	@NotNull
     @ManyToOne
     @JoinColumn(name="storeOwnerId")
     public StoreOwner getStoreOwner() {
@@ -93,4 +103,5 @@ public class Store {
     public void addProduct(StoreProduct s){
         products.add(s);
     }
+
 }
