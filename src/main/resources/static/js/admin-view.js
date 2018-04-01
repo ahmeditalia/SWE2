@@ -6,8 +6,9 @@ $(document).ready(function() {
     
     
 		$("#addbrandtosystem").click(function() {
-			
+
 			$("#adminwindow").empty();
+			$("div#adminwindow").show(500);
 			var v="<form id=\"addbrand\" name=\"addbrand\">"
 			+"<p>Brand Name</p>"
 			+"<input id=\"namebrand\" name=\"brandname\" type=\"text\"></input>"
@@ -24,6 +25,7 @@ $(document).ready(function() {
 
 		$("#addbrandcancel").click(function() {
 			$("div#adminwindow").hide(500);
+			$("div#adminwindow").empty();
 		});
 		
 		$("#submitbrand").click(function() {
@@ -46,6 +48,7 @@ $(document).ready(function() {
 		$("#addproduct").click(function() {
 
 			$("#adminwindow").empty();
+			$("div#adminwindow").show(500);
 			var v="<h2>Add Product To System</h2>"
 				+"<form name=\"addProduct\">"
 				+"<p>Name</p>"
@@ -80,7 +83,7 @@ $(document).ready(function() {
 			});
 			
 			$("#cancel").click(function() {
-				$("div#adminwindow").hide(500);
+				$("div#adminwindow").empty(500);
 			});
 			$("#create").click(function() {
 				if(addproductvalid()==true)
@@ -104,6 +107,7 @@ $(document).ready(function() {
 		$("#Requests").click(function() {
 
 			$("#adminwindow").empty();
+			$("div#adminwindow").show(500);
 			var table="<table id=\"requesttable\" class=\"showtableS\">"
 				+"<thead>"
 		+"<tr class=\"theader\" style=\"background-color: #008040;\">"
@@ -158,6 +162,7 @@ $(document).ready(function() {
 		$("#showallproducts").click(function() {
 
 			$("#adminwindow").empty();
+			$("div#adminwindow").show(500);
 			var table="<table id=\"showProducts\" class=\"showtable\">"
 				+"<thead>"
 				+"<tr class=\"theader\" style=\"background-color: #008040;\">"

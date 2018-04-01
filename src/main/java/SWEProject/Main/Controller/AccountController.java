@@ -25,14 +25,15 @@ public class AccountController {
 	}
 
 	@PostMapping("/Registration")
-	@ResponseBody
-	public void registration(@RequestBody User user, @RequestBody String type)
+	public String registration(@ModelAttribute User user, @RequestParam("type") String type)
 	{
 		if(!userRepository.exists(user.getUsername()))
 		{
 			user=creator.createUser(type, user);
 			userRepository.save(user);
+			return "redirect:/login";
 		}
+		return "redirect:/Registration?error";
 	}
 	
 	@GetMapping("/login")

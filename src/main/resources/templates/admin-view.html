@@ -17,7 +17,9 @@
 		<button id="addproduct">Add Product</button>
 		<button id="addbrandtosystem">Add Brand</button>
 		<button id="showallproducts">Show All Product</button>
-		<button>Log out</button>
+		<form name="logOut" th:action="@{/logout}" method="post">
+			<button  value="Log out">Log out</button>
+		</form>
 	</div>
 	<div id="adminwindow"></div>
 	<!-- 
@@ -35,9 +37,7 @@
 		<form name="show" th:action="@{/show-all-product}" method="get">
 			<input type="submit" value="Show All Products"></input>
 		</form>
-		<form name="logOut" th:action="@{/logout}" method="post">
-			<input type="submit" value="Log out"></input>
-		</form>
+		
 	</div>
 	<div id="addbrand" class="addBrand">
 		<form name="addbrand" th:action="@{/add-brand}" method="get">
