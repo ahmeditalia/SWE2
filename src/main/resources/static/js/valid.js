@@ -99,18 +99,14 @@ function addproductvalid() {
 
 	var name = document.forms["addProduct"]["name"].value;
 	var type = document.forms["addProduct"]["type"].value;
-	var brand = document.forms["addProduct"]["brand"].value;
-	var category = document.forms["addProduct"]["category"].value;
 	var numbers = /^\d+$/;
 	var floatnumber = /(^-?\d\d*\.\d\d*$)|(^-?\.\d\d*$)/;
 	
 	var flag1 = true;
 	var flag3 = true;
-	var flag4 = true;
-	var flag5 = true;
 
 	if (name == "") {
-		document.getElementById('validname').innerText = "*Name require";
+		document.getElementById('validname').innerText = "*Name required";
 		flag1 = false;
 	}
 	else if (numbers.test(name)){
@@ -123,7 +119,7 @@ function addproductvalid() {
 	
 
 	if (type == "") {
-		document.getElementById('validtype').innerText = "*Type require";
+		document.getElementById('validtype').innerText = "*Type required";
 		flag3 = false;
 	}
 	else if (numbers.test(type)) {
@@ -133,31 +129,53 @@ function addproductvalid() {
 		document.getElementById('validtype').innerText = "";
 		flag3 = true;
 	}
-	if (brand == "") {
-		document.getElementById('validbrand').innerText = "*Brand require";
-		flag4 = false;
-	}
-	else if (numbers.test(brand)) {
-		document.getElementById('validbrand').innerText = "*Invlaid Input";
-		flag4 = false;
+	
+
+	
+	if (flag1  && flag3) {
+		return true;
 	} else {
-		document.getElementById('validbrand').innerText = "";
-		flag4 = true;
+		return false;
 	}
+}
+function addbrandvalid() {
+
+	var brand = document.forms["addbrand"]["brandname"].value;
+	var category = document.forms["addbrand"]["brandcategory"].value;
+	var numbers = /^\d+$/;
+	var floatnumber = /(^-?\d\d*\.\d\d*$)|(^-?\.\d\d*$)/;
+	
+	var flag1 = true;
+	var flag3 = true;
+
+	if (brand == "") {
+		document.getElementById('validname').innerText = "*Name required";
+		flag1 = false;
+	}
+	else if (numbers.test(brand)){
+		document.getElementById('validname').innerText = "*Invlaid Input";
+		flag1 = false;
+	} else {
+		document.getElementById('validname').innerText = "";
+		flag1 = true;
+	}
+	
+
 	if (category == "") {
-		document.getElementById('validcategory').innerText = "*Category require";
-		flag5 = false;
+		document.getElementById('validcategory').innerText = "*Category required";
+		flag3 = false;
 	}
 	else if (numbers.test(category)) {
 		document.getElementById('validcategory').innerText = "*Invlaid Input";
-		flag5 = false;
+		flag3 = false;
 	} else {
 		document.getElementById('validcategory').innerText = "";
-		flag5 = true;
+		flag3 = true;
 	}
+	
 
 	
-	if (flag1  && flag3 && flag4 && flag5) {
+	if (flag1  && flag3) {
 		return true;
 	} else {
 		return false;
