@@ -69,17 +69,6 @@ public class ProductController {
 		}
 		return products;
 	}
-
-	@RequestMapping("/show-all-product")
-	@ResponseBody
-	public List<Product>  showAllProducts() {
-		Iterable<SystemProduct> pro = sysProductrepo.findAll();
-		List<Product> products = new ArrayList<Product>();
-		for (Product p : pro) {
-			products.add(p);
-		}
-		return products;
-	}
 	
 	@RequestMapping("/productsOfBrand")
 	@ResponseBody
@@ -93,11 +82,10 @@ public class ProductController {
 
 	@RequestMapping("/allSystemProduct")
 	@ResponseBody
-	public List<SystemProduct> allSystemProduct() {
-		Iterable<SystemProduct> Products;
-		List<SystemProduct> products = new ArrayList<SystemProduct>();
-		Products = sysProductrepo.findAll();
-		for (SystemProduct p : Products) {
+	public List<Product> allSystemProduct() {
+		Iterable<SystemProduct> Products= sysProductrepo.findAll();
+		List<Product> products = new ArrayList<Product>();
+		for (Product p : Products) {
 			products.add(p);
 		}
 		return products;

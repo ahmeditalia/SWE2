@@ -27,16 +27,12 @@ public class BrandController {
 	// return "add-brand";
 	// }
 
-	@RequestMapping("/add-brand")
-	public String addBrand(@RequestParam String brandname,@RequestParam String brandcategory) {
-
-		if(!repo.existsByName(brandname)) {
-			Brand brand = new Brand();
-			brand.setCategory(brandcategory);
-			brand.setName(brandname);
+	@PostMapping("/add-brand")
+	@ResponseBody
+	public void addBrand(@RequestBody Brand brand) {
+		if(!repo.existsByName(brand.getName())) {
 			repo.save(brand);
 		}
-		return "redirect:/admin-view";
 	}
 
 	@RequestMapping("/brands")

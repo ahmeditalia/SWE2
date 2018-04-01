@@ -24,25 +24,31 @@ public class AdminController {
 		return stores;
 	}
 	
-	@RequestMapping("/accept")
+	@PostMapping("/accept")
 	@ResponseBody
-	public void accept(@RequestBody String storeName)
+	public void accept(@RequestParam("storename") String storeName)
 	{
 		Store store=storeRepo.findOne(storeName);
 		store.setStatus("accepted");
 		storeRepo.save(store);
 	}
 
-	@RequestMapping("/reject")
-	public void reject(@RequestBody String storeName)
+	@PostMapping("/reject")
+	@ResponseBody
+	public void reject(@RequestParam("storename") String storeName)
 	{
 		storeRepo.delete(storeName);
 	}
 	@GetMapping("/admin-view")
-	public String loadView(Model model) {
-		int Count=storeRepo.countOnHold();
-		model.addAttribute("N", Count);
+	public String loadView() {
 		return "admin-view";
+	}
+	
+	@PostMapping("/requestNumber")
+	@ResponseBody
+	public int requestNumber()
+	{
+		return storeRepo.countOnHold();
 	}
 
 }
