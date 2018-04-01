@@ -121,6 +121,7 @@ $(document).ready(function() {
 		
 		});
 		$('#list').change(function() {
+			$('#storeownerwindow').empty();
 					var table= "<table id=\"products\" class=\"showtable\">"
 						+"<thead>"
 							+"<tr class=\"theader\" style=\"background-color: #008040;\">"
@@ -157,15 +158,16 @@ $(document).ready(function() {
 		});
 	
 	$("#addstore").click(function() {
+		$('#storeownerwindow').empty();
 		var addstore= 
 			+"<div id=\"addstore\" class=\"addstore\">"
-				+"<form name=\"add\"method=\"POST\">"
+					+"<h2>Add Store</h2>"
 					+"<p>Store Name:</p>"
-					+"<input type=\"text\" name=\"storeName\"></input>"
+					+"<input id=\"storename\" type=\"text\" name=\"storeName\"></input>"
 					+"<p>Store Location:</p>"
-					+"<input type=\"text\" name=\"location\"></input>"
+					+"<input id=\"location\" type=\"text\" name=\"location\"></input>"
 					+"<p>Store Type:</p>"
-					+"<input type=\"text\" name=\"type\" ></input>"
+					+"<input id=\"storetype\" type=\"text\" name=\"type\" ></input>"
 					+"<h3>Store Type:</h3>"
 					+"<label class=\"container\">Onsite"
 					+"<input type=\"radio\" name=\"type2\" value=\"onsite\"></input>"
@@ -175,15 +177,23 @@ $(document).ready(function() {
 					+"<input type=\"radio\" name=\"type2\" value=\"online\"></input>"
 					+"<span class=\"checkmark\"></span>"
 					+"</label> <br></br>"
-				+"</form>"
 				+"<button id=\"adddone\" value=\"Add\">Submit</button>"
 				+"<button id=\"addcancel\" value=\"Cancel\">Cancel</button>"
 			+"</div>" +
+		$('#storeownerwindow').append(addstore);
 		$("#adddone").click(function() {
-				
+			var store = {"storeName": $("#storename").val() , "location": $("#location").val()
+					,"type": $("storetype").val(),"status": "Onhold"};
+			$.ajax({
+			      type: "POST",
+			      contentType : 'application/json; charset=utf-8',
+			      dataType : 'json',
+			      url: "/add-store",
+			      data: JSON.stringify(store)
+			 });
 		});
 		$("#addcancel").click(function() {
-				
+			$('#storeownerwindow').empty();
 		});
 	});
 	
