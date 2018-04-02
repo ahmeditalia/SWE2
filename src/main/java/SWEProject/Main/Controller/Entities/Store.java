@@ -10,19 +10,20 @@ import java.util.List;
 @Inheritance
 
 public class Store {
-   
-
+	@Id
     protected String storeName;
-
+    @OneToMany(mappedBy="store",cascade=CascadeType.ALL)
     protected List<StoreProduct> products;
 
-   
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="storeOwnerId")
     protected StoreOwner storeOwner;
     protected String location;
     protected String type;
     protected String status;
-	/*@OneToOne(mappedBy="store",cascade = CascadeType.ALL)
-	protected Statistics statistics;*/
+	@OneToOne(mappedBy="store",cascade = CascadeType.ALL)
+	protected Statistics statistics;
 
 	public Store() {
     	products=new ArrayList<StoreProduct>();
@@ -64,7 +65,7 @@ public class Store {
 		this.type = type;
 	}
 	
-	@Id
+	
 	public String getStoreName() {
 		return storeName;
 	}
@@ -73,7 +74,7 @@ public class Store {
 		this.storeName = storeName;
 	}
 
-    @OneToMany(mappedBy="store",cascade=CascadeType.ALL)
+   
 	public List<StoreProduct> getProducts() {
         return products;
     }
@@ -82,17 +83,15 @@ public class Store {
         this.products = products;
     }
 
-	/*public Statistics getStatistics() {
+	public Statistics getStatistics() {
 		return statistics;
 	}
 
 	public void setStatistics(Statistics statistics) {
 		this.statistics = statistics;
 	}
-*/
-	@NotNull
-    @ManyToOne
-    @JoinColumn(name="storeOwnerId")
+
+	
     public StoreOwner getStoreOwner() {
 		return storeOwner;
 	}

@@ -31,7 +31,8 @@ public class StoreController {
 	
 	@RequestMapping("/statistics")
 	@ResponseBody
-	public Statistics showstat() {
+	public Statistics showstat(@RequestBody String sname) {
+		//return statrepo.findOne(sname);
 		// example
 		Random rand = new Random();
 		int n = rand.nextInt(250);
@@ -42,11 +43,11 @@ public class StoreController {
 
 	@RequestMapping("/add-product-store")
 	@ResponseBody
-	public void addProduct(@RequestBody StoreProduct p, @RequestBody String sName,@RequestBody double price,@RequestBody int quantity) {
-		Store s = sepo.findOneByStoreName(sName);
-		p.setStore(s);
-		s.addProduct(p);
-		prepo.save(p);
+	public void addProduct(@RequestBody() StoreProduct product) {
+		Store s = sepo.findOneByStoreName(product.getStore().getStoreName());
+		product.setStore(s);
+		s.addProduct(product);
+		prepo.save(product);
 	}
 	@RequestMapping("/ShowAllStores")
 	@ResponseBody

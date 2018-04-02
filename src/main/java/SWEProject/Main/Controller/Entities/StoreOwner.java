@@ -13,6 +13,12 @@ import javax.persistence.OneToOne;
 public class StoreOwner extends User{
 	@OneToMany(mappedBy="storeOwner",cascade=CascadeType.ALL)
 	List<Store> stores;
+	public List<Store> getStores() {
+		return stores;
+	}
+	public void setStores(List<Store> stores) {
+		this.stores = stores;
+	}
 	public StoreOwner() {
 		stores=new ArrayList<Store>();
 	}

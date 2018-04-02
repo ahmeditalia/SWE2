@@ -1,7 +1,9 @@
 function updatediv() {
 	var select=$("#list option:selected").val();
-	if(select == "All"){
-		$("#list > option").each(function() {			
+	if(select == "ALL"){
+		$("#list > option").each(function() {
+			if(this.value!="ALL")
+				{
 			setTimeout(function(){
 				$("#statistics p").remove();
 				$.getJSON("/stat", {sname:this.value},function(data) {
@@ -11,7 +13,7 @@ function updatediv() {
 					$("div#statistics").append(divcontent);
 				});
 		    }, 5000);
-		}
+		}});
 		window.setTimeout(updatediv, 10000);
 	}else{
 		$("#statistics p").remove();
@@ -58,7 +60,7 @@ $(document).ready(function() {
 						+"<option ></option>"
 						+"</select>"
 						+"<br></br><br></br>"
-						+"<div style=\"display:none\">
+						+"<div style=\"display:none\">"
 						+"<p>Category</p>"
 						+"<br></br>"
 						+"<select id=\"Category\" class=\"lists\">"
@@ -104,7 +106,7 @@ $(document).ready(function() {
 				$("#submitprodcttostore").click(function() {
 					var vbrand={"name": $("#Brand option:selected").val() , "category": $("#Category option:selected").val()};
 					var vproduct={"name": $("#ProductName option:selected").val() , "brand": $("#Brand option:selected").val(),
-							"price": $("#price").val(),"quantity": $("#quantity").val(),"store"{"storeName":$("#list option:selected").val()}};
+							"price": $("#price").val(),"quantity": $("#quantity").val(),"store":{"storeName": $("#list option:selected").val()}};
 					$.ajax({
 					      type: "POST",
 					      contentType : 'application/json; charset=utf-8',
@@ -159,8 +161,7 @@ $(document).ready(function() {
 	
 	$("#addstore").click(function() {
 		$('#storeownerwindow').empty();
-		var addstore= 
-			+"<div id=\"addstore\" class=\"addstore\">"
+		var addstore="<div id=\"addstore\" class=\"addstore\">"
 					+"<h2>Add Store</h2>"
 					+"<p>Store Name:</p>"
 					+"<input id=\"storename\" type=\"text\" name=\"storeName\"></input>"
@@ -179,11 +180,11 @@ $(document).ready(function() {
 					+"</label> <br></br>"
 				+"<button id=\"adddone\" value=\"Add\">Submit</button>"
 				+"<button id=\"addcancel\" value=\"Cancel\">Cancel</button>"
-			+"</div>" +
+			+"</div>";
 		$('#storeownerwindow').append(addstore);
 		$("#adddone").click(function() {
 			var store = {"storeName": $("#storename").val() , "location": $("#location").val()
-					,"type": $("storetype").val(),"status": "Onhold"};
+					,"type": $("#storetype").val(),"status": "Onhold"};
 			$.ajax({
 			      type: "POST",
 			      contentType : 'application/json; charset=utf-8',

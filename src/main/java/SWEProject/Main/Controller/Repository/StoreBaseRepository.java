@@ -8,6 +8,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
 
 import SWEProject.Main.Controller.Entities.Store;
+import SWEProject.Main.Controller.Entities.StoreOwner;
 
 @NoRepositoryBean
 
@@ -16,6 +17,5 @@ public interface StoreBaseRepository <T extends Store> extends CrudRepository<T,
 	int countOnHold();
 	
 	List<Store> findByStatus(String status);
-	
-
+	List<Store> findByStoreOwner(StoreOwner storeOwner);
 }

@@ -22,7 +22,7 @@ public class AllStatisticsController {
     @RequestMapping("/addstatistics")
     @ResponseBody
     public void addstatistics(@RequestBody String operation,@RequestBody String entity){
-        AllStatistics a=allStatisticsRepo.findByOperationAndEntity(operation,entity);
-        allStatisticsRepo.updateAdded(a.getId());
+     //   AllStatistics a=allStatisticsRepo.findByOperationAndEntity(operation,entity);
+       // allStatisticsRepo.updateAdded(a.getId());
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 public interface  AllStatisticsRepository extends CrudRepository<AllStatistics,Integer> {
-    @Query("update AllStatistics a set a.added =1 where a.ID=:id")
+   /* @Query("update AllStatistics a set a.added =1 where a.ID=:id")
     void updateAdded(@Param("id") int id);
-    AllStatistics findByOperationAndEntity(String operation, String entity);
+    AllStatistics findByOperationAndEntity(String operation, String entity);*/
 }

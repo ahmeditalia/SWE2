@@ -16,6 +16,7 @@ import SWEProject.Main.Controller.Entities.Store;
 import SWEProject.Main.Controller.Entities.StoreOwner;
 import SWEProject.Main.Controller.Entities.SystemProduct;
 import SWEProject.Main.Controller.Entities.User;
+import SWEProject.Main.Controller.Repository.StoreOwnerRepository;
 import SWEProject.Main.Controller.Repository.StoreRepository;
 
 @Controller
@@ -23,10 +24,13 @@ public class StoreOwnerController {
 
 	@Autowired
 	StoreRepository storeRepo;
-
+	@Autowired
+	StoreOwnerRepository ownerRepo;
 	@GetMapping("/store-owner-view")
 	public String showStoreOwnerView(Model model) {
-		model.addAttribute("store", new Store());
+		StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<Store> stores=storeRepo.findByStoreOwner(user);
+		model.addAttribute("stores", stores);
 		return "store-owner-view";
 	}
 
@@ -37,16 +41,14 @@ public class StoreOwnerController {
 	 */
 	@PostMapping("/add-store")
 	@ResponseBody
-	public String newStore(@RequestBody Store store, @RequestBody String type) {
+	public void newStore(@RequestBody Store store) {
 		if (!storeRepo.exists(store.getStoreName())) {
 			StoreOwner storeOwner = new StoreOwner(
 					(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-			store = Creator.getInstance().createStore(type, store, storeOwner);
+			store = Creator.getInstance().createStore("online", store, storeOwner);
 			storeOwner.addStore(store);
 			storeRepo.save(store);
-			return "redirect:/store-owner-view";
 		}
-		return "redirect:/store-owner-view?error";
 	}
 
 	/*test function*/
