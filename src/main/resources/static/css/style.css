@@ -1,7 +1,10 @@
 body {
-	background-color: #c0c0c0;
-	background-size: cover;
+	background-image: url("/img/bg4.jpg");
+	background-color:#c0c0c0;
+    background-repeat: no-repeat;
+    background-size: cover;
 	font-family: sans-serif;
+	height: 100%; 
 }
 
 ::placeholder {
@@ -158,6 +161,79 @@ body {
     left:0;
     right:0;
     height:628px;
+}
+
+
+.divbox{
+	border-radius: 8px;
+	position: absolute;
+	padding: 30px 30px;
+	top: 15%;
+	left: 45%;
+	width: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+
+
+.divbox h2 {
+	margin: 0 0 5px 0;
+	padding: 0 0 0 0;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
+
+.divbox h3 {
+	margin: 0;
+	font-size:14px;
+	padding: 0 0 20px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+
+.divbox p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+
+.divbox input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.divbox input[type="text"], .Registration input[type="password"] {
+	border: none;
+	border-bottom: 1px solid rgb(4, 255, 234);
+	background: transparent;
+	outline: none;
+	height: 35px;
+	color: white;
+	font-size: 16px;
+}
+
+
+.divbox input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+	margin-top: 12px;
+}
+
+.divbox input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
 }
 
 
@@ -730,6 +806,7 @@ body {
 
 
 .loginBox {
+	background-image: url("/img/bck.jpg");
 	border-radius: 15px;
 	position: absolute;
 	padding: 80px 40px;

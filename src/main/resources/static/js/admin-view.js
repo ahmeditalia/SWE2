@@ -9,18 +9,20 @@ $(document).ready(function() {
 
 			$("#adminwindow").empty();
 			$("div#adminwindow").show(500);
-			var v="<form id=\"addbrand\" name=\"addbrand\">"
+			var v="<div class=\"divbox\">"
+			+"<form id=\"addbrand\" name=\"addbrand\">"
 			+"<p>Brand Name</p>"
-			+"<input id=\"namebrand\" name=\"brandname\" type=\"text\"></input>"
+			+"<input id=\"namebrand\" name=\"brandname\" type=\"text\" placeholder=\"Brand Name\"></input>"
 			+"<div id=\"validname\" class=\"validadd\"></div>"
 			+"<br></br>"
 			+"<p>Brand Cateory</p>"
-			+"<input id=\"categorybrand\" name=\"brandcategory\" type=\"text\"></input>"
+			+"<input id=\"categorybrand\" name=\"brandcategory\" type=\"text\" placeholder=\"Category\"></input>"
 			+"<div id=\"validcategory\" class=\"validadd\"></div>"
 			+"<br></br>"
 			+"</form>"
 			+"<button id=\"submitbrand\"  value=\"Add Brand\">Add Brand</input>"
-			+"<button id=\"addbrandcancel\" value=\"Cancel\">Cancel</button>";
+			+"<button id=\"addbrandcancel\" value=\"Cancel\">Cancel</button>"
+			+"</div>";
 		$("#adminwindow").append(v);
 
 		$("#addbrandcancel").click(function() {
@@ -39,7 +41,8 @@ $(document).ready(function() {
 				      url: "/add-brand",
 				      data: JSON.stringify(vbrand)
 				  });
-
+				$("div#adminwindow").hide(500);
+				$("div#adminwindow").empty();
 			}
 		});
 		});
@@ -49,7 +52,8 @@ $(document).ready(function() {
 
 			$("#adminwindow").empty();
 			$("div#adminwindow").show(500);
-			var v="<h2>Add Product To System</h2>"
+			var v="<div class=\"divbox\">"
+				+"<h2>Add Product To System</h2>"
 				+"<form name=\"addProduct\">"
 				+"<p>Name</p>"
 				+"<input id=\"pname\" name=\"name\" type=\"text\"></input>"
@@ -60,12 +64,10 @@ $(document).ready(function() {
 				+"<select id=\"brand\" class=\"listbrand\">"
 				+"</select>"
 				+"<br></br><br></br>"
-				+"<div id=\"cate\">"
 				+"<p>Category</p>"
 				+"<br></br>"
 				+"<select id=\"category\" class=\"listbrand\">"
 				+"</select>"
-				+"</div>"
 				+"<br></br><br></br>"
 				+"<p>Type</p>"
 				+"<input id=\"ptype\" name=\"type\" type=\"text\"></input>"
@@ -73,6 +75,7 @@ $(document).ready(function() {
 				+"</form>"
 				+"<button id=\"create\" value=\"submit\">Submit</button>"
 				+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
+				+"</div>"
 			$("#adminwindow").append(v);
 			$("div#cate").toggle();
 			$.getJSON("/brands", function(data) {
