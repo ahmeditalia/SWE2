@@ -1,4 +1,4 @@
-function updatediv() {
+/*function updatediv() {
 	var select=$("#list option:selected").val();
 	if(select == "ALL"){
 		$("#list > option").each(function() {
@@ -26,9 +26,9 @@ function updatediv() {
 		window.setTimeout(updatediv, 10000);
 	}
 }
-
+*/
 $(document).ready(function() {	
-	updatediv();
+	//updatediv();
 		$.getJSON("/store-view", function(data) {
 			for ( var i in data) {
 				$("#list").append($("<option></option>").text(data[i].name));
@@ -40,8 +40,7 @@ $(document).ready(function() {
 				return;
 			}
 			$('#storeownerwindow').empty();
-			var addproduct = 
-				"<div id=\"addproduct\" class=\"Box\">"
+			var addproduct ="<div id=\"addproduct\" class=\"Box\">"
 					+"<h2>Add Product To Store</h2>"
 					//+"<form>"
 						+"<p>Product Name</p>"
@@ -75,7 +74,7 @@ $(document).ready(function() {
 						+"<button id=\"submitprodcttostore\" value=\"Submit\">Submit</button>"
 					//+"</form>"
 					+"<button id=\"addproductcancel\" value=\"Cancel\">Cancel</button>"
-				+"</div>"
+				+"</div>";
 				$('#storeownerwindow').append(addproduct);
 				$("#ProductName option").remove();
 				$("#Brand option").remove();
@@ -103,6 +102,7 @@ $(document).ready(function() {
 								$("#ProductName").append($("<option></option>").text(data[i].name));
 						}
 				});
+				});
 				$("#submitprodcttostore").click(function() {
 					var vbrand={"name": $("#Brand option:selected").val() , "category": $("#Category option:selected").val()};
 					var vproduct={"name": $("#ProductName option:selected").val() , "brand": $("#Brand option:selected").val(),
@@ -120,8 +120,7 @@ $(document).ready(function() {
 				});
 		});
 		
-		
-		});
+
 		$('#list').change(function() {
 			$('#storeownerwindow').empty();
 					var table= "<table id=\"products\" class=\"showtable\">"
@@ -156,7 +155,7 @@ $(document).ready(function() {
 							$("#products tbody").append(tblRow);
 						}
 					});
-					updatediv();
+					//updatediv();
 		});
 	
 	$("#addstore").click(function() {
@@ -189,7 +188,7 @@ $(document).ready(function() {
 			      type: "POST",
 			      contentType : 'application/json; charset=utf-8',
 			      dataType : 'json',
-			      url: "/add-store",
+			      url: "/add-store?type="+$("input[name=type2]:checked").val(),
 			      data: JSON.stringify(store)
 			 });
 		});

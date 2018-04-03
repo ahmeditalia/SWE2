@@ -29,7 +29,7 @@ public class StoreOwnerController {
 	@GetMapping("/store-owner-view")
 	public String showStoreOwnerView(Model model) {
 		StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Store> stores=storeRepo.findByStoreOwner(user);
+		List<Store> stores=storeRepo.findByStoreOwnerAndStatus(user, "accepted");
 		model.addAttribute("stores", stores);
 		return "store-owner-view";
 	}
@@ -41,11 +41,11 @@ public class StoreOwnerController {
 	 */
 	@PostMapping("/add-store")
 	@ResponseBody
-	public void newStore(@RequestBody Store store) {
+	public void newStore(@RequestBody Store store,@RequestParam("type") String type) {
 		if (!storeRepo.exists(store.getStoreName())) {
 			StoreOwner storeOwner = new StoreOwner(
 					(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-			store = Creator.getInstance().createStore("online", store, storeOwner);
+			store = Creator.getInstance().createStore(type, store, storeOwner);
 			storeOwner.addStore(store);
 			storeRepo.save(store);
 		}

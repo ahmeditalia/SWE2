@@ -17,5 +17,5 @@ public interface StoreBaseRepository <T extends Store> extends CrudRepository<T,
 	int countOnHold();
 	
 	List<Store> findByStatus(String status);
-	List<Store> findByStoreOwner(StoreOwner storeOwner);
+	List<Store> findByStoreOwnerAndStatus(StoreOwner storeOwner,String status);
 }

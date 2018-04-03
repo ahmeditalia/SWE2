@@ -3,7 +3,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
@@ -15,7 +17,6 @@ public abstract class Product {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="brandId")
-    @JsonManagedReference
 	protected Brand brand;
 	@NotNull
 	protected String type;

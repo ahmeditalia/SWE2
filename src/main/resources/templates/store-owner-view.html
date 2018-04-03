@@ -10,7 +10,9 @@
 </head>
 <body>
 	<div class="btn-bar">
-		<button id="Logout">Log Out</button>
+		<form name="logOut" th:action="@{/logout}" method="post">
+			<button  value="Log out">Log out</button>
+		</form>
 		<button id="addprodcttostore">Add Store Product</button>
 		<button id="addstore">Add Store</button>
 		<div class="divlist">

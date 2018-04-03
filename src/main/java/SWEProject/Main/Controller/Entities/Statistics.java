@@ -2,6 +2,10 @@ package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 public class Statistics implements Operations {
     @Id
@@ -11,6 +15,7 @@ public class Statistics implements Operations {
     public int numUserBuy;
     public int soldProducts;
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     public Store store;
     public Statistics() {
         this.numUserView = 0;

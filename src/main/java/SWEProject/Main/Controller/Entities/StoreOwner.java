@@ -9,9 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 public class StoreOwner extends User{
 	@OneToMany(mappedBy="storeOwner",cascade=CascadeType.ALL)
+	@JsonIgnore
 	List<Store> stores;
 	public List<Store> getStores() {
 		return stores;

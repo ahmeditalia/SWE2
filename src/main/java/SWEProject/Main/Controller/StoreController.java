@@ -46,7 +46,9 @@ public class StoreController {
 	public void addProduct(@RequestBody() StoreProduct product) {
 		Store s = sepo.findOneByStoreName(product.getStore().getStoreName());
 		product.setStore(s);
+		product.setBrand(brepo.findOneByName(product.getBrand().getName()));
 		s.addProduct(product);
+		product.setType("sports");
 		prepo.save(product);
 	}
 	@RequestMapping("/ShowAllStores")

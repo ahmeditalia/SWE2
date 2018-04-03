@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class Brand {
     private String category;
 
     @OneToMany(mappedBy="brand",cascade=CascadeType.ALL)
-	@JsonBackReference
+	@JsonIgnore
     List<Product> products;
     
     public Brand(String name, String category) {
@@ -56,7 +57,12 @@ public class Brand {
         return products;
     }
 
-    public Brand() {
+    public Brand(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Brand() {
 
         name = "";
         category = "";

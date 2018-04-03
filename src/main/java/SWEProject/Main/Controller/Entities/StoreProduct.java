@@ -2,6 +2,9 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 public class StoreProduct extends Product {
 
@@ -10,7 +13,7 @@ public class StoreProduct extends Product {
     private String type;
     private double price;
     @ManyToOne
-    @JoinColumn(name = "storeName", insertable = false, updatable = false)
+    @JoinColumn(name = "storeName")
     private Store store;
 
     public int getQuantity() {
