@@ -149,6 +149,18 @@ body {
 }
 
 
+.adminpanel{
+	border:1px solid red;
+	width:84%;
+	margin-left:16%;
+	top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    height:628px;
+}
+
+
 .avatar {
 	width: 100px;
 	height: 100px;
@@ -905,18 +917,14 @@ body {
 
 .showtable {
 	border-collapse: collapse;
-	width: 100%;
+	width: 83%;
 	position: absolute;
 }
 
 .showtableS {
 	border-collapse: collapse;
-	width: 70%;
-	left: 50%;
-	top: 30%;
-	transform: translate(-50%, -50%);
+	width: 83%;
 	position: absolute;
-	padding: 80px 40px;
 }
 
 th, td ,thead{

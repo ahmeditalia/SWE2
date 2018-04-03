@@ -60,10 +60,12 @@ $(document).ready(function() {
 				+"<select id=\"brand\" class=\"listbrand\">"
 				+"</select>"
 				+"<br></br><br></br>"
+				+"<div id=\"cate\">"
 				+"<p>Category</p>"
 				+"<br></br>"
 				+"<select id=\"category\" class=\"listbrand\">"
 				+"</select>"
+				+"</div>"
 				+"<br></br><br></br>"
 				+"<p>Type</p>"
 				+"<input id=\"ptype\" name=\"type\" type=\"text\"></input>"
@@ -72,7 +74,7 @@ $(document).ready(function() {
 				+"<button id=\"create\" value=\"submit\">Submit</button>"
 				+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
 			$("#adminwindow").append(v);
-			
+			$("div#cate").toggle();
 			$.getJSON("/brands", function(data) {
 				$("#brand option").remove();
 				$("#category option").remove();
