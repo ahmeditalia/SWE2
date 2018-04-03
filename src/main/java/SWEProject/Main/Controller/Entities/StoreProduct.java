@@ -10,7 +10,6 @@ public class StoreProduct extends Product {
 
     @NotNull
     private int quantity;
-    private String type;
     private double price;
     @ManyToOne
     @JoinColumn(name = "storeName")
@@ -24,15 +23,6 @@ public class StoreProduct extends Product {
         this.quantity = quantity;
     }
 
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public Store getStore() {
         return store;
@@ -42,7 +32,9 @@ public class StoreProduct extends Product {
         this.store = store;
     }
 
-    public StoreProduct(){}
+    public StoreProduct(){
+
+    }
 
     public double getPrice() {
         return price;
@@ -50,5 +42,11 @@ public class StoreProduct extends Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public StoreProduct(int quantity, double price, Store store) {
+        this.quantity = quantity;
+        this.price = price;
+        this.store = store;
     }
 }

@@ -41,15 +41,27 @@ public class StoreController {
 		return statistics;
 	}
 
-	@RequestMapping("/add-product-store")
+	@RequestMapping("/add-product-store/{storeName}")
 	@ResponseBody
-	public void addProduct(@RequestBody() StoreProduct product) {
-		Store s = sepo.findOneByStoreName(product.getStore().getStoreName());
-		product.setStore(s);
-		product.setBrand(brepo.findOneByName(product.getBrand().getName()));
-		s.addProduct(product);
-		product.setType("sports");
-		prepo.save(product);
+	public void addProduct(@RequestBody() StoreProduct p,@PathVariable ("storeName")String sname) {
+		boolean x=true;
+		Store s = sepo.findOneByStoreName(sname);
+		for(int i=0;i<s.getProducts().size();i++){
+			if(s.getProducts().get(i).getName().equals(p.getName())){
+				x=false;
+				break;
+			}
+		}
+		if(x==true) {
+			SystemProduct product = sprepo.findOneByName(p.getName());
+			StoreProduct storeProduct = new StoreProduct(p.getQuantity(), p.getPrice(), s);
+			storeProduct.setName(product.getName());
+			storeProduct.setBrand(product.getBrand());
+			storeProduct.setType(product.getType());
+			System.out.println("pppppppp  " + storeProduct.getType() + " " + storeProduct.getPrice() + " " + storeProduct.getStore() + " " + storeProduct.getName() + " " + storeProduct.getQuantity() + " " + storeProduct.getBrand());
+			s.addProduct(storeProduct);
+			prepo.save(storeProduct);
+		}
 	}
 	@RequestMapping("/ShowAllStores")
 	@ResponseBody

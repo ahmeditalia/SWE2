@@ -32,22 +32,16 @@ public class WebSecurityAuthenticator implements AuthenticationProvider {
 
         userRepository.existsByUsernameAndPassword(username, password);
         User user = userRepository.findOneByUsernameAndPassword(username, password);
-
         if(null == user) { throw new BadCredentialsException("Invalid Username or Password Douche!");}
-
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         if(user instanceof Admin) {
             grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
         }
         else if(user instanceof StoreOwner){
             grantedAuthorities.add(new SimpleGrantedAuthority("storeOwner"));
-
         }
-
         return new UsernamePasswordAuthenticationToken(user, password, grantedAuthorities);
-
     }
-
     @Override
     public boolean supports(Class<?> authentication) { return authentication.equals(UsernamePasswordAuthenticationToken.class); }
 }
