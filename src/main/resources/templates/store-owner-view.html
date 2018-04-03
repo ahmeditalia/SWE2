@@ -18,7 +18,7 @@
 		<div class="divlist">
 				Stores:
 				<select id="list" class="liststores">
-					<option value="ALL">All</option>
+					<option value="All">All</option>
 					<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option>
 				</select>
 		</div>

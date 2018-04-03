@@ -111,7 +111,7 @@ $(document).ready(function() {
 					      type: "POST",
 					      contentType : 'application/json; charset=utf-8',
 					      dataType : 'json',
-					      url: "/add-product-store",
+					      url: "/add-product-store/"+$("#list option:selected").val(),
 					      data: JSON.stringify(vproduct)
 					 });
 				});
