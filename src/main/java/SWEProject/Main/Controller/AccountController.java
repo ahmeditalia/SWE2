@@ -1,5 +1,4 @@
 package SWEProject.Main.Controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,12 +9,10 @@ import SWEProject.Main.Controller.Entities.Creator;
 import SWEProject.Main.Controller.Entities.StoreOwner;
 import SWEProject.Main.Controller.Entities.User;
 import SWEProject.Main.Controller.Repository.UserRepository;
-
 @Controller
 public class AccountController {
 	@Autowired
 	private UserRepository userRepository;
-	
 	private Creator creator=Creator.getInstance();
 	@GetMapping("/Registration")
 	public String showRegistrationForm(Model model)
@@ -23,7 +20,6 @@ public class AccountController {
 		model.addAttribute("user",new User());
 		return "Registration";
 	}
-
 	@PostMapping("/Registration")
 	public String registration(@ModelAttribute User user, @RequestParam("type") String type)
 	{
@@ -35,13 +31,11 @@ public class AccountController {
 		}
 		return "redirect:/Registration?error";
 	}
-	
 	@GetMapping("/login")
 	public String showLoginForm(Model model)
 	{
 		return "login";
 	}
-	
 	@GetMapping("/success")
 	public String success(Model model)
 	{

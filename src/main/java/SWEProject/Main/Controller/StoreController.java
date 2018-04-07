@@ -1,72 +1,24 @@
 package SWEProject.Main.Controller;
-
 import SWEProject.Main.Controller.Entities.*;
 import SWEProject.Main.Controller.Repository.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 @Controller
 public class StoreController {
 	@Autowired
-	private StoreRepository sepo;
+	private StoreRepository storeRepo;
 	@Autowired
-	private StoreProductRepository prepo;
+	private StoreProductRepository storeProductRepo;
 	@Autowired
-	private SystemProductRepository sprepo;
-	@Autowired
-	private BrandRepository brepo;
-	@Autowired
-	private StoreOwnerRepository sorepo;
-	@Autowired
-	private StatisticsRepository statrepo;
-	@Autowired
-	private NormalUserRepository nurepo;
-
-	
-	@RequestMapping("/statistics")
-	@ResponseBody
-	public Statistics showstat(@RequestBody String sname) {
-		//return statrepo.findOne(sname);
-		// example
-		Random rand = new Random();
-		int n = rand.nextInt(250);
-		int m = rand.nextInt(n);
-		Statistics statistics = new Statistics(n, m, rand.nextInt(m));
-		return statistics;
-	}
-
-	@RequestMapping("/add-product-store/{storeName}")
-	@ResponseBody
-	public void addProduct(@RequestBody() StoreProduct p,@PathVariable ("storeName")String sname) {
-		boolean x=true;
-		Store s = sepo.findOneByStoreName(sname);
-		for(int i=0;i<s.getProducts().size();i++){
-			if(s.getProducts().get(i).getName().equals(p.getName())){
-				x=false;
-				break;
-			}
-		}
-		if(x==true) {
-			SystemProduct product = sprepo.findOneByName(p.getName());
-			StoreProduct storeProduct = new StoreProduct(p.getQuantity(), p.getPrice(), s);
-			storeProduct.setName(product.getName());
-			storeProduct.setBrand(product.getBrand());
-			storeProduct.setType(product.getType());
-			System.out.println("pppppppp  " + storeProduct.getType() + " " + storeProduct.getPrice() + " " + storeProduct.getStore() + " " + storeProduct.getName() + " " + storeProduct.getQuantity() + " " + storeProduct.getBrand());
-			s.addProduct(storeProduct);
-			prepo.save(storeProduct);
-		}
-	}
+	private StatisticsRepository statRepo;
 	@RequestMapping("/ShowAllStores")
 	@ResponseBody
 	public  List<Store> showAllStores(){
-		Iterable<Store> str = sepo.findAll();
+		Iterable<Store> str = storeRepo.findAll();
 		List<Store> stores = new ArrayList<Store>();
 		for (Store s : str) {
 			stores.add(s);
@@ -77,29 +29,28 @@ public class StoreController {
 	@ResponseBody
 	public  List<StoreProduct> openStore(@RequestBody String sname){
 		List<StoreProduct> sProducts = new ArrayList<StoreProduct>();
-		Store s=sepo.findOneByStoreName(sname);
+		Store s=storeRepo.findOneByStoreName(sname);
 		for (int i=0;i<s.getProducts().size();i++) {
 			sProducts.add(s.getProducts().get(i));
 		}
-		statrepo.updateNumUserView(sname);
+		statRepo.updateNumUserView(sname);
 		return  sProducts;
 	}
-	@RequestMapping("/buyProduct")
+	@PostMapping("/add-store")
 	@ResponseBody
-	public  boolean buyProduct(@RequestBody String spname,@RequestBody String normaluname,@RequestBody String storeName,@RequestBody int quantity) {
-			NormalUser normalUser=nurepo.findOneByUsername(normaluname);
-			StoreProduct storeProduct=prepo.findByNameAndStore(spname,storeName);
-		Store store=sepo.findOneByStoreName(storeName);
-			if(normalUser.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-quantity<0){
-				return false;
-			}
-		double balance=normalUser.getBalance()-storeProduct.getPrice();
-		normalUser.setBalance(balance);
-		prepo.updateQuantity(quantity,storeName,storeProduct.getId());
-		nurepo.updateBalance(storeProduct.getPrice(),normalUser.getUsername());
-		statrepo.updateNumUserBuy(storeName);
-		statrepo.updateNumUserView(storeName);
-		statrepo.updateSoldProducts(storeName,quantity);
-		return true;
+	public void newStore(@RequestBody Store store,@RequestParam("type") String type) {
+		if (!storeRepo.exists(store.getStoreName())) {
+			StoreOwner storeOwner = new StoreOwner(
+					(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+			store = Creator.getInstance().createStore(type, store, storeOwner);
+			storeOwner.addStore(store);
+			storeRepo.save(store);
 		}
 	}
+	@GetMapping("/store-view")
+	public List<Store> StoreOwnerStores() {
+
+		List<Store> stores = storeRepo.findByStatus("accepted");
+		return stores;
+	}
+}
