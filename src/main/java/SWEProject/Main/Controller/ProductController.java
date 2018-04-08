@@ -83,6 +83,13 @@ public class ProductController {
 		List<StoreProduct> str = storeProductRepo.findByName(spname);
 		return str;
 	}
+	@RequestMapping("/ShowProductByName")
+	@ResponseBody
+	public  SystemProduct ShowProductByName(@RequestBody String pname) {
+		SystemProduct systemProduct = sysProductrepo.findOneByName(pname);
+		return systemProduct;
+	}
+
 	@RequestMapping("/add-product-store/{storeName}")
 	@ResponseBody
 	public void addProduct(@RequestBody() StoreProduct p,@PathVariable("storeName")String sname) {
@@ -110,7 +117,13 @@ public class ProductController {
 	}
 	@RequestMapping("/buyProduct")
 	@ResponseBody
-	public  boolean buyProduct(@RequestBody String spname,@RequestBody String normaluname,@RequestBody String storeName,@RequestBody int quantity) {
+	public  boolean buyProduct(@RequestBody String all) {
+		String[] parts = all.split("-");
+		String spname = parts[0];
+		String normaluname = parts[1];
+		String storeName = parts[2];
+		int quantity = Integer.parseInt(parts[3]);
+
 		NormalUser normalUser=normalUserRepo.findOneByUsername(normaluname);
 		StoreProduct storeProduct=storeProductRepo.findByNameAndStore(spname,storeName);
 		Store store=storeRepo.findOneByStoreName(storeName);
