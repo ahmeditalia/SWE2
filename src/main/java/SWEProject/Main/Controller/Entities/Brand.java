@@ -19,7 +19,6 @@ public class Brand {
     private String name;
     @NotNull
     private String category;
-
     @OneToMany(mappedBy="brand",cascade=CascadeType.ALL)
 	@JsonIgnore
     List<Product> products;

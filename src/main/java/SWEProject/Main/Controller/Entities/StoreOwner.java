@@ -26,6 +26,7 @@ public class StoreOwner extends User{
 	}
 	public StoreOwner() {
 		stores=new ArrayList<Store>();
+		balance=0;
 	}
 	public StoreOwner(User user)
 	{
@@ -44,5 +45,4 @@ public class StoreOwner extends User{
 	{
 		stores.add(store);
 	}
-
 }

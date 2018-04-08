@@ -19,9 +19,9 @@ public class ProductController {
 	@Autowired
 	private StoreRepository storeRepo;
 	@Autowired
-	private NormalUserRepository normalUserRepo;
-	@Autowired
 	private StatisticsRepository statRepo;
+	@Autowired
+	private UserRepository userRepo;
 
 	@GetMapping("/add-product-to-system")
 	public String showProductForm(Model model) {
@@ -116,17 +116,29 @@ public class ProductController {
 	}
 	@RequestMapping("/buyProduct")
 	@ResponseBody
-	public  boolean buyProduct(@RequestBody String spname,@RequestBody String normaluname,@RequestBody String storeName,@RequestBody int quantity) {
-		NormalUser normalUser=normalUserRepo.findOneByUsername(normaluname);
+	public  boolean buyProduct(@RequestBody String all) {
+		String[] parts = all.split("-");
+		String spname = parts[0];
+		String normaluserName = parts[1];
+		String storeName = parts[2];
+		int quantity = Integer.parseInt(parts[3]);
+		User user=userRepo.findOneByUsername(normaluserName);
 		StoreProduct storeProduct=storeProductRepo.findByNameAndStore(spname,storeName);
 		Store store=storeRepo.findOneByStoreName(storeName);
-		if(normalUser.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-quantity<0){
+		Discount d=new Discount();
+		if(quantity>=2){
+			PlusTwoItems t=new PlusTwoItems(d);
+		}
+		FirstBuyDiscount f=new FirstBuyDiscount(d);
+		StoreOwnerDiscount s=new StoreOwnerDiscount(f);
+
+		if(user.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-quantity<0){
 			return false;
 		}
-		double balance=normalUser.getBalance()-storeProduct.getPrice();
-		normalUser.setBalance(balance);
+
+		user.decreaseBalance(storeProduct.getPrice());
 		storeProductRepo.updateQuantity(quantity,storeName,storeProduct.getId());
-		normalUserRepo.updateBalance(storeProduct.getPrice(),normalUser.getUsername());
+		userRepo.updateBalance(storeProduct.getPrice(),user.getUsername());
 		statRepo.updateNumUserBuy(storeName);
 		statRepo.updateNumUserView(storeName);
 		statRepo.updateSoldProducts(storeName,quantity);

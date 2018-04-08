@@ -14,11 +14,13 @@ public class User {
 	protected String email;
 	@NotNull
 	protected String password;
-
+	protected double balance;
+	protected boolean firstBuy;
 	public User() {
 		username="";
 		email="";
 		password="";
+		balance=0;
 	}
 
 
@@ -51,7 +53,22 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double b) {
+		balance = b;
+	}
+	public void increaseBalance(double b){
+		balance+=b;
+	}
+	public void decreaseBalance(double b){
+		balance-=b;
+	}
+	public boolean isFirstBuy() {
+		return firstBuy;
+	}
+	public void setFirstBuy(boolean firstBuy) {
+		this.firstBuy = firstBuy;
+	}
 }
