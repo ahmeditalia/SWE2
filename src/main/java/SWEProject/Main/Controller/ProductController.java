@@ -83,6 +83,12 @@ public class ProductController {
 		List<StoreProduct> str = storeProductRepo.findByName(spname);
 		return str;
 	}
+	@RequestMapping("/ShowProductByName")
+	@ResponseBody
+	public  SystemProduct ShowProductByName(@RequestBody String spname) {
+		SystemProduct systemProduct = sysProductrepo.findOneByName(spname);
+		return systemProduct;
+	}
 	@RequestMapping("/add-product-store/{storeName}")
 	@ResponseBody
 	public void addProduct(@RequestBody() StoreProduct p,@PathVariable("storeName")String sname) {
