@@ -1,4 +1,5 @@
 package SWEProject.Main.Controller;
+
 import SWEProject.Main.Controller.Entities.Admin;
 import SWEProject.Main.Controller.Entities.StoreOwner;
 import SWEProject.Main.Controller.Entities.User;
@@ -15,14 +16,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class WebSecurityAuthenticator implements AuthenticationProvider {
+
     @Autowired(required = true)
     private UserRepository userRepository;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
+
+
         userRepository.existsByUsernameAndPassword(username, password);
         User user = userRepository.findOneByUsernameAndPassword(username, password);
         if(null == user) { throw new BadCredentialsException("Invalid Username or Password Douche!");}
