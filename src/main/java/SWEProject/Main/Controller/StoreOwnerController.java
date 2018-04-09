@@ -13,10 +13,7 @@ public class StoreOwnerController {
 	@Autowired
 	StoreRepository storeRepo;
 	@GetMapping("/store-owner-view")
-	public String showStoreOwnerView(Model model) {
-		StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Store> stores=storeRepo.findByStoreOwnerAndStatus(user, "accepted");
-		model.addAttribute("stores", stores);
+	public String showStoreOwnerView() {
 		return "store-owner-view";
 	}
 	/*

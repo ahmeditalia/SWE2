@@ -42,10 +42,12 @@ function updatediv()
 	});
 }
 $(document).ready(function(){
-				$.getJSON("/store-view", function(data) {
+				$.getJSON("/ShowOwnerStores", function(data) {
 					for ( var i in data) {
-						$("#list").append($("<option></option>").text(data[i].name));
+						var option="<option value="+data[i].storeName+">"+data[i].storeName+"</option>"
+						$("#list").append(option);
 					}
+					updatediv();
 				});
 				$('#addprodcttostore').click(function(){
 					$("div#storeownerwindow").hide(500);
@@ -212,6 +214,5 @@ $(document).ready(function(){
 					$("div#storeownerwindow").empty();
 				});
 			});
-			updatediv();
 
 		});
