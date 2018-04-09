@@ -34,7 +34,7 @@ public class AllStatisticsController {
     	List<Statistics> retList=new ArrayList<Statistics>();
     	for(String sname:Listsname)
     	{
-    		retList.add(statRepo.findOneByStore(storeRepo.findOne(sname)));
+    		retList.add(statRepo.findOneByStore_StoreName(sname));
     	}
         return retList;
     }

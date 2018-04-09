@@ -146,21 +146,40 @@ $(document).ready(function(){
 							+"</table>";
 							$("#storeownerwindow").append(table);
 							$("div#storeownerwindow").show(500);
-							$.getJSON("/products", function(data) {
-								$("#products tbody").remove();
-								$("#products").append('<tbody></tbody>');
-								for ( var i in data) {
-									var tblRow = "<tr>" + "<td>" + data[i].id
-											+ "</td>" + "<td>" + data[i].name
-											+ "</td>" + "<td>" + data[i].price
-											+ "</td>" + "<td>" + data[i].type
-											+ "</td>" + "<td>" + data[i].brand
-											+ "</td>" + "<td>" + data[i].category
-											+ "</td>" + "<td>" + data[i].quantity
-											+ "</td>" + "</tr>"
-									$("#products tbody").append(tblRow);
-								}
-							});
+							var select = [$("#list").val()];
+							if (select[0] == "All")
+							{
+								$("#list > option").each(function(index, element)
+								{
+									if ($(element).val() != "All")
+									{
+										select[index - 1] = $(element).val();
+									}
+								});
+							}
+							$.ajax({
+							      type: "POST",
+							      contentType : 'application/json; charset=utf-8',
+							      dataType : 'json',
+							      url: "/products",
+							      data: JSON.stringify(select),
+							      success: function(data)
+							      {
+							    	  $("#products tbody").remove();
+										$("#products").append('<tbody></tbody>');
+										for ( var i in data) {
+											var tblRow = "<tr>" + "<td>" + data[i].id
+													+ "</td>" + "<td>" + data[i].name
+													+ "</td>" + "<td>" + data[i].price
+													+ "</td>" + "<td>" + data[i].type
+													+ "</td>" + "<td>" + data[i].brand.name
+													+ "</td>" + "<td>" + data[i].brand.category
+													+ "</td>" + "<td>" + data[i].quantity
+													+ "</td>" + "</tr>"
+											$("#products tbody").append(tblRow);
+										}
+							      }
+							 });
 							updatediv();
 				});
 			
