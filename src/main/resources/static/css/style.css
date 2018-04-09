@@ -49,7 +49,7 @@ body {
     text-align: center;
     position: absolute;
     left:78%;
-    top:1.3%;
+    top:7.5%;
     background-color:red;
     line-height:20px;
     width:28px;
@@ -105,10 +105,7 @@ body {
   background-color: #28282b;
   margin-left:15.5%;
   margin-top:-8px;
-  width:220px;
-}
-.topnav .search-container {
-  float: right;
+  width:400px;
 }
 .topnav input[type=text] {
   padding: 6px;
@@ -119,19 +116,21 @@ body {
   font-size: 14px;
   border: none;
 }
-.topnav .search-container button {
+.topnav button {
   float: right;
+  color:white;
   padding: 6px 10px;
   margin-top: 8px;
   margin-bottom: 8px;
   margin-right: 16px;
-  background: #ddd;
+  background: #408080;
   font-size: 17px;
   border: none;
   cursor: pointer;
 }
-.topnav .search-container button:hover {
-  background: #ccc;
+.topnav button:hover {
+  background: #9a9a9a;
+  color:black;
 }
 
 .divlist{
@@ -258,7 +257,7 @@ body {
 
 .validadd {
 	margin-top: 3px;
-	margin-bottom: 0px;
+	margin-bottom: 20px;
 	height: 15px;
 	font-size: 13px;
 	color: rgb(238, 255, 2);
@@ -307,6 +306,7 @@ body {
 	color: rgb(253, 253, 253);
 }
 
+/*selected type*/
 .container {
 	display: block;
 	position: relative;
@@ -321,13 +321,11 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 }
-
 .container input {
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
 }
-
 .checkmark {
 	position: absolute;
 	top: 0;
@@ -337,25 +335,20 @@ body {
 	background-color: #eee;
 	border-radius: 50%;
 }
-
 .container:hover input ~ .checkmark {
 	background-color: #ccc;
 }
-
 .container input:checked ~ .checkmark {
 	background-color: #2196F3;
 }
-
 .checkmark:after {
 	content: "";
 	position: absolute;
 	display: none;
 }
-
 .container input:checked ~ .checkmark:after {
 	display: block;
 }
-
 .container .checkmark:after {
 	top: 9px;
 	left: 9px;
@@ -364,9 +357,8 @@ body {
 	border-radius: 50%;
 	background: white;
 }
-
+/*end selected type*/
 /*addtosystem*/
-
 .addtosystem {
 	border-radius: 15px;
 	position: absolute;
@@ -379,7 +371,6 @@ body {
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.534);
 }
-
 .addtosystem h2 {
 	margin: 10px;
 	padding: 0 0 30px;
@@ -397,12 +388,10 @@ body {
 	color: rgb(255, 255, 255);
 	font-size: 14px;
 }
-
 .addtosystem input {
 	width: 100%;
 	margin-bottom: 15px;
 }
-
 .addtosystem input[type="text"] {
 	border-bottom: 1px solid rgb(4, 255, 234);
 	background: transparent;
@@ -412,7 +401,6 @@ body {
 	margin-bottom: -10px;
 	font-size: 16px;
 }
-
 .addtosystem input[type="submit"] {
 	border: none;
 	outline: none;
@@ -424,20 +412,17 @@ body {
 	border-radius: 50px;
 	margin-bottom: 30px;
 }
-
 .addtosystem input[type="submit"]:hover {
 	background: white;
 	color: rgba(4, 4, 160, 0.87);
 	font-weight: bold;
 }
-
 .addtosystem a {
 	color: white;
 	font-size: 14px;
 	font-weight: bold;
 	text-decoration: none;
 }
-
 /*end*/
 
 
@@ -457,19 +442,24 @@ body {
 	color:white;
 }
 
-
+/*add store*/
 .addstore {
 	border-radius: 15px;
 	position: absolute;
-	padding: 40px 40px;
-	top: 15%;
-	left: 50%;
+	padding: 20px 40px;
+	top: 8%;
+	left: 45%;
 	width: 350px;
-	height: 500px;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.534);
 }
-
+.addstore h2 {
+	margin: 10px;
+	padding: 0 0 30px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
 .addstore h3 {
 	margin: 0;
 	font-size:14px;
@@ -477,7 +467,6 @@ body {
 	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 	color: rgb(253, 253, 253);
 }
-
 .addstore p {
 	margin: 0;
 	padding: 0;
@@ -487,17 +476,13 @@ body {
 }
 .addstore input {
 	width: 100%;
-	margin-bottom: 15px;
 }
-
 .addstore input[type="text"] {
-	border-bottom: 1px solid rgb(4, 255, 234);
+	border-bottom: 1px solid #4000404255234;
 	height: 20px;
 	color: black;
-	margin-bottom: 10px;
 	font-size: 16px;
 }
-
 .addstore input[type="submit"] {
 	border: none;
 	outline: none;
@@ -509,12 +494,217 @@ body {
 	border-radius: 50px;
 	margin-bottom: 30px;
 }
-
 .addstore input[type="submit"]:hover {
 	background: white;
 	color: rgba(4, 4, 160, 0.87);
 	font-weight: bold;
 }
+/*end add store*/
+/*add product to store*/
+.addproducttostore {
+	border-radius: 15px;
+	position: absolute;
+	padding: 20px 40px;
+	top: 8%;
+	left: 45%;
+	width: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+.addproducttostore h2 {
+	margin: 10px;
+	padding: 0 0 30px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+.addproducttostore h3 {
+	margin: 0;
+	font-size:14px;
+	padding: 0 0 20px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+.addproducttostore p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+.addproducttostore input {
+	width: 100%;
+}
+.addproducttostore input[type="text"] {
+	border-bottom: 1px solid #4000404255234;
+	height: 20px;
+	color: black;
+	font-size: 16px;
+}
+.addproducttostore input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+.addproducttostore input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+.listproducts{
+	outline:none;
+	border-radius: 8px;
+	width:100%;
+	height:30px;
+	background-color:#800000;
+	color:white;
+	margin-bottom: 30px;
+}
+.productinfo {
+	border-radius: 15px;
+	position: absolute;
+	padding: 30px 30px;
+	top: 12%;
+	left: 74%;
+	width: 250px;
+	box-sizing: border-box;
+	background-color: #65050f;
+	color:#ffffff;
+	font-weight:bold;
+	font-size: 15px;
+}
+/*end add product to store*/
+/*add product to system*/
+.addproducttosystem {
+	border-radius: 15px;
+	position: absolute;
+	padding: 20px 40px;
+	top: 8%;
+	left: 45%;
+	width: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+.addproducttosystem h2 {
+	margin: 10px;
+	padding: 0 0 30px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+.addproducttosystem h3 {
+	margin: 0;
+	font-size:14px;
+	padding: 0 0 20px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+.addproducttosystem p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+.addproducttosystem input {
+	width: 100%;
+}
+.addproducttosystem input[type="text"] {
+	border-bottom: 1px solid #4000404255234;
+	height: 20px;
+	color: black;
+	font-size: 16px;
+}
+.addproducttosystem input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+.addproducttosystem input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+.listbrands{
+	outline:none;
+	border-radius: 8px;
+	width:100%;
+	height:30px;
+	background-color:#800000;
+	color:white;
+	margin-bottom: 20px;
+}
+/*end add product to system*/
+/*add brand*/
+.addbrand {
+	border-radius: 15px;
+	position: absolute;
+	padding: 20px 40px;
+	top: 8%;
+	left: 45%;
+	width: 350px;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.534);
+}
+.addbrand h2 {
+	margin: 10px;
+	padding: 0 0 30px;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+.addbrand h3 {
+	margin: 0;
+	font-size:14px;
+	padding: 0 0 20px;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	color: rgb(253, 253, 253);
+}
+.addbrand p {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+}
+.addbrand input {
+	width: 100%;
+}
+.addbrand input[type="text"] {
+	border-bottom: 1px solid #4000404255234;
+	height: 20px;
+	color: black;
+	font-size: 16px;
+}
+.addbrand input[type="submit"] {
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+	background: rgb(1, 1, 94);
+	border-radius: 50px;
+	margin-bottom: 30px;
+}
+.addbrand input[type="submit"]:hover {
+	background: white;
+	color: rgba(4, 4, 160, 0.87);
+	font-weight: bold;
+}
+/*end add brand*/
 
 
 .statistics {
@@ -528,7 +718,6 @@ body {
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.534);
 }
-
 
 
 .Box {

@@ -36,6 +36,11 @@ public class AccountController {
 	{
 		return "login";
 	}
+	@GetMapping("/normal-user-view")
+	public String showLogin(Model model)
+	{
+		return "normal-user-view";
+	}
 	@GetMapping("/success")
 	public String success(Model model)
 	{

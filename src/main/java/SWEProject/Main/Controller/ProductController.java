@@ -40,7 +40,7 @@ public class ProductController {
 	}
 
 	/*test fnction*/
-	/*@RequestMapping("/products")
+	@RequestMapping("/products")
 	public @ResponseBody List<Product> products() {
 		StoreProduct storeProduct;
 		List<Product> products = new ArrayList<Product>();
@@ -55,7 +55,7 @@ public class ProductController {
 			products.add(storeProduct);
 		}
 		return products;
-	}*/
+	}
 	
 	@RequestMapping("/productsOfBrand")
 	@ResponseBody
@@ -83,9 +83,9 @@ public class ProductController {
 		List<StoreProduct> str = storeProductRepo.findByName(spname);
 		return str;
 	}
-	@RequestMapping("/ShowProductByName")
+	@RequestMapping("/ShowProductByName/{spname}")
 	@ResponseBody
-	public  SystemProduct ShowProductByName(@RequestBody String spname) {
+	public  SystemProduct ShowProductByName(@PathVariable("spname") String spname) {
 		SystemProduct systemProduct = sysProductrepo.findOneByName(spname);
 		return systemProduct;
 	}

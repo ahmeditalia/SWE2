@@ -10,6 +10,9 @@
 </head>
 <body>
 	<div class="btn-bar">
+		<form name="logOut" th:action="@{/logout}" method="post">
+			<button  value="Log out">Log out</button>
+		</form>
 		<button id="Requests">
 			Requests
 			<div id="not" class="notification"></div>
@@ -17,9 +20,6 @@
 		<button id="addproduct">Add Product</button>
 		<button id="addbrandtosystem">Add Brand</button>
 		<button id="showallproducts">Show All Product</button>
-		<form name="logOut" th:action="@{/logout}" method="post">
-			<button  value="Log out">Log out</button>
-		</form>
 	</div>
 	<div id="adminwindow" class="adminpanel"></div>
 	<!-- 

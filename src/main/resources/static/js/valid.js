@@ -52,7 +52,6 @@ function registervalid() {
 		return false;
 	}
 }
-
 function loginvalid() {
 	var username = document.forms["loginform"]["username"].value;
 	var password = document.forms["loginform"]["password"].value;
@@ -90,11 +89,6 @@ function loginvalid() {
 		return false;
 	}
 }
-
-function isString (value) {
-	return typeof value === 'string' || value instanceof String;
-}
-
 function addproductvalid() {
 
 	var name = document.forms["addProduct"]["name"].value;
@@ -170,6 +164,92 @@ function addbrandvalid() {
 		flag3 = false;
 	} else {
 		document.getElementById('validcategory').innerText = "";
+		flag3 = true;
+	}
+	
+
+	
+	if (flag1  && flag3) {
+		return true;
+	} else {
+		return false;
+	}
+}
+function addproductstorevalid() {
+
+	var price = document.forms["addProductstore"]["price"].value;
+	var quantity = document.forms["addProductstore"]["quantity"].value;
+	var numbers = /^\d+$/;
+	var floatnumber = /(^-?\d\d*\.\d\d*$)|(^-?\.\d\d*$)/;
+	
+	var flag1 = true;
+	var flag3 = true;
+
+	if (price == "") {
+		document.getElementById('validprice').innerText = "*Price required";
+		flag1 = false;
+	}
+	else if (!numbers.test(price)){
+		document.getElementById('validprice').innerText = "*Invlaid Input";
+		flag1 = false;
+	} else {
+		document.getElementById('validprice').innerText = "";
+		flag1 = true;
+	}
+	
+
+	if (quantity == "") {
+		document.getElementById('validquantity').innerText = "*Quantity required";
+		flag3 = false;
+	}
+	else if (!numbers.test(quantity)) {
+		document.getElementById('validquantity').innerText = "*Invlaid Input";
+		flag3 = false;
+	} else {
+		document.getElementById('validquantity').innerText = "";
+		flag3 = true;
+	}
+	
+
+	
+	if (flag1  && flag3) {
+		return true;
+	} else {
+		return false;
+	}
+}
+function addstorevalid() {
+
+	var storeName = document.forms["addStore"]["storeName"].value;
+	var location = document.forms["addStore"]["location"].value;
+	var numbers = /^\d+$/;
+	var floatnumber = /(^-?\d\d*\.\d\d*$)|(^-?\.\d\d*$)/;
+	
+	var flag1 = true;
+	var flag3 = true;
+
+	if (storeName == "") {
+		document.getElementById('validstorename').innerText = "*StoreName required";
+		flag1 = false;
+	}
+	else if (numbers.test(storeName)){
+		document.getElementById('validstorename').innerText = "*Invlaid Input";
+		flag1 = false;
+	} else {
+		document.getElementById('validstorename').innerText = "";
+		flag1 = true;
+	}
+	
+
+	if (location == "") {
+		document.getElementById('validstorelocation').innerText = "*Location required";
+		flag3 = false;
+	}
+	else if (numbers.test(location)) {
+		document.getElementById('validstorelocation').innerText = "*Invlaid Input";
+		flag3 = false;
+	} else {
+		document.getElementById('validstorelocation').innerText = "";
 		flag3 = true;
 	}
 	

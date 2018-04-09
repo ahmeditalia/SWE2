@@ -10,16 +10,16 @@
 </head>
 <body>
 	<div class="btn-bar">
+		<form name="logOut" th:action="@{/logout}" method="post">
+			<button  value="Log out">Log out</button>
+		</form>
 		<button id="search">Search</button>
-		<button>Add Product</button>
-		<button>Add Brand</button>
-		<button>Log out</button>
+		<button id="buyproduct">Buy Product</button>
 	</div>
 	<div id="topbar" class="topnav">
-		<div class="search-container">
 			<input type="text" placeholder="Search..."></input>
-		</div>
+			<button type="submit">Submit</button>
 	</div>
-
+	<div id="userwindow" class="adminpanel"></div>
 </body>
 </html>

@@ -26,69 +26,7 @@
 			
 		</div>
 	</div>
-	<!--<div class="storeownerview">
-		<form name="show" th:action="@{/store-view}" method="get">
-			<input type="submit" value="Show All Products"></input>
-		</form>
-		<button id="addstore">Add Store</button>
-		<form name="logOut" th:action="@{/logout}" method="post">
-			<input type="submit" value="Log out"></input>
-		</form>
-	</div>-->
-<!-- 	<div id="storepanelview" class="storenav"> -->
-<!-- 		<ul> -->
-<!-- 			<li> -->
-<!-- 				<button id="addprodcttostore" value="Add Product">Add Product</button> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 				Stores: -->
-<!-- 				<select id="list" class="liststores"> -->
-<!-- 					<option value="ALL">All</option> -->
-<!-- 					<option th:each="store : ${stores}" th:value="${store.storeName}" th:text="${store.storeName}"></option> -->
-<!-- 				</select> -->
-<!-- 			</li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
 	<div id="storeownerwindow" class="adminpanel">
 	</div>
-<!-- 	<div id="addstore" class="addstore"> -->
-<!-- 		<form name="add" th:object="${store}" th:action="@{/add-store}" method="POST"> -->
-<!-- 			<p>Store Name:</p> -->
-<!-- 			<input type="text" name="storeName" th:field="*{storeName}"></input> -->
-<!-- 			<p>Store Location:</p> -->
-<!-- 			<input type="text" name="location" th:field="*{location}"></input> -->
-<!-- 			<p>Store Type:</p> -->
-<!-- 			<input type="text" name="type" th:field="*{type}"></input> -->
-<!-- 			<h3>Store Type:</h3> -->
-<!-- 			<label class="container">Onsite  -->
-<!-- 			<input type="radio" name="type2" value="onsite"></input>  -->
-<!-- 			<span class="checkmark"></span> -->
-<!-- 			</label> <br></br> -->
-<!-- 			<label class="container">Online  -->
-<!-- 			<input type="radio" name="type2" value="online"></input>  -->
-<!-- 			<span class="checkmark"></span> -->
-<!-- 			</label> <br></br> -->
-<!-- 			<input type="submit" id="adddone" value="Add"></input>  -->
-<!-- 		</form>		 -->
-<!-- 		<button id="addcancel" value="Cancel">Cancel</button> -->
-<!-- 	</div> -->
-<!-- 	<div id="freebox" class="Free-Box"> -->
-<!-- 		<table class="showtable"> -->
-<!-- 			<tr class="theader" style="background-color: #008040;"> -->
-<!-- 				<td class="tdshow">ID</td> -->
-<!-- 				<td class="tdshow">Name</td> -->
-<!-- 				<td class="tdshow">Type</td> -->
-<!-- 				<td class="tdshow">Brand</td> -->
-<!-- 				<td class="tdshow">Category</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr th:each="product : ${products}"> -->
-<!-- 				<td th:text="${product.id}"></td> -->
-<!-- 				<td th:text="${product.name}"></td> -->
-<!-- 				<td th:text="${product.type}"></td> -->
-<!-- 				<td th:text="${product.brand.name}"></td> -->
-<!-- 				<td th:text="${product.brand.category}"></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
 </body>
 </html>
