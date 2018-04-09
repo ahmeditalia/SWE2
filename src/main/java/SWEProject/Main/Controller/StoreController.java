@@ -10,21 +10,53 @@ import java.util.List;
 @Controller
 public class StoreController {
 	@Autowired
-	private StoreRepository storeRepo;
+	public StoreRepository storeRepo;
 	@Autowired
-	private StoreProductRepository storeProductRepo;
+	public StoreProductRepository storeProductRepo;
 	@Autowired
-	private StatisticsRepository statRepo;
-	@RequestMapping("/ShowAllStores")
+	public StatisticsRepository statRepo;
+	@Autowired
+	public SystemProductRepository  sysProRepo;
+
+	@RequestMapping("/ShowOwnerStores")
 	@ResponseBody
 	public  List<Store> showAllStores(){
-		Iterable<Store> str = storeRepo.findAll();
-		List<Store> stores = new ArrayList<Store>();
-		for (Store s : str) {
-			stores.add(s);
-		}
-		return  stores;
+		StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return storeRepo.findByStoreOwnerAndStatus(user, "accepted");
 	}
+
+	@GetMapping("/add-product-to-store")
+	public String addproduct() {
+		return "add-product-to-store";
+	}
+
+	@RequestMapping("/add-product-store/{storeName}")
+	@ResponseBody
+	public void addProduct(@RequestBody() StoreProduct p,@PathVariable("storeName")String sname) {
+
+		boolean x=true;
+		Store store = storeRepo.findOneByStoreName(sname);
+		for(int i=0;i<store.getProducts().size();i++){
+			if(store.getProducts().get(i).getName().equals(p.getName())){
+				x=false;
+				break;
+			}
+		}
+		if(x) {
+
+			p.setStore(store);
+			/*SystemProduct product = sysProductrepo.findOneByName(p.getName());
+			StoreProduct storeProduct = new StoreProduct(p.getQuantity(), p.getPrice(), s);
+			storeProduct.setName(product.getName());
+			storeProduct.setBrand(product.getBrand());
+			storeProduct.setType(product.getType());
+			s.addProduct(storeProduct);
+			storeProductRepo.save(storeProduct);*/
+			AddProductCommand add = new AddProductCommand(p);
+			add.execute(this);
+		}
+	}
+
 	@RequestMapping("/openStore")
 	@ResponseBody
 	public  List<StoreProduct> openStore(@RequestBody String sname){

@@ -30,20 +30,29 @@ public class Store {
 	@OneToOne(mappedBy="store",cascade = CascadeType.ALL)
 	protected Statistics statistics;
 
+    @OneToMany(cascade=CascadeType.ALL)
+	List<Command> commands;
+
 	public Store() {
     	products=new ArrayList<StoreProduct>();
     }
 	public Store(String storeName) {
-    	products=new ArrayList<StoreProduct>();
+
+		commands = new ArrayList<Command>();
+    	products = new ArrayList<StoreProduct>();
 		this.storeName = storeName;
 	}
 	public Store(String storeName, StoreOwner storeOwner) {
-    	products=new ArrayList<StoreProduct>();
+
+		commands = new ArrayList<Command>();
+    	products = new ArrayList<StoreProduct>();
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
 	}
 	public Store(String storeName, StoreOwner storeOwner, String location, String type, String status) {
-    	products=new ArrayList<StoreProduct>();
+
+		commands = new ArrayList<Command>();
+		products = new ArrayList<StoreProduct>();
 		this.storeName = storeName;
 		this.storeOwner = storeOwner;
 		this.location = location;
@@ -94,6 +103,7 @@ public class Store {
 
 	public void setStatistics(Statistics statistics) {
 		this.statistics = statistics;
+		statistics.setStore(this);
 	}
 
 	
@@ -107,5 +117,11 @@ public class Store {
     public void addProduct(StoreProduct s){
         products.add(s);
     }
+
+	public List<Command> getCommands() { return commands; }
+
+	public void setCommands(List<Command> commands) { this.commands = commands; }
+
+	public void addCommand(Command command){ commands.add(command); }
 
 }
