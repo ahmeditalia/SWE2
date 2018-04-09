@@ -24,12 +24,6 @@ public class StoreController {
 		StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return storeRepo.findByStoreOwnerAndStatus(user, "accepted");
 	}
-
-	@GetMapping("/add-product-to-store")
-	public String addproduct() {
-		return "add-product-to-store";
-	}
-
 	@RequestMapping("/add-product-store/{storeName}")
 	@ResponseBody
 	public void addProduct(@RequestBody() StoreProduct p,@PathVariable("storeName")String sname) {
