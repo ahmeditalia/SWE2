@@ -27,8 +27,7 @@ public class AdminController {
 	{
 		Store store=storeRepo.findOne(storeName);
 		store.setStatus("accepted");
-		Statistics statistics=new Statistics(store);
-		statRepo.save(statistics);
+		store.setStatistics(new Statistics());
 		storeRepo.save(store);
 	}
 	@PostMapping("/reject")

@@ -12,7 +12,7 @@ public class AllStatistics {
     Integer id;
     String operation;
     String entity;
-     boolean added;
+    boolean added;
 
     public AllStatistics(String operation, String entity) {
         this.operation = operation;

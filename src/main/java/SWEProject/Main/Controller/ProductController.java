@@ -41,18 +41,11 @@ public class ProductController {
 
 	/*test fnction*/
 	@RequestMapping("/products")
-	public @ResponseBody List<Product> products() {
-		StoreProduct storeProduct;
-		List<Product> products = new ArrayList<Product>();
-		for (int i = 0; i < 10; i++) {
-			storeProduct = new StoreProduct();
-			storeProduct.setBrand(new Brand("" + i, "" + i * 2));
-			storeProduct.setId(i);
-			storeProduct.setName("" + i);
-			storeProduct.setQuantity(i * i);
-			storeProduct.setType(" Store Type ");
-			storeProduct.setStore(new Store("S" + i, new StoreOwner("a", "b", "c"), "location", "type", "state"));
-			products.add(storeProduct);
+	public @ResponseBody List<StoreProduct> products(@RequestBody List<String> storesNames) {
+		List<StoreProduct> products=new ArrayList<StoreProduct>();
+		for(String sname:storesNames)
+		{
+			products.addAll(storeProductRepo.findByStore_StoreName(sname));
 		}
 		return products;
 	}

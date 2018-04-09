@@ -20,13 +20,6 @@ public class Statistics implements Operations {
     public Statistics() {
     }
 
-    public Statistics(Store store) {
-		this.store = store;
-        this.numUserView = 0;
-        this.numUserBuy = 0;
-        this.soldProducts = 0;
-		store.setStatistics(this);
-	}
 
 	public Statistics(Integer id, int numUserView, int numUserBuy, int soldProducts) {
 		this.id = id;
@@ -41,7 +34,18 @@ public class Statistics implements Operations {
         this.soldProducts = soldProducts;
     }
 
-    public int getNumUserView() {
+	
+    public Store getStore() {
+		return store;
+	}
+
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+
+	public int getNumUserView() {
         return numUserView;
     }
 
@@ -71,14 +75,6 @@ public class Statistics implements Operations {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Store getStoreOwner() {
-        return store;
-    }
-
-    public void setStoreOwner(Store store) {
-        this.store = store;
     }
 
     @Override
