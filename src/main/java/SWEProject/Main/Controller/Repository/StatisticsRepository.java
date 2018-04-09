@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import SWEProject.Main.Controller.Entities.Statistics;
+import SWEProject.Main.Controller.Entities.Store;
+
 import org.springframework.data.repository.query.Param;
 
 public interface StatisticsRepository extends CrudRepository<Statistics, Integer>{//fee 7aga 8lt
@@ -13,5 +15,7 @@ public interface StatisticsRepository extends CrudRepository<Statistics, Integer
     void updateNumUserBuy(@Param("store") String store);
 @Query("UPDATE Statistics s set s.soldProducts=s.soldProducts+:soldPro where s.store=:store")
     void updateSoldProducts(@Param("store") String store,@Param("soldPro")int soldPro);
+	
+	Statistics findOneByStore(Store store);
 
 }

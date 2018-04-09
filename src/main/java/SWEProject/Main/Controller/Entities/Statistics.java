@@ -18,12 +18,24 @@ public class Statistics implements Operations {
     @JsonIgnore
     public Store store;
     public Statistics() {
+    }
+
+    public Statistics(Store store) {
+		this.store = store;
         this.numUserView = 0;
         this.numUserBuy = 0;
         this.soldProducts = 0;
-    }
+		store.setStatistics(this);
+	}
 
-    public Statistics(int numUserView, int numUserBuy, int soldProducts) {
+	public Statistics(Integer id, int numUserView, int numUserBuy, int soldProducts) {
+		this.id = id;
+		this.numUserView = numUserView;
+		this.numUserBuy = numUserBuy;
+		this.soldProducts = soldProducts;
+	}
+
+	public Statistics(int numUserView, int numUserBuy, int soldProducts) {
         this.numUserView = numUserView;
         this.numUserBuy = numUserBuy;
         this.soldProducts = soldProducts;

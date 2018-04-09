@@ -2,13 +2,19 @@ package SWEProject.Main.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import SWEProject.Main.Controller.Entities.Statistics;
 import SWEProject.Main.Controller.Entities.Store;
+import SWEProject.Main.Controller.Repository.StatisticsRepository;
 import SWEProject.Main.Controller.Repository.StoreRepository;
 import java.util.List;
 @Controller
 public class AdminController {
 	@Autowired
 	StoreRepository storeRepo;
+	@Autowired
+	StatisticsRepository statRepo;
+	
 	@RequestMapping("/view-request-stores")
 	@ResponseBody
 	public List<Store> Viewrequests() {
@@ -21,6 +27,8 @@ public class AdminController {
 	{
 		Store store=storeRepo.findOne(storeName);
 		store.setStatus("accepted");
+		Statistics statistics=new Statistics(store);
+		statRepo.save(statistics);
 		storeRepo.save(store);
 	}
 	@PostMapping("/reject")
