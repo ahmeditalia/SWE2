@@ -30,6 +30,7 @@ public class Store {
 	@OneToOne(mappedBy="store",cascade = CascadeType.ALL)
 	protected Statistics statistics;
 
+    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL)
 	List<Command> commands;
 
