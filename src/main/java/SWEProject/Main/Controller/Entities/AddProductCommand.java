@@ -7,7 +7,12 @@ import javax.persistence.Entity;
 @Entity
 public class AddProductCommand extends Command{
 
-    public AddProductCommand(StoreProduct product) { this.product = product; }
+
+    public AddProductCommand(StoreProduct product /*,String desc*/)
+    {
+        this.product = product;
+        //this.desc = desc;
+    }
 
     public void execute(StoreController storeController){
 
@@ -24,6 +29,7 @@ public class AddProductCommand extends Command{
 
     public void undo(StoreController storeController){
 
-
+        storeController.storeProductRepo.delete(product);
     }
 }
+
