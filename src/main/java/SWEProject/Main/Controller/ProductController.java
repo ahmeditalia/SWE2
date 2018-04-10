@@ -82,31 +82,6 @@ public class ProductController {
 		SystemProduct systemProduct = sysProductrepo.findOneByName(spname);
 		return systemProduct;
 	}
-	@RequestMapping("/add-product-store/{storeName}")
-	@ResponseBody
-	public void addProduct(@RequestBody() StoreProduct p,@PathVariable("storeName")String sname) {
-		boolean x=true;
-		Store s = storeRepo.findOneByStoreName(sname);
-		for(int i=0;i<s.getProducts().size();i++){
-			if(s.getProducts().get(i).getName().equals(p.getName())){
-				x=false;
-				break;
-			}
-		}
-		if(x==true) {
-			SystemProduct product = sysProductrepo.findOneByName(p.getName());
-			StoreProduct storeProduct = new StoreProduct(p.getQuantity(), p.getPrice(), s);
-			storeProduct.setName(product.getName());
-			storeProduct.setBrand(product.getBrand());
-			storeProduct.setType(product.getType());
-			s.addProduct(storeProduct);
-			storeProductRepo.save(storeProduct);
-		}
-	}
-	@GetMapping("/add-product-to-store")
-	public String addproduct() {
-		return "add-product-to-store";
-	}
 	@RequestMapping("/buyProduct")
 	@ResponseBody
 	public  boolean buyProduct(@RequestBody String all) {
