@@ -93,23 +93,21 @@ public class ProductController {
 		User user=userRepo.findOneByUsername(normaluserName);
 		StoreProduct storeProduct=storeProductRepo.findByNameAndStore(spname,storeName);
 		Store store=storeRepo.findOneByStoreName(storeName);
-		Discount d=new Discount();
 		if(quantity>=2){
-			PlusTwoItems t=new PlusTwoItems(d);
+			user.addDiscount(PlusTwoItems.class);
 		}
-		FirstBuyDiscount f=new FirstBuyDiscount(d);
-		StoreOwnerDiscount s=new StoreOwnerDiscount(f);
-
-		if(user.getBalance()>storeProduct.getPrice()||storeProduct.getQuantity()-quantity<0){
+		if(user.getBalance()>(storeProduct.getPrice()*user.getDiscount().getDis()/100)||storeProduct.getQuantity()<quantity){
 			return false;
 		}
-
+		user.deleteDiscount(FirstBuyDiscount.class);
+		user.deleteDiscount(PlusTwoItems.class);
 		user.decreaseBalance(storeProduct.getPrice());
 		storeProductRepo.updateQuantity(quantity,storeName,storeProduct.getId());
 		userRepo.updateBalance(storeProduct.getPrice(),user.getUsername());
 		statRepo.updateNumUserBuy(storeName);
 		statRepo.updateNumUserView(storeName);
 		statRepo.updateSoldProducts(storeName,quantity);
+		userRepo.save(user);/*if save->update*/
 		return true;
 	}
 
