@@ -30,8 +30,8 @@ function updatediv()
 					return;
 				}
 				$("#statistics p").remove();
-				var divcontent = "<p>Store: " + select[i] + "</p>" + "<p>Number Of Views " + data[i].numUserView
-						+ "</p>" + "<p>Number Of Buyers " + data[i].numUserBuy + "</p>" + "<p>Number Of Sold Products "
+				var divcontent = "<p>Store: " + select[i] + "</p>" + "<p>Number Of Views: " + data[i].numUserView
+						+ "</p>" + "<p>Number Of Buyers: " + data[i].numUserBuy + "</p>" + "<p>Number Of Sold Products: "
 						+ data[i].soldProducts + "</p>";
 				$("div#statistics").append(divcontent);
 				i = (i + 1) % data.length;
@@ -233,5 +233,33 @@ $(document).ready(function(){
 					$("div#storeownerwindow").empty();
 				});
 			});
-
+			$("#addcollaborator").click(function() {
+				$("#storeownerwindow").empty();
+				$("div#storeownerwindow").hide();
+				var addacoll="<div class=\"addadmin\">"
+					+"<h2>Add Admin</h2>"
+					+"<p>User Name</p>"
+					+"<input id=\"username\" name=\"username\" type=\"text\" placeholder=\"User Name\"></input>"
+					+"<div id=\"validname\" class=\"validadd\"></div>"
+					+"<p>E-mail</p>"
+					+"<input id=\"email\" name=\"email\" type=\"text\" placeholder=\"avatar@mail.com\"></input>"
+					+"<div id=\"validemail\" class=\"validadd\"></div>"
+					+"<p>Password</p>"
+					+"<input id=\"password\" name=\"password\" type=\"text\" placeholder=\"********\"></input>"
+					+"<div id=\"validpassword\" class=\"validadd\"></div>"
+					+"<button id=\"submitcollaborator\"  value=\"Add Admin\">Add Collaborator</input>"
+					+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
+					+"</div>";
+				$("#storeownerwindow").append(addacoll);
+				$("div#storeownerwindow").show(500);
+				$("#submitcollaborator").click(function() {
+					/*send data*/
+					$("div#storeownerwindow").hide(500);
+					$("div#storeownerwindow").empty();
+				});
+				$("#cancel").click(function() {
+					$("div#storeownerwindow").hide(500);
+					$("div#storeownerwindow").empty();
+				});
+			});
 		});

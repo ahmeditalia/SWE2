@@ -9,18 +9,18 @@ $(document).ready(function() {
 			$("#adminwindow").empty();
 			$("div#adminwindow").hide();
 			var v="<div class=\"addbrand\">"
-			+"<h2>Add Brand</h2>"
-			+"<form id=\"addbrand\" name=\"addbrand\">"
-			+"<p>Brand Name</p>"
-			+"<input id=\"namebrand\" name=\"brandname\" type=\"text\" placeholder=\"Brand Name\"></input>"
-			+"<div id=\"validname\" class=\"validadd\"></div>"
-			+"<p>Brand Cateory</p>"
-			+"<input id=\"categorybrand\" name=\"brandcategory\" type=\"text\" placeholder=\"Category\"></input>"
-			+"<div id=\"validcategory\" class=\"validadd\"></div>"
-			+"</form>"
-			+"<button id=\"submitbrand\"  value=\"Add Brand\">Add Brand</input>"
-			+"<button id=\"addbrandcancel\" value=\"Cancel\">Cancel</button>"
-			+"</div>";
+				+"<h2>Add Brand</h2>"
+				+"<form id=\"addbrand\" name=\"addbrand\">"
+				+"<p>Brand Name</p>"
+				+"<input id=\"namebrand\" name=\"brandname\" type=\"text\" placeholder=\"Brand Name\"></input>"
+				+"<div id=\"validname\" class=\"validadd\"></div>"
+				+"<p>Brand Cateory</p>"
+				+"<input id=\"categorybrand\" name=\"brandcategory\" type=\"text\" placeholder=\"Category\"></input>"
+				+"<div id=\"validcategory\" class=\"validadd\"></div>"
+				+"</form>"
+				+"<button id=\"submitbrand\"  value=\"Add Brand\">Add Brand</input>"
+				+"<button id=\"addbrandcancel\" value=\"Cancel\">Cancel</button>"
+				+"</div>";
 		$("#adminwindow").append(v);
 		$("div#adminwindow").show(500);
 		$("#addbrandcancel").click(function() {
@@ -191,5 +191,33 @@ $(document).ready(function() {
 				}
 			});	
 		});
-		
+		$("#addadmin").click(function() {
+			$("#adminwindow").empty();
+			$("div#adminwindow").hide();
+			var addadmin="<div class=\"addadmin\">"
+				+"<h2>Add Admin</h2>"
+				+"<p>User Name</p>"
+				+"<input id=\"username\" name=\"username\" type=\"text\" placeholder=\"User Name\"></input>"
+				+"<div id=\"validname\" class=\"validadd\"></div>"
+				+"<p>E-mail</p>"
+				+"<input id=\"email\" name=\"email\" type=\"text\" placeholder=\"avatar@mail.com\"></input>"
+				+"<div id=\"validemail\" class=\"validadd\"></div>"
+				+"<p>Password</p>"
+				+"<input id=\"password\" name=\"password\" type=\"text\" placeholder=\"********\"></input>"
+				+"<div id=\"validpassword\" class=\"validadd\"></div>"
+				+"<button id=\"submitadmin\"  value=\"Add Admin\">Add Admin</input>"
+				+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
+				+"</div>";
+			$("#adminwindow").append(addadmin);
+			$("div#adminwindow").show(500);
+			$("#submitadmin").click(function() {
+				/*send data*/
+				$("div#adminwindow").hide(500);
+				$("div#adminwindow").empty();
+			});
+			$("#cancel").click(function() {
+				$("div#adminwindow").hide(500);
+				$("div#adminwindow").empty();
+			});
+		});
 	});
