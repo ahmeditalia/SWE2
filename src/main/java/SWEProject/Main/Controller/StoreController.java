@@ -19,6 +19,8 @@ public class StoreController {
     public StatisticsRepository statRepo;
     @Autowired
     public SystemProductRepository sysProRepo;
+    @Autowired
+    public CommandRepository commandRepo;
 
 
     @RequestMapping("/ShowOwnerStores")
@@ -52,7 +54,7 @@ public class StoreController {
         if (!exist) {
 
             product.setStore(store);
-            AddProductCommand add = new AddProductCommand(product/*,"added product"*/);
+            AddProductCommand add = new AddProductCommand(product,"added product");
             add.execute(this);
         }
     }
@@ -61,7 +63,7 @@ public class StoreController {
     @ResponseBody
     public void deleteProduct(@RequestBody() StoreProduct product) {
 
-        DeleteProductCommand deleteProduct = new DeleteProductCommand(product/*,"deleted product"*/);
+        DeleteProductCommand deleteProduct = new DeleteProductCommand(product,"deleted product");
         deleteProduct.execute(this);
     }
 
@@ -97,10 +99,11 @@ public class StoreController {
         return stores;
     }
 
-    /*@RequestMapping("/store-commands")
+    @RequestMapping("/store-commands")
     @ResponseBody
     public List<Command> getStoreCommands() {
 
-
-    }*/
+        StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return storeRepo.findByStoreOwner(user);
+    }
 }

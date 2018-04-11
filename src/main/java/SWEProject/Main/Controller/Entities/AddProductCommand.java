@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 public class AddProductCommand extends Command{
 
 
-    public AddProductCommand(StoreProduct product /*,String desc*/)
+    public AddProductCommand() {}
+
+    public AddProductCommand(StoreProduct product , String description)
     {
         this.product = product;
-        //this.desc = desc;
+        this.description = description;
     }
 
     public void execute(StoreController storeController){
@@ -22,6 +24,7 @@ public class AddProductCommand extends Command{
         product.setName(product1.getName());
         product.setBrand(product1.getBrand());
         product.setType(product1.getType());
+        storeController.commandRepo.save(this);
         store.addCommand(this);
         storeController.storeProductRepo.save(product);
         store.addProduct(product);

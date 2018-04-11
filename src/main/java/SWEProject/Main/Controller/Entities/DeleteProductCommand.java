@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 @Entity
 public class DeleteProductCommand extends Command {
 
-    public DeleteProductCommand(StoreProduct product/*, String desc*/)
+
+    public DeleteProductCommand() {}
+
+    public DeleteProductCommand(StoreProduct product, String decription)
     {
         this.product = product;
-        //this.desc = desc;
+        this.description = decription;
     }
 
     public void execute(StoreController storeController){

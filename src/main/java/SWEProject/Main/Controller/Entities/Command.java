@@ -2,9 +2,9 @@ package SWEProject.Main.Controller.Entities;
 
 import SWEProject.Main.Controller.StoreController;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 
 @Entity
 public abstract class Command {
@@ -13,16 +13,24 @@ public abstract class Command {
     @GeneratedValue(strategy= GenerationType.AUTO)
     protected Integer id;
 
-    //@NotNull
-    //protected String desc;
+    @NotNull
+    protected String description;
 
     @NotNull
     @ManyToOne(cascade=CascadeType.ALL)
     protected StoreProduct product;
 
-    //public String getDesc() { return desc; }
+    public Command() {}
 
-    //public void setDesc(String desc) { this.desc = desc; }
+    public Command(String description, StoreProduct product) {
+
+        this.description = description;
+        this.product = product;
+    }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public StoreProduct getProduct() { return product; }
 

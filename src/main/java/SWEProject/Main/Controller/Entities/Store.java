@@ -31,10 +31,12 @@ public class Store {
 	protected Statistics statistics;
 
     @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL)
-	List<Command> commands;
+    @OneToMany(cascade = CascadeType.ALL)
+	protected List<Command> commands;
 
 	public Store() {
+
+		commands = new ArrayList<Command>();
     	products=new ArrayList<StoreProduct>();
     }
 	public Store(String storeName) {
