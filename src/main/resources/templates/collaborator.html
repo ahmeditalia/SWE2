@@ -4,24 +4,27 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 <script type="text/javascript" src="/js/valid.js"></script>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="/js/admin-view.js"></script>
+<script type="text/javascript" src="/js/store-owner-view.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Admin View</title>
+<title>Collaborator</title>
 </head>
 <body>
 	<div class="btn-bar">
 		<form name="logOut" th:action="@{/logout}" method="post">
 			<button  value="Log out">Log out</button>
 		</form>
-		<button id="Requests">
-			Requests
-			<div id="not" class="notification"></div>
-		</button>
-		<button id="addproduct">Add Product</button>
-		<button id="addbrandtosystem">Add Brand</button>
-		<button id="addadmin">Add Admin</button>
-		<button id="showallproducts">Show All Product</button>
+		<button id="addprodcttostore">Add Store Product</button>
+		<div class="divlist">
+				Stores:
+				<select id="list" class="liststores">
+					<option value="All">All</option>
+				</select>
+		</div>
+		<div id="statistics" class="statistics">
+			
+		</div>
 	</div>
-	<div id="adminwindow" class="adminpanel"></div>
+	<div id="storeownerwindow" class="adminpanel">
+	</div>
 </body>
 </html>

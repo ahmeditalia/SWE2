@@ -1,9 +1,11 @@
 package SWEProject.Main.Controller.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @Entity
 @Inheritance
@@ -15,12 +17,15 @@ public class User {
 	@NotNull
 	protected String password;
 	protected double balance;
-	protected boolean firstBuy;
+	@JsonIgnore
+	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
+	protected Discount discount;
 	public User() {
 		username="";
 		email="";
 		password="";
 		balance=0;
+		discount=new Discount(this);
 	}
 
 
@@ -28,28 +33,24 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		discount=new Discount(this);
 	}
 	
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -65,10 +66,18 @@ public class User {
 	public void decreaseBalance(double b){
 		balance-=b;
 	}
-	public boolean isFirstBuy() {
-		return firstBuy;
+	public Discount getDiscount() {
+		return discount;
 	}
-	public void setFirstBuy(boolean firstBuy) {
-		this.firstBuy = firstBuy;
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+		discount.setUser(this);
+
+	}
+	public void deleteDiscount(Class c){
+		discount.deleteDiscount(c);
+	}
+	public void addDiscount(Class c){
+		discount.addDiscount(c);
 	}
 }
