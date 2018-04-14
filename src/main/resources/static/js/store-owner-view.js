@@ -161,7 +161,7 @@ $(document).ready(function(){
 							      type: "POST",
 							      contentType : 'application/json; charset=utf-8',
 							      dataType : 'json',
-							      url: "/products",
+							      url: "/Store-products",
 							      data: JSON.stringify(select),
 							      success: function(data)
 							      {

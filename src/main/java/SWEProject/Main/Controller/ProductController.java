@@ -39,12 +39,11 @@ public class ProductController {
 		}
 	}
 
-	@RequestMapping("/products")
-	public @ResponseBody List<StoreProduct> products() {
-		Iterable<StoreProduct> Products= storeProductRepo.findAll();
+	@RequestMapping("/Store-products")
+	public @ResponseBody List<StoreProduct> products(@RequestBody List<String> sList) {
 		List<StoreProduct> products = new ArrayList<StoreProduct>();
-		for (StoreProduct p : Products) {
-			products.add(p);
+		for (String sname : sList) {
+			products.addAll(storeProductRepo.findByStore_StoreName(sname));
 		}
 		return products;
 	}
