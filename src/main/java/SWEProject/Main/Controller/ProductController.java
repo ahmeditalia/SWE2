@@ -39,13 +39,12 @@ public class ProductController {
 		}
 	}
 
-	/*test fnction*/
 	@RequestMapping("/products")
-	public @ResponseBody List<StoreProduct> products(@RequestBody List<String> storesNames) {
-		List<StoreProduct> products=new ArrayList<StoreProduct>();
-		for(String sname:storesNames)
-		{
-			products.addAll(storeProductRepo.findByStore_StoreName(sname));
+	public @ResponseBody List<StoreProduct> products() {
+		Iterable<StoreProduct> Products= storeProductRepo.findAll();
+		List<StoreProduct> products = new ArrayList<StoreProduct>();
+		for (StoreProduct p : Products) {
+			products.add(p);
 		}
 		return products;
 	}

@@ -237,7 +237,7 @@ $(document).ready(function(){
 				$("#storeownerwindow").empty();
 				$("div#storeownerwindow").hide();
 				var addacoll="<div class=\"addadmin\">"
-					+"<h2>Add Admin</h2>"
+					+"<h2>Add Collaborator</h2>"
 					+"<p>User Name</p>"
 					+"<input id=\"username\" name=\"username\" type=\"text\" placeholder=\"User Name\"></input>"
 					+"<div id=\"validname\" class=\"validadd\"></div>"

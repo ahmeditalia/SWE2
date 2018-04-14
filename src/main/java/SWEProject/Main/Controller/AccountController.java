@@ -23,7 +23,6 @@ public class AccountController {
 		if(!userRepository.exists(user.getUsername()))
 		{
 			user=creator.createUser(type, user);
-			System.out.print("iiiiiiiiiii"+user.getEmail());
 			userRepository.save(user);
 			return "redirect:/login";
 		}
