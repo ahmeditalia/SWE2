@@ -23,16 +23,16 @@ function viewproducts()
 	    	$("#allproducts tbody").remove();
 			$("#allproducts").append('<tbody></tbody>');
 			for ( var i in data) {
-				var tblRow = "</td>" + "<td>" + data[i].name
+				var tblRow = "<tr>" + "<td>" + data[i].name
 						+ "</td>" + "<td>" + data[i].price
 						+ "</td>" + "<td>" + data[i].type
 						+ "</td>" + "<td>" + data[i].brand.name
 						+ "</td>" + "<td>" + data[i].brand.category
 						+ "</td>" + "<td>" + data[i].quantity
 						+ "</td>" + "<td>"
-						+"<label class=\"container\">"
+						+"<label class=\"container2\">"
 						+"<input type=\"check\" name=\"type\"></input>"
-						+"<span class=\"checkmark\"></span>"
+						+"<span class=\"checkmark2\"></span>"
 						+"</label>"
 						+ "</td>" + "</tr>"
 				$("#allproducts tbody").append(tblRow);
