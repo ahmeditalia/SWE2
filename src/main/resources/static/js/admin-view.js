@@ -196,6 +196,7 @@ $(document).ready(function() {
 			$("div#adminwindow").hide();
 			var addadmin="<div class=\"addadmin\">"
 				+"<h2>Add Admin</h2>"
+				+"<form  name=\"Registrationform\">"
 				+"<p>User Name</p>"
 				+"<input id=\"username\" name=\"username\" type=\"text\" placeholder=\"User Name\"></input>"
 				+"<div id=\"validname\" class=\"validadd\"></div>"
@@ -205,15 +206,27 @@ $(document).ready(function() {
 				+"<p>Password</p>"
 				+"<input id=\"password\" name=\"password\" type=\"text\" placeholder=\"********\"></input>"
 				+"<div id=\"validpassword\" class=\"validadd\"></div>"
+				+"</form>"
 				+"<button id=\"submitadmin\"  value=\"Add Admin\">Add Admin</input>"
 				+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
 				+"</div>";
 			$("#adminwindow").append(addadmin);
 			$("div#adminwindow").show(500);
 			$("#submitadmin").click(function() {
-				/*send data*/
-				$("div#adminwindow").hide(500);
-				$("div#adminwindow").empty();
+				if(registervalid()==true)
+				{
+					var admin={"username": $("#username").val() , "email": $("#email").val(),"password": $("#password").val()};
+					 $.ajax({
+					      type: "POST",
+					      contentType : 'application/json; charset=utf-8',
+					      dataType : 'json',
+					      url: "/add-admin",
+					      data: JSON.stringify(admin)
+					  });
+					alert('New Admin Added :)');
+					$("div#adminwindow").hide(500);
+					$("div#adminwindow").empty();
+				}
 			});
 			$("#cancel").click(function() {
 				$("div#adminwindow").hide(500);

@@ -1,4 +1,5 @@
-$(document).ready(function() {
+function viewproducts()
+{
 	$('#topbar').hide();
 	$('#userwindow').hide();
 	var table= "<table id=\"allproducts\" class=\"showtable\">"
@@ -37,9 +38,21 @@ $(document).ready(function() {
 				$("#allproducts tbody").append(tblRow);
 			}
 	 });
+}
+$(document).ready(function() {
+	viewproducts();
+	var fl=true;
 	$('#search').click(function(){
-		$('#userwindow').hide(500);
-		$('#topbar').toggle(500);
+		if(fl==true)
+		{
+			$('#userwindow').hide(500);
+			$('#topbar').toggle(500);
+			viewproducts();
+		}
+		else{
+			$('#userwindow').hide(500);
+			$('#topbar').toggle(500);
+		}
 	});
 	$("#buyproduct").click(function() {
 		$('#topbar').hide();
@@ -65,6 +78,7 @@ $(document).ready(function() {
 		$('#userwindow').append(buyproduct);
 		$('#cancel').click(function(){
 			$('#userwindow').hide(500);
+			viewproducts();
 		});
 	});
 });
