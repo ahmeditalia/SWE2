@@ -1,6 +1,7 @@
 package SWEProject.Main.Controller;
 
 import SWEProject.Main.Controller.Entities.Admin;
+import SWEProject.Main.Controller.Entities.NormalUser;
 import SWEProject.Main.Controller.Entities.StoreOwner;
 import SWEProject.Main.Controller.Entities.User;
 import SWEProject.Main.Controller.Repository.UserRepository;
@@ -39,6 +40,9 @@ public class WebSecurityAuthenticator implements AuthenticationProvider {
         }
         else if(user instanceof StoreOwner){
             grantedAuthorities.add(new SimpleGrantedAuthority("storeOwner"));
+        }
+        else if(user instanceof NormalUser){
+            grantedAuthorities.add(new SimpleGrantedAuthority("NormalUser"));
         }
         return new UsernamePasswordAuthenticationToken(user, password, grantedAuthorities);
     }

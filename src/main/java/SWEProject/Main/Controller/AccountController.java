@@ -1,13 +1,10 @@
 package SWEProject.Main.Controller;
+import SWEProject.Main.Controller.Entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import SWEProject.Main.Controller.Entities.Admin;
-import SWEProject.Main.Controller.Entities.Creator;
-import SWEProject.Main.Controller.Entities.StoreOwner;
-import SWEProject.Main.Controller.Entities.User;
 import SWEProject.Main.Controller.Repository.UserRepository;
 @Controller
 public class AccountController {
@@ -26,6 +23,7 @@ public class AccountController {
 		if(!userRepository.exists(user.getUsername()))
 		{
 			user=creator.createUser(type, user);
+			System.out.print("iiiiiiiiiii"+user.getEmail());
 			userRepository.save(user);
 			return "redirect:/login";
 		}
@@ -53,6 +51,11 @@ public class AccountController {
 		{
 			return "redirect:/store-owner-view";
 		}
+		else if(user instanceof NormalUser)
+		{
+			return "redirect:/normal-user-view";
+		}
+
 		return "login";
 	}
 }

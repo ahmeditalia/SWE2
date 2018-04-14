@@ -27,7 +27,7 @@ public class StoreOwner extends User{
 	public StoreOwner() {
 		stores=new ArrayList<Store>();
 		balance=0;
-		discount.addDiscount(StoreOwner.class);
+		discount.addDiscount(StoreOwnerDiscount.class);
 	}
 	public StoreOwner(User user)
 	{
@@ -35,14 +35,14 @@ public class StoreOwner extends User{
 		this.username=user.username;
 		this.password=user.password;
 		this.email=user.email;
-		discount.addDiscount(StoreOwner.class);
+		discount.addDiscount(StoreOwnerDiscount.class);
 	}
 	public StoreOwner(String username, String email, String password) {
 		stores=new ArrayList<Store>();
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		discount.addDiscount(StoreOwner.class);
+		discount.addDiscount(StoreOwnerDiscount.class);
 	}
 	public void addStore(Store store)
 	{

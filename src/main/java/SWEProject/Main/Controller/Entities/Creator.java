@@ -25,7 +25,7 @@ public class Creator {
 		}
 		else if(type.equals("normal user"))
 		{
-			return null;
+			return new NormalUser(user);
 		}
 		return null;
 	}
