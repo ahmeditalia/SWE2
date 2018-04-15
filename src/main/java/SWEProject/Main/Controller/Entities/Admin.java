@@ -5,11 +5,10 @@ import javax.persistence.Entity;
 @Entity
 public class Admin extends User {
 	public Admin() {
+		super();
 	}
 	public Admin(User user)
 	{
-		this.username=user.username;
-		this.password=user.password;
-		this.email=user.email;
+    	super(user.username, user.password, user.email);
 	}
 }

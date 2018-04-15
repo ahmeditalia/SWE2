@@ -90,7 +90,7 @@ public class ProductController {
 		String storeName = parts[2];
 		int quantity = Integer.parseInt(parts[3]);
 		User user=userRepo.findOneByUsername(normaluserName);
-		StoreProduct storeProduct=storeProductRepo.findByNameAndStore(spname,storeName);
+		StoreProduct storeProduct=storeProductRepo.findByNameAndStore_storeName(spname,storeName);
 		Store store=storeRepo.findOneByStoreName(storeName);
 		if(quantity>=2){
 			user.addDiscount(PlusTwoItems.class);

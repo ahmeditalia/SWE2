@@ -167,8 +167,7 @@ $(document).ready(function(){
 							      data: JSON.stringify(select),
 							      success: function(data)
 							      {
-							    	  $("#products tbody").remove();
-										$("#products").append('<tbody></tbody>');
+							    	  $("#body").empty();
 										for ( var i in data) {
 											var tblRow = "<tr>" + "<td>" + data[i].id
 													+ "</td>" + "<td>" + data[i].name
@@ -180,16 +179,16 @@ $(document).ready(function(){
 													+ "</td>" + "<td><button id=\"edit\" name=\"btnedit\" value="+data[i].id+"s>edit</button>"
 													+ "</td>" + "<td><button id=\"delete\" name=\"btnadelete\" value="+data[i].id+" >delete</button>"
 													+ "</td>" + "</tr>"
-											$("#products tbody").append(tblRow);
+											$("#body").append(tblRow);
 										}
 							      }
 							 });
-							$("#products tbody").on('click', "#delete", function () {
+							$("#body").on('click', "#delete", function () {
 							    var productid= $(this).val();
 							    $.post( "/delete-store-product", { id: productid});
 							    $(this).closest('tr').remove();
 							});
-							$("#products tbody").on('click', "#edit", function () {
+							$("#body").on('click', "#edit", function () {
 							    var productid= $(this).val();
 							    $.post( "", { id: productid});
 							    $(this).closest('tr').remove();

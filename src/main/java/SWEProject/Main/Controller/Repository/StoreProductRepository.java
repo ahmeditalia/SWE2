@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 public interface StoreProductRepository extends CrudRepository<StoreProduct, Integer>{
-    StoreProduct findByNameAndStore(String name,String store);
+    StoreProduct findByNameAndStore_storeName(String name,String storeName);
     List<StoreProduct> findByName(String name);
     List<StoreProduct> findByStore_StoreName(String storeName);
     @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id")

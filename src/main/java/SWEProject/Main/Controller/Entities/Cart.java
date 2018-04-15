@@ -16,8 +16,7 @@ public class Cart {
     @JsonIgnore
     private User user;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="storeProductId")
-    @JsonIgnore
+    //@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
     private List<StoreProduct> storeProducts;
     public Cart(User user){
         storeProducts=new ArrayList<StoreProduct>();

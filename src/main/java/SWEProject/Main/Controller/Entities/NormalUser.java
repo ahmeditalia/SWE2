@@ -5,13 +5,11 @@ import javax.persistence.Entity;
 @Entity
 public class NormalUser extends User{
     public NormalUser() {
-        balance = 0;
+    	super();
     }
     public NormalUser(User user)
     {
-        this.username=user.username;
-        this.password=user.password;
-        this.email=user.email;
+    	super(user.username, user.password, user.email);
     }
 
 }

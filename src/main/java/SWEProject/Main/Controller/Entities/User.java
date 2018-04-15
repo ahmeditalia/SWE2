@@ -34,10 +34,11 @@ public class User {
 	}
 
 
-	public User(String username, String email, String password) {
+	public User(String username, String password, String email) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		balance=0;
 		discount=new Discount(this);
 		cart=new Cart(this);
 	}
