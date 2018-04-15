@@ -19,8 +19,6 @@ public class StoreController {
     public SystemProductRepository sysProRepo;
     @Autowired
     public CommandRepository commandRepo;
-    @Autowired
-    public DeletedStoreProductRepository deletedProductRepo;
 
 
     @RequestMapping("/ShowOwnerStores")
@@ -54,11 +52,10 @@ public class StoreController {
         }
     }
 
-    @RequestMapping("/delete-store-product")
+    @RequestMapping("/delete-product-store")
     @ResponseBody
-    public void deleteProduct(@RequestParam("id") int productId) {
+    public void deleteProduct(@RequestBody() StoreProduct product) {
 
-        StoreProduct product = storeProductRepo.findOne(productId);
         DeleteProductCommand deleteProduct = new DeleteProductCommand(product,"deleted product");
         deleteProduct.execute(this);
     }
