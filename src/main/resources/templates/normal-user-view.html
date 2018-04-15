@@ -13,12 +13,11 @@
 		<form name="logOut" th:action="@{/logout}" method="post">
 			<button  value="Log out">Log out</button>
 		</form>
-		<button id="search">Search</button>
+		<div class="search-container">
+		<input type="text" placeholder="Search.." name="search"></input>
+      	<button type="submit"><i class="fa fa-search"></i></button>
+		</div>
 		<button id="buyproduct">Buy Product</button>
-	</div>
-	<div id="topbar" class="topnav">
-			<input type="text" placeholder="Search..."></input>
-			<button type="submit">Submit</button>
 	</div>
 	<div id="userwindow" class="adminpanel"></div>
 </body>

@@ -23,11 +23,6 @@ public class ProductController {
 	@Autowired
 	private UserRepository userRepo;
 
-	@GetMapping("/add-product-to-system")
-	public String showProductForm(Model model) {
-		model.addAttribute("product", new SystemProduct());
-		return "add-product-to-system";
-	}
 
 	@PostMapping("/add-product-to-system")
 	@ResponseBody
@@ -37,25 +32,6 @@ public class ProductController {
 			product.setBrand(productBrand);
 			sysProductrepo.save(product);
 		}
-	}
-
-	@RequestMapping("/Store-products")
-	public @ResponseBody List<StoreProduct> products(@RequestBody List<String> sList) {
-		List<StoreProduct> products = new ArrayList<StoreProduct>();
-		for (String sname : sList) {
-			products.addAll(storeProductRepo.findByStore_StoreName(sname));
-		}
-		return products;
-	}
-	
-	@RequestMapping("/productsOfBrand")
-	@ResponseBody
-	public  List<SystemProduct> productsOfBrand(@RequestBody String bname) {
-		List<SystemProduct> products = new ArrayList<SystemProduct>();
-		Brand b = brandRepository.findBrandByName(bname);
-		for (int i = 0; i < b.getProducts().size(); i++)
-			products.add((SystemProduct) b.getProducts().get(i));
-		return products;
 	}
 
 	@RequestMapping("/allSystemProduct")
@@ -68,11 +44,32 @@ public class ProductController {
 		}
 		return products;
 	}
+	
+	@RequestMapping("/Store-products")
+	public @ResponseBody List<StoreProduct> StoreProducts(@RequestBody List<String> sList) {
+		List<StoreProduct> products = new ArrayList<StoreProduct>();
+		for (String sname : sList) {
+			products.addAll(storeProductRepo.findByStore_StoreName(sname));
+		}
+		return products;
+	}
+	
+	@RequestMapping("/allStoreProducts")
+	public @ResponseBody Iterable<StoreProduct> products() {
+		return storeProductRepo.findAll();
+	}
+	
+	@RequestMapping("/productsOfBrand")
+	@ResponseBody
+	public  List<SystemProduct> productsOfBrand(@RequestBody String bname) {
+		return sysProductrepo.findByBrand_Name(bname);
+	}
+
+
 	@RequestMapping("/ShowAllProductsByName")
 	@ResponseBody
 	public  List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
-		List<StoreProduct> str = storeProductRepo.findByName(spname);
-		return str;
+		return storeProductRepo.findByName(spname);
 	}
 	@RequestMapping("/ShowProductByName/{spname}")
 	@ResponseBody

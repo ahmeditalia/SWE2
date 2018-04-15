@@ -19,7 +19,7 @@ function viewproducts()
 	+"</table>";
 	$("#userwindow").append(table);
 	$("div#userwindow").show(500);
-	$.getJSON("/products", function(data) {
+	$.getJSON("/allStoreProducts", function(data) {
 	    	$("#allproducts tbody").remove();
 			$("#allproducts").append('<tbody></tbody>');
 			for ( var i in data) {
@@ -40,9 +40,10 @@ function viewproducts()
 	 });
 }
 $(document).ready(function() {
-	viewproducts();
+	//viewproducts();
 	var fl=true;
 	$('#search').click(function(){
+		/*
 		if(fl==true)
 		{
 			$('#userwindow').hide(500);
@@ -53,6 +54,7 @@ $(document).ready(function() {
 			$('#userwindow').hide(500);
 			$('#topbar').toggle(500);
 		}
+		*/
 	});
 	$("#buyproduct").click(function() {
 		$('#topbar').hide();

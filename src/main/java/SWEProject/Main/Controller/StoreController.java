@@ -1,5 +1,3 @@
-
-
 package SWEProject.Main.Controller;
 import SWEProject.Main.Controller.Entities.*;
 import SWEProject.Main.Controller.Repository.*;
@@ -28,11 +26,6 @@ public class StoreController {
     public List<Store> showAllStores() {
         StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return storeRepo.findByStoreOwnerAndStatus(user, "accepted");
-    }
-
-    @GetMapping("/add-product-to-store")
-    public String addproduct() {
-        return "add-product-to-store";
     }
 
     @RequestMapping("/add-product-store/{storeName}")
