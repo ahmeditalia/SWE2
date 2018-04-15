@@ -1,7 +1,6 @@
-function viewproducts()
+function viewproducts(var search)
 {
-	$('#topbar').hide();
-	$('#userwindow').hide();
+	$("#userwindow").empty();
 	var table= "<table id=\"allproducts\" class=\"showtable\">"
 		+"<thead>"
 			+"<tr class=\"theader\" style=\"background-color: #008040;\">"
@@ -18,7 +17,6 @@ function viewproducts()
 		+"</tbody>";
 	+"</table>";
 	$("#userwindow").append(table);
-	$("div#userwindow").show(500);
 	$.getJSON("/allStoreProducts", function(data) {
 	    	$("#allproducts tbody").remove();
 			$("#allproducts").append('<tbody></tbody>');
@@ -40,21 +38,9 @@ function viewproducts()
 	 });
 }
 $(document).ready(function() {
-	//viewproducts();
-	var fl=true;
+	viewproducts();
 	$('#search').click(function(){
-		/*
-		if(fl==true)
-		{
-			$('#userwindow').hide(500);
-			$('#topbar').toggle(500);
-			viewproducts();
-		}
-		else{
-			$('#userwindow').hide(500);
-			$('#topbar').toggle(500);
-		}
-		*/
+		
 	});
 	$("#buyproduct").click(function() {
 		$('#topbar').hide();
