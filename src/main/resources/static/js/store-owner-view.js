@@ -138,9 +138,11 @@ $(document).ready(function(){
 										+"<th class=\"tdshow\">Brand</th>"
 										+"<th class=\"tdshow\">Category</th>"
 										+"<th class=\"tdshow\">Quantity</th>"
+										+"<th class=\"tdshow\"></th>"
+										+"<th class=\"tdshow\"></th>"
 									+"</tr>"
 								+"</thead>"
-								+"<tbody>"
+								+"<tbody id=\"body\">"
 									
 								+"</tbody>"
 							+"</table>";
@@ -175,11 +177,23 @@ $(document).ready(function(){
 													+ "</td>" + "<td>" + data[i].brand.name
 													+ "</td>" + "<td>" + data[i].brand.category
 													+ "</td>" + "<td>" + data[i].quantity
+													+ "</td>" + "<td><button id=\"edit\" name=\"btnedit\" value="+data[i].id+"s>edit</button>"
+													+ "</td>" + "<td><button id=\"delete\" name=\"btnadelete\" value="+data[i].id+" >delete</button>"
 													+ "</td>" + "</tr>"
 											$("#products tbody").append(tblRow);
 										}
 							      }
 							 });
+							$("#products tbody").on('click', "#delete", function () {
+							    var productid= $(this).val();
+							    $.post( "/delete-store-product", { id: productid});
+							    $(this).closest('tr').remove();
+							});
+							$("#products tbody").on('click', "#edit", function () {
+							    var productid= $(this).val();
+							    $.post( "", { id: productid});
+							    $(this).closest('tr').remove();
+							});
 							updatediv();
 				});
 			
