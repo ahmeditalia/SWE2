@@ -3,7 +3,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import java.util.List;
 
 @Entity
 public class StoreProduct extends Product {
@@ -14,6 +17,10 @@ public class StoreProduct extends Product {
     @ManyToOne
     @JoinColumn(name = "storeName")
     private Store store;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="cartId")
+    @JsonIgnore
+    private List<Cart> carts;
 
     public int getQuantity() {
         return quantity;
@@ -49,4 +56,15 @@ public class StoreProduct extends Product {
         this.price = price;
         this.store = store;
     }
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
+    public void addCart(Cart cart){
+        carts.add(cart);
+    }
+
 }

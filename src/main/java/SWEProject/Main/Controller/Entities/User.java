@@ -20,12 +20,17 @@ public class User {
 	@JsonIgnore
 	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
 	protected Discount discount;
+	@JsonIgnore
+	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
+	protected Cart cart;
+
 	public User() {
 		username="";
 		email="";
 		password="";
 		balance=0;
 		discount=new Discount(this);
+		cart=new Cart(this);
 	}
 
 
@@ -34,6 +39,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		discount=new Discount(this);
+		cart=new Cart(this);
 	}
 	
 	public String getUsername() {
@@ -80,4 +86,6 @@ public class User {
 	public void addDiscount(Class c){
 		discount.addDiscount(c);
 	}
+	public Cart getCart() { return cart; }
+	public void setCart(Cart cart) { this.cart = cart; }
 }
