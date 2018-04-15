@@ -69,6 +69,10 @@ public class ProductController {
 	@RequestMapping("/ShowAllProductsByName")
 	@ResponseBody
 	public  List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
+		if(spname.equals("all"))
+		{
+			return (List<StoreProduct>) storeProductRepo.findAll(); 
+		}
 		return storeProductRepo.findByName(spname);
 	}
 	@RequestMapping("/ShowProductByName/{spname}")
