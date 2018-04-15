@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
-<script type="text/javascript" src="/js/valid.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+	<script type="text/javascript" src="/js/valid.js"></script>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="/js/user-view.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,10 +14,14 @@
 		<form name="logOut" th:action="@{/logout}" method="post">
 			<button  value="Log out">Log out</button>
 		</form>
+		<div class="topnav">
 		<div class="search-container">
-		<input type="text" placeholder="Search.." name="search"></input>
-      	<button type="submit"><i class="fa fa-search"></i></button>
+			<form>
+			<input type="text" placeholder="Search.." name="search"></input>
+      		<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
 		</div>
+	</div>
 		<button id="buyproduct">Buy Product</button>
 	</div>
 	<div id="userwindow" class="adminpanel"></div>
