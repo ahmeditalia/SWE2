@@ -23,12 +23,13 @@ public class DeleteProductCommand extends Command {
         storeProduct.setBrand(product.brand);
         storeProduct.setName(product.name);
         storeProduct.setType(product.getType());
-
+        storeController.commandRepo.save(this);
         storeController.storeProductRepo.delete(storeProduct);
     }
 
     public void undo(StoreController storeController){
 
         storeController.storeProductRepo.save(product);
+        storeController.commandRepo.delete(this);
     }
 }
