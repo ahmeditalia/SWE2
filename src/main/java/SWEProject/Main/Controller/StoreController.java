@@ -91,12 +91,20 @@ public class StoreController {
         List<Store> stores = storeRepo.findByStatus("accepted");
         return stores;
     }
+    @RequestMapping("/undo")
+    @ResponseBody
+    public void undo(@RequestParam("id") int commandId){
 
+        Command command = commandRepo.findOne(commandId);
+        command.undo(this);
+    }
+    
     @RequestMapping("/store-commands")
     @ResponseBody
     public List<Command> getStoreCommands() {
 
         StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return storeRepo.findByStoreOwner(user);
+        List<Command> commands=storeRepo.findByStoreOwner(user);
+        return  commands;
     }
 }

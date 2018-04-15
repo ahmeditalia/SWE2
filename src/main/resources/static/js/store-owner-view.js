@@ -262,4 +262,45 @@ $(document).ready(function(){
 					$("div#storeownerwindow").empty();
 				});
 			});
+			
+			
+			$("#showcommands").click(function() {
+				$("#storeownerwindow").empty();
+				var table="<table id=\"commandTable\" class=\"showtableS\">"
+					+"<thead>"
+			+"<tr class=\"theader\" style=\"background-color: #008040;\">"
+			+"<th class=\"tdshow\">ID</th>"
+			+"<th class=\"tdshow\">Description</th>"
+			+"<th class=\"tdshow\"></th>"
+			+"</tr></thead>"
+			+"<tbody id=\"body\"></tbody>"
+			+"</table>";
+				$("#storeownerwindow").append(table);
+				$.ajax({
+					type : 'POST',
+					contentType : 'application/json; charset=utf-8',
+					url : '/store-commands',
+					dataType : 'json',
+					success : function(data)
+					{
+						for(var i in data)
+						{
+							console.log(data[i]);
+							var row="<tr>"
+								+"<td>"+data[i].id+"</td>"
+								+"<td>"+data[i].description+" "+data[i].product.name+" to "+data[i].product.store.storeName+" with Quantity "+data[i].product.quantity+"</td>"
+								+"<td>"
+								+"	<button id=\"undo\" name=\"btnundo\" value="+data[i].id+">undo</button>"
+								+"</td>"
+								+"</tr>";
+							$("#body").append(row);
+						}
+					}
+				});
+				$("#body").on('click', "#undo", function () {
+				    var commandid= $(this).val();
+				    $.post( "/undo", {id: commandid});
+				    $(this).closest('tr').remove();
+				});
+			});
 		});

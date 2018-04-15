@@ -31,8 +31,8 @@ public class AddProductCommand extends Command{
     }
 
     public void undo(StoreController storeController){
-
-        storeController.storeProductRepo.delete(product);
+    	Store store = storeController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
+        store.commands.remove(this);
         storeController.commandRepo.delete(this);
     }
 }

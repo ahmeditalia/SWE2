@@ -27,8 +27,16 @@ public abstract class Command {
         this.description = description;
         this.product = product;
     }
+    
+    public Integer getId() {
+		return id;
+	}
 
-    public String getDescription() { return description; }
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
 
@@ -36,9 +44,9 @@ public abstract class Command {
 
     public void setProduct(StoreProduct product) { this.product = product; }
 
-    public void execute(StoreController storeController){}
+    public abstract void execute(StoreController storeController);
 
-    public void undo(StoreController storeController){}
+    public abstract void undo(StoreController storeController);
 
 }
 
