@@ -109,6 +109,7 @@ $(document).ready(function() {
 		$("#Requests").click(function() {
 			$("#adminwindow").empty();
 			$("div#adminwindow").hide();
+			var table="<table id=\"requesttable\" class=\"showtableS\">"
 				+"<thead>"
 		+"<tr class=\"theader\" style=\"background-color: #008040;\">"
 		+"<th class=\"tdshow\">Store owner</th>"
