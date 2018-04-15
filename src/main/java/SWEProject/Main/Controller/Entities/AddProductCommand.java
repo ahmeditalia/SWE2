@@ -33,6 +33,7 @@ public class AddProductCommand extends Command{
     public void undo(StoreController storeController){
 
         storeController.storeProductRepo.delete(product);
+        storeController.commandRepo.delete(this);
     }
 }
 
