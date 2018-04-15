@@ -5,7 +5,8 @@ function viewproducts(search)
 			+ "<tr class=\"theader\" style=\"background-color: #008040;\">" + "<th class=\"tdshow\">Name</th>"
 			+ "<th class=\"tdshow\">Price</th>" + "<th class=\"tdshow\">Type</th>" + "<th class=\"tdshow\">Brand</th>"
 			+ "<th class=\"tdshow\">Category</th>" + "<th class=\"tdshow\">Quantity</th>"
-			+ "<th class=\"tdshow\">Select</th>" + "</tr>" + "</thead>" + "<tbody>" + "</tbody>";
+			+ "<th class=\"tdshow\">Select</th>" + "<th class=\"tdshow\">Add To Cart</th>"
+			+ "</tr>" + "</thead>" + "<tbody>" + "</tbody>";
 	+"</table>";
 	$("#userwindow").append(table);
 	$.ajax({
@@ -22,12 +23,16 @@ function viewproducts(search)
 			{
 				var tblRow = "<tr>" + "<td>" + data[i].name + "</td>" + "<td>" + data[i].price + "</td>" + "<td>"
 						+ data[i].type + "</td>" + "<td>" + data[i].brand.name + "</td>" + "<td>"
-						+ data[i].brand.category + "</td>" + "<td>" + data[i].quantity + "</td>" + "<td>"
-						+ "<label class=\"container2\">" + "<input type=\"check\" name=\"type\"></input>"
-						+ "<span class=\"checkmark2\"></span>" + "</label>" + "</td>" + "</tr>"
+						+ data[i].brand.category + "</td>"+ "<td>"+ data[i].store.storeName+ "</td>" + "<td>" + data[i].quantity + "</td>" 
+						+"<td>"
+						+"	<button id=\"addcart\" name=\"btnacc\" value="+data[i].name+"/"+data[i].store.storeName+">Add Cart</button>"
+						+"</td>" + "</tr>"
 				$("#allproducts tbody").append(tblRow);
 			}
 		}
+	});
+	$("#body").on('click', "#addcart", function () {
+	    $.post( "/addtocart", { spname: $(this).val()});
 	});
 }
 $(document).ready(
