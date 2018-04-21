@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 public interface StoreProductRepository extends CrudRepository<StoreProduct, Integer>{
-    StoreProduct findByNameAndStore_storeName(String name,String storeName);
-    List<StoreProduct> findByName(String name);
-    List<StoreProduct> findByStore_StoreName(String storeName);
-    @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id")
+
+    StoreProduct findByNameAndStoreAndExist(String name,String store, String exist);
+    List<StoreProduct> findByNameAndExist(String name , String exist);
+    List<StoreProduct> findByStore_StoreNameAndExist(String storeName , String exist);
+    @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id and exist = 'exist'")
     void updateQuantity(@Param("quantity") int quantity,@Param  ("store") String storeName,@Param("id") int id);
 
 }

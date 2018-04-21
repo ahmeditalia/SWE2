@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.mysql.fabric.Response;
+
 @Controller
 public class ProductController {
 	@Autowired
@@ -44,21 +43,21 @@ public class ProductController {
 		}
 		return products;
 	}
-	
+
 	@RequestMapping("/Store-products")
 	public @ResponseBody List<StoreProduct> StoreProducts(@RequestBody List<String> sList) {
 		List<StoreProduct> products = new ArrayList<StoreProduct>();
 		for (String sname : sList) {
-			products.addAll(storeProductRepo.findByStore_StoreName(sname));
+			products.addAll(storeProductRepo.findByStore_StoreNameAndExist(sname,"exist"));
 		}
 		return products;
 	}
-	
+
 	@RequestMapping("/allStoreProducts")
 	public @ResponseBody Iterable<StoreProduct> products() {
 		return storeProductRepo.findAll();
 	}
-	
+
 	@RequestMapping("/productsOfBrand")
 	@ResponseBody
 	public  List<SystemProduct> productsOfBrand(@RequestBody String bname) {
@@ -71,9 +70,9 @@ public class ProductController {
 	public  List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
 		if(spname.equals("all"))
 		{
-			return (List<StoreProduct>) storeProductRepo.findAll(); 
+			return (List<StoreProduct>) storeProductRepo.findAll();
 		}
-		return storeProductRepo.findByName(spname);
+		return storeProductRepo.findByNameAndExist(spname,"exist");
 	}
 	@RequestMapping("/ShowProductByName/{spname}")
 	@ResponseBody
@@ -90,7 +89,7 @@ public class ProductController {
 		String storeName = parts[2];
 		int quantity = Integer.parseInt(parts[3]);
 		User user=userRepo.findOneByUsername(normaluserName);
-		StoreProduct storeProduct=storeProductRepo.findByNameAndStore_storeName(spname,storeName);
+		StoreProduct storeProduct=storeProductRepo.findByNameAndStoreAndExist(spname,storeName,"exist");
 		Store store=storeRepo.findOneByStoreName(storeName);
 		if(quantity>=2){
 			user.addDiscount(PlusTwoItems.class);

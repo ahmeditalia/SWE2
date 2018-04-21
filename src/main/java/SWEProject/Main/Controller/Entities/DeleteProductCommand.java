@@ -1,5 +1,6 @@
 package SWEProject.Main.Controller.Entities;
 
+import SWEProject.Main.Controller.CommandController;
 import SWEProject.Main.Controller.StoreController;
 
 import javax.persistence.Entity;
@@ -10,26 +11,27 @@ public class DeleteProductCommand extends Command {
 
     public DeleteProductCommand() {}
 
-    public DeleteProductCommand(StoreProduct product, String decription)
+    public DeleteProductCommand(StoreProduct product, String description)
     {
         this.product = product;
-        this.description = decription;
+        this.description = description;
     }
 
-    public void execute(StoreController storeController){
+    public void execute(CommandController commandController){
 
-        StoreProduct storeProduct = new StoreProduct(product.getQuantity(), product.getPrice(), product.getStore());
-        storeProduct.setId(product.id);
-        storeProduct.setBrand(product.brand);
-        storeProduct.setName(product.name);
-        storeProduct.setType(product.getType());
-        storeController.commandRepo.save(this);
-        storeController.storeProductRepo.delete(storeProduct);
+        product.setExist("deleted");
+        Store store = commandController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
+        store.commands.add(this);
+        commandController.commandRepo.save(this);
+        commandController.storeProRepo.save(product);
     }
 
-    public void undo(StoreController storeController){
+    public void undo(CommandController commandController){
 
-        storeController.storeProductRepo.save(product);
-        storeController.commandRepo.delete(this);
+        product.setExist("exist");
+        commandController.storeProRepo.save(product);
+        Store store = commandController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
+        store.commands.remove(this);
+        commandController.commandRepo.delete(this);
     }
 }
