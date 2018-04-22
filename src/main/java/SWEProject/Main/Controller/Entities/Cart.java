@@ -42,4 +42,7 @@ public class Cart {
     public void addProduct(StoreProduct storeProduct){
         storeProducts.add(storeProduct);
     }
+    public void removeProduct(StoreProduct storeProduct){
+        storeProducts.remove(storeProduct);
+    }
 }

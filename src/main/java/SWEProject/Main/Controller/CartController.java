@@ -33,7 +33,30 @@ public class CartController {
         Cart cart=cartRepository.findOneByUser_username(user.getUsername());
         cart.addProduct(storeProduct);
         storeProduct.addCart(cart);
-        cartRepository.save(cart);
+        //cartRepository.save(cart);
         storeProductRepository.save(storeProduct);
     }
+    @RequestMapping("/removefromcart")
+    @ResponseBody
+    public void removefromcart(@RequestParam("spname") String spname) {
+        String[] parts = spname.split("-");
+        String storeProductName = parts[0];
+        String storeName = parts[1];
+        StoreProduct storeProduct=storeProductRepository.findByNameAndStore_storeName(storeProductName,storeName);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Cart cart=cartRepository.findOneByUser_username(user.getUsername());
+        cart.removeProduct(storeProduct);
+        storeProduct.removeCart(cart);
+        storeProductRepository.save(storeProduct);
+    }
+    @RequestMapping("/viewProductsCart")
+    @ResponseBody
+    public void viewProductsCart() {
+        /*User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Cart cart=cartRepository.findOneByUser_username(user.getUsername());
+        List<StoreProduct> storeProducts=cartRepository.findByCart(cart);
+        /*for(int i=0;i<storeProducts.size();i++)
+            System.out.print(storeProducts.get(i).getName()+"  ");*/
+    }
+
 }

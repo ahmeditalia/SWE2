@@ -79,5 +79,7 @@ public class StoreProduct extends Product {
     public void addCart(Cart cart){
         carts.add(cart);
     }
-
+    public void removeCart(Cart cart){
+        carts.remove(cart);
+    }
 }
