@@ -28,8 +28,10 @@ public class DeleteProductCommand extends Command {
 
     public void undo(CommandController commandController){
 
-        product.setExist("exist");
-        commandController.storeProRepo.save(product);
+        if(commandController.storeProRepo.exists(product.id)) {
+            product.setExist("exist");
+            commandController.storeProRepo.save(product);
+        }
         Store store = commandController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
         store.commands.remove(this);
         commandController.commandRepo.delete(this);

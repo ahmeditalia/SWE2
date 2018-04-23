@@ -17,7 +17,7 @@ public class StoreProduct extends Product {
     @JoinColumn(name = "storeName")
     private Store store;
     @JsonIgnore
-    @ManyToMany(mappedBy="storeProducts")
+    @ManyToMany//(mappedBy="storeProducts")
     private List<Cart> carts;
     @NotNull
     private String exist;

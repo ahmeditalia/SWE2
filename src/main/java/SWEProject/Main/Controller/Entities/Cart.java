@@ -16,7 +16,7 @@ public class Cart {
     @JsonIgnore
     private User user;
     @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    //@JoinTable(joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<StoreProduct> storeProducts;
     public Cart(User user){
         storeProducts=new ArrayList<StoreProduct>();

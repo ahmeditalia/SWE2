@@ -28,24 +28,12 @@ public class CommandController {
     @ResponseBody
     public void addProduct(@RequestBody() StoreProduct product, @PathVariable("storeName") String sname) {
 
-        boolean exist = false;
         Store store = storeRepo.findOneByStoreName(sname);
-
-        for (int i = 0; i < store.getProducts().size(); i++) {
-
-            if (store.getProducts().get(i).getName().equals(product.getName())) {
-
-                exist = true;
-                break;
-            }
-        }
-
-        if (!exist) {
-
-            product.setStore(store);
-            AddProductCommand add = new AddProductCommand(product,"added product");
-            add.execute(this);
-        }
+        product.setStore(store);
+        String desc = "add product " + product.getName() + " to store " + store.getStoreName()
+                + " with quantity " + product.getQuantity() + " and price " + product.getPrice();
+        AddProductCommand add = new AddProductCommand(product,desc);
+        add.execute(this);
     }
 
     @RequestMapping("/delete-store-product")
@@ -53,7 +41,8 @@ public class CommandController {
     public void deleteProduct(@RequestParam("id") int productid) {
 
         StoreProduct product = storeProRepo.findOne(productid);
-        DeleteProductCommand deleteProduct = new DeleteProductCommand(product,"deleted product");
+        String desc = "delete product " + product.getName() + " from store " + product.getStore().getStoreName();
+        DeleteProductCommand deleteProduct = new DeleteProductCommand(product,desc);
         deleteProduct.execute(this);
     }
 
@@ -62,15 +51,12 @@ public class CommandController {
     public void editProduct(@RequestParam("id") int productid, @RequestParam("quantity") int quantity,
                             @RequestParam("price") double price) {
 
-        StoreProduct deletedProduct = storeProRepo.findOne(productid);
-        StoreProduct product = new StoreProduct(quantity,price,deletedProduct.getStore());
-        product.setExist("exist");
-        product.setName(deletedProduct.getName());
-        product.setType(deletedProduct.getType());
-        product.setBrand(deletedProduct.getBrand());
-        product.setCarts(deletedProduct.getCarts());
-
-        EditProductCommand editProduct = new EditProductCommand("edited Product",product,deletedProduct);
+        StoreProduct product = storeProRepo.findOne(productid);
+        String desc = "edit product " + product.getName() + " with quntity " + product.getQuantity() + " and price "
+                + product.getPrice();
+        product.setQuantity(quantity);
+        product.setPrice(price);
+        EditProductCommand editProduct = new EditProductCommand(product,desc);
         editProduct.execute(this);
     }
 

@@ -25,10 +25,10 @@ public class AddProductCommand extends Command{
         product.setName(product1.getName());
         product.setBrand(product1.getBrand());
         product.setType(product1.getType());
-        commandController.commandRepo.save(this);
-        store.addCommand(this);
         commandController.storeProRepo.save(product);
+        store.addCommand(this);
         store.addProduct(product);
+        commandController.commandRepo.save(this);
     }
 
     public void undo(CommandController commandController){
@@ -36,6 +36,7 @@ public class AddProductCommand extends Command{
         Store store = commandController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
         store.commands.remove(this);
         commandController.commandRepo.delete(this);
+        commandController.storeProRepo.delete(product);
     }
 }
 

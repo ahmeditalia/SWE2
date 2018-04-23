@@ -18,7 +18,7 @@ public abstract class Command {
     protected String description;
 
     @NotNull
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     protected StoreProduct product;
 
     public Command() {}

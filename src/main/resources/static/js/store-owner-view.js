@@ -315,7 +315,7 @@ $(document).ready(function(){
 							console.log(data[i]);
 							var row="<tr>"
 								+"<td>"+data[i].id+"</td>"
-								+"<td>"+data[i].description+" "+data[i].product.name+" to "+data[i].product.store.storeName+" with Quantity "+data[i].product.quantity+"</td>"
+								+"<td>"+data[i].description+"</td>"
 								+"<td>"
 								+"	<button id=\"undo\" name=\"btnundo\" value="+data[i].id+">undo</button>"
 								+"</td>"
