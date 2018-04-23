@@ -15,8 +15,8 @@ public class Cart {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private User user;
-    @ManyToMany(cascade = CascadeType.ALL)
-    //@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<StoreProduct> storeProducts;
     public Cart(User user){
         storeProducts=new ArrayList<StoreProduct>();

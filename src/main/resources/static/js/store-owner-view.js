@@ -176,8 +176,8 @@ $(document).ready(function(){
 													+ "</td>" + "<td>" + data[i].brand.name
 													+ "</td>" + "<td>" + data[i].brand.category
 													+ "</td>" + "<td>" + data[i].quantity
-													+ "</td>" + "<td><button id=\"edit\" name=\"btnedit\" value="+data[i].id+"s>edit</button>"
-													+ "</td>" + "<td><button id=\"delete\" name=\"btnadelete\" value="+data[i].id+" >delete</button>"
+													+ "</td>" + "<td><button id=\"edit\" name=\"btnedit\" value="+data[i].id+">edit</button>"
+													+ "</td>" + "<td><button id=\"delete\" name=\"btnadelete\" value="+data[i].id+">delete</button>"
 													+ "</td>" + "</tr>"
 											$("#body").append(tblRow);
 										}
@@ -190,8 +190,22 @@ $(document).ready(function(){
 							});
 							$("#body").on('click', "#edit", function () {
 							    var productid= $(this).val();
-							    $.post( "", { id: productid});
-							    $(this).closest('tr').remove();
+							    $(this).text("done");
+							    $(this).closest('tr').find('td').eq(2).prop('contenteditable', true);
+							    $(this).closest('tr').find('td').eq(6).prop('contenteditable', true);
+							    $(this).text("done");
+							    $(this).attr('id','done');
+							});
+							$("#body").on('click', "#done", function () {
+							    $(this).closest('tr').find('td').eq(2).prop('contenteditable', false);
+							    $(this).closest('tr').find('td').eq(6).prop('contenteditable', false);
+							    alert($(this).val());
+							    var productid= $(this).val();
+							    var vprice=$(this).closest('tr').find('td').eq(2).text();
+							    var vquantity=$(this).closest('tr').find('td').eq(6).text();
+							    $.post( "/edit-store-product", { id: productid, quantity: vquantity , price: vprice});
+								$(this).text("edit");
+								$(this).attr('id','edit');
 							});
 							updatediv();
 				});

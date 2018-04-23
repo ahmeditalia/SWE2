@@ -16,11 +16,9 @@ public class StoreProduct extends Product {
     @ManyToOne
     @JoinColumn(name = "storeName")
     private Store store;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="cartId")
     @JsonIgnore
+    @ManyToMany(mappedBy="storeProducts")
     private List<Cart> carts;
-
     @NotNull
     private String exist;
 
