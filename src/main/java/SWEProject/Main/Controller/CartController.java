@@ -33,12 +33,11 @@ public class CartController {
         Cart cart=cartRepository.findOneByUser_username(user.getUsername());
         cart.addProduct(storeProduct);
         storeProduct.addCart(cart);
-        //cartRepository.save(cart);
         storeProductRepository.save(storeProduct);
     }
     @RequestMapping("/removefromcart")
     @ResponseBody
-    public void removefromcart(@RequestParam("spname") String spname) {
+    public void removeFromCart(@RequestParam("spname") String spname) {
         String[] parts = spname.split("-");
         String storeProductName = parts[0];
         String storeName = parts[1];

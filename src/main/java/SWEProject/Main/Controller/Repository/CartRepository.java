@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface  CartRepository extends CrudRepository<Cart,Integer> {
 	Cart findOneByUser_username(String username);
-	//@Query("select s.name from StoreProduct s where s.cart =:id")
-	//List<StoreProduct> findByCart(@Param("id") Cart cart);
+	@Query("select c.storeProducts from cart c where c.id =:id")
+	List<StoreProduct> findByCart(@Param("id") Cart cart);
 }

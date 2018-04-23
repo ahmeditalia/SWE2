@@ -40,7 +40,8 @@ public class Cart {
     public List<StoreProduct> getStoreProducts() { return storeProducts; }
     public void setStoreProducts(List<StoreProduct> storeProducts) { this.storeProducts = storeProducts; }
     public void addProduct(StoreProduct storeProduct){
-        storeProducts.add(storeProduct);
+        if(!storeProducts.contains(storeProduct))
+            storeProducts.add(storeProduct);
     }
     public void removeProduct(StoreProduct storeProduct){
         storeProducts.remove(storeProduct);
