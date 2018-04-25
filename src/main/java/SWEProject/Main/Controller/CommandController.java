@@ -29,11 +29,13 @@ public class CommandController {
     public void addProduct(@RequestBody() StoreProduct product, @PathVariable("storeName") String sname) {
 
         Store store = storeRepo.findOneByStoreName(sname);
-        product.setStore(store);
-        String desc = "add product " + product.getName() + " to store " + store.getStoreName()
-                + " with quantity " + product.getQuantity() + " and price " + product.getPrice();
-        AddProductCommand add = new AddProductCommand(product,desc);
-        add.execute(this);
+        if(!storeProRepo.existsByNameAndStore(product.getName(),store)){
+            product.setStore(store);
+            String desc = "add product " + product.getName() + " to store " + store.getStoreName()
+                    + " with quantity " + product.getQuantity() + " and price " + product.getPrice();
+            AddProductCommand add = new AddProductCommand(product, desc);
+            add.execute(this);
+        }
     }
 
     @RequestMapping("/delete-store-product")

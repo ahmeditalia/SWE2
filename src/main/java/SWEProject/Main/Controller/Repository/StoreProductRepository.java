@@ -25,5 +25,5 @@ public interface StoreProductRepository extends CrudRepository<StoreProduct, Int
     @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id and exist = 'exist'")
     void updateQuantity(@Param("quantity") int quantity,@Param  ("store") String storeName,@Param("id") int id);
     List<StoreProduct> findByCarts_Id(Integer id);
-
+    boolean existsByNameAndStore(String name,Store store);
 }
