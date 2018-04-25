@@ -37,9 +37,14 @@ $(document).ready(function() {
 				      contentType : 'application/json; charset=utf-8',
 				      dataType : 'json',
 				      url: "/add-brand",
-				      data: JSON.stringify(vbrand)
+				      data: JSON.stringify(vbrand),
+				      success : function(data){
+				    	  if(data==true)
+				    		  alert('Add Brand Success :)');
+				    	  else
+				    		  alert('Brand already exits :)');
+				      }
 				  });
-				alert('Add Brand Success :)');
 				$("div#adminwindow").hide(500);
 				$("div#adminwindow").empty();
 			}
@@ -95,9 +100,14 @@ $(document).ready(function() {
 					      contentType : 'application/json; charset=utf-8',
 					      dataType : 'json',
 					      url: "/add-product-to-system",
-					      data: JSON.stringify(vproduct)
+					      data: JSON.stringify(vproduct),
+					      success : function(data){
+					    	  if(data==true)
+					    		  alert('Add Product Success :)');
+					    	  else
+					    		  alert('Product already exits :)');
+					      }
 					  });
-					 alert('Add Product Success :)');
 					 $("div#adminwindow").hide(500);
 					 $("div#adminwindow").empty();
 				}

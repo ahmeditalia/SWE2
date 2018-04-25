@@ -5,6 +5,9 @@ import SWEProject.Main.Controller.Repository.CommandRepository;
 import SWEProject.Main.Controller.Repository.StoreProductRepository;
 import SWEProject.Main.Controller.Repository.StoreRepository;
 import SWEProject.Main.Controller.Repository.SystemProductRepository;
+
+import org.apache.coyote.http2.HpackEncoder.State;
+import org.apache.coyote.http2.Http2Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +29,7 @@ public class CommandController {
 
     @RequestMapping("/add-product-store/{storeName}")
     @ResponseBody
-    public void addProduct(@RequestBody() StoreProduct product, @PathVariable("storeName") String sname) {
+    public boolean addProduct(@RequestBody() StoreProduct product, @PathVariable("storeName") String sname) {
 
         Store store = storeRepo.findOneByStoreName(sname);
         if(!storeProRepo.existsByNameAndStore(product.getName(),store)){
@@ -35,6 +38,10 @@ public class CommandController {
                     + " with quantity " + product.getQuantity() + " and price " + product.getPrice();
             AddProductCommand add = new AddProductCommand(product, desc);
             add.execute(this);
+            return true;
+        }
+        else {
+        	return false;
         }
     }
 

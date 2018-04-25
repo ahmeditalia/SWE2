@@ -630,8 +630,9 @@ body {
 	border-radius: 15px;
 	position: absolute;
 	padding: 30px 30px;
-	top: 8%;
+	top: 5%;
 	left: 48%;
+	padding-bottom:0;
 	width: 350px;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.534);
@@ -840,11 +841,41 @@ body {
 	width: 83%;
 	position: absolute;
 }
+.showtable button{
+	border:none;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	border-radius:8px;
+	color:white;
+	background-color:#003c35;
+	height:30px;
+	width:70px;
+	font-size:15px;
+	cursor: pointer;
+}
+.showtable button:hover{
+	background-color:#032056;
+}
 .showtableS {
 	border-collapse: collapse;
 	width: 83%;
 	position: absolute;
 }
+.showtableS button{
+	border:none;
+	font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+	border-radius:8px;
+	color:white;
+	background-color:#003c35;
+	height:30px;
+	width:70px;
+	font-size:15px;
+	cursor: pointer;
+}
+.showtableS button:hover{
+	background-color:#032056;
+}
+
+
 th, td ,thead{
 	font-weight:bold;
 	text-align: left;

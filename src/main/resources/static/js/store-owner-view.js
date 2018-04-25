@@ -112,9 +112,14 @@ $(document).ready(function(){
 								      contentType : 'application/json; charset=utf-8',
 								      dataType : 'json',
 								      url: "/add-product-store/"+$("#list option:selected").val(),
-								      data: JSON.stringify(vproduct)
+								      data: JSON.stringify(vproduct),
+								      success : function(data){
+								    	  if(data==true)
+								    		  alert('Add Product Success :)');
+								    	  else
+								    		  alert('Product already exits :)');
+								      }
 								 });
-								alert('Add Product Success :)');
 								$("div#storeownerwindow").hide(500);
 								$("div#storeownerwindow").empty();
 							}
@@ -248,9 +253,14 @@ $(document).ready(function(){
 						      contentType : 'application/json; charset=utf-8',
 						      dataType : 'json',
 						      url: "/add-store?type="+$("input[name=type2]:checked").val(),
-						      data: JSON.stringify(store)
+						      data: JSON.stringify(store),
+						      success : function(data){
+						    	  if(data==true)
+						    		  alert('Add Store Success :)');
+						    	  else
+						    		  alert('Store already exits :)');
+						      }
 						 });
-						alert('Add Store Success :)');
 						$("div#storeownerwindow").hide(500);
 						$("div#storeownerwindow").empty();
 					}
@@ -274,15 +284,26 @@ $(document).ready(function(){
 					+"<p>Password</p>"
 					+"<input id=\"password\" name=\"password\" type=\"text\" placeholder=\"********\"></input>"
 					+"<div id=\"validpassword\" class=\"validadd\"></div>"
-					+"<button id=\"submitcollaborator\"  value=\"Add Admin\">Add Collaborator</input>"
+					+"<button id=\"submitcollaborator\"  value=\"Add Collaborator\">Add Collaborator</input>"
 					+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
 					+"</div>";
 				$("#storeownerwindow").append(addacoll);
 				$("div#storeownerwindow").show(500);
 				$("#submitcollaborator").click(function() {
-					/*send data*/
-					$("div#storeownerwindow").hide(500);
-					$("div#storeownerwindow").empty();
+					if(registervalid()==true)
+					{
+						var Collaborator={"username": $("#username").val() , "email": $("#email").val(),"password": $("#password").val()};
+						 $.ajax({
+						      type: "POST",
+						      contentType : 'application/json; charset=utf-8',
+						      dataType : 'json',
+						      url: "/add-collaborator",
+						      data: JSON.stringify(Collaborator)
+						  });
+						alert('New Admin Added :)');
+						$("div#storeownerwindow").hide(500);
+						$("div#storeownerwindow").empty();
+					}
 				});
 				$("#cancel").click(function() {
 					$("div#storeownerwindow").hide(500);

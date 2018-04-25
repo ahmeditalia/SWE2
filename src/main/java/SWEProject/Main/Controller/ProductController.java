@@ -1,4 +1,5 @@
 package SWEProject.Main.Controller;
+
 import SWEProject.Main.Controller.Entities.*;
 import SWEProject.Main.Controller.Repository.*;
 import java.util.ArrayList;
@@ -27,18 +28,20 @@ public class ProductController {
 
 	@PostMapping("/add-product-to-system")
 	@ResponseBody
-	public void addProduct(@RequestBody SystemProduct product) {
-		if(!sysProductrepo.existsByName(product.getName())) {
+	public boolean addProduct(@RequestBody SystemProduct product) {
+		if (!sysProductrepo.existsByName(product.getName())) {
 			Brand productBrand = brandRepository.findBrandByName(product.getBrand().getName());
 			product.setBrand(productBrand);
 			sysProductrepo.save(product);
+			return true;
 		}
+		return false;
 	}
 
 	@RequestMapping("/allSystemProduct")
 	@ResponseBody
 	public List<Product> allSystemProduct() {
-		Iterable<SystemProduct> Products= sysProductrepo.findAll();
+		Iterable<SystemProduct> Products = sysProductrepo.findAll();
 		List<Product> products = new ArrayList<Product>();
 		for (Product p : Products) {
 			products.add(p);
@@ -50,7 +53,7 @@ public class ProductController {
 	public @ResponseBody List<StoreProduct> StoreProducts(@RequestBody List<String> sList) {
 		List<StoreProduct> products = new ArrayList<StoreProduct>();
 		for (String sname : sList) {
-			products.addAll(storeProductRepo.findByStore_StoreNameAndExist(sname,"exist"));
+			products.addAll(storeProductRepo.findByStore_StoreNameAndExist(sname, "exist"));
 		}
 		return products;
 	}
@@ -62,29 +65,29 @@ public class ProductController {
 
 	@RequestMapping("/productsOfBrand")
 	@ResponseBody
-	public  List<SystemProduct> productsOfBrand(@RequestBody String bname) {
+	public List<SystemProduct> productsOfBrand(@RequestBody String bname) {
 		return sysProductrepo.findByBrand_Name(bname);
 	}
 
-
 	@RequestMapping("/ShowAllProductsByName")
 	@ResponseBody
-	public  List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
-		if(spname.equals("all"))
-		{
+	public List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
+		if (spname.equals("all")) {
 			return (List<StoreProduct>) storeProductRepo.findAllByExist("exist");
 		}
-		return storeProductRepo.findByNameAndExist(spname,"exist");
+		return storeProductRepo.findByNameAndExist(spname, "exist");
 	}
+
 	@RequestMapping("/ShowProductByName/{spname}")
 	@ResponseBody
-	public  SystemProduct ShowProductByName(@PathVariable("spname") String spname) {
+	public SystemProduct ShowProductByName(@PathVariable("spname") String spname) {
 		SystemProduct systemProduct = sysProductrepo.findOneByName(spname);
 		return systemProduct;
 	}
+
 	@RequestMapping("/buyProduct")
 	@ResponseBody
-	public  double buyProduct(@RequestBody String all) {
+	public double buyProduct(@RequestBody String all) {
 		String[] parts = all.split("-");
 		List<Integer> quantity = new ArrayList<Integer>();
 		for (int i = 0; i < parts.length; i++) {
@@ -104,16 +107,16 @@ public class ProductController {
 			if (quantity.get(i) >= 2) {
 				user.addDiscount(PlusTwoItems.class);
 			}
-			price+=(storeProducts.get(i).getPrice()*user.getDiscount().getDis());
+			price += (storeProducts.get(i).getPrice() * user.getDiscount().getDis());
 			user.deleteDiscount(FirstBuyDiscount.class);
 			user.deleteDiscount(PlusTwoItems.class);
-			//user.decreaseBalance(storeProducts.get(i).getPrice());
+			// user.decreaseBalance(storeProducts.get(i).getPrice());
 			storeProductRepo.updateQuantity(quantity.get(i), store.getStoreName(), storeProducts.get(i).getId());
-			//userRepo.updateBalance(storeProducts.get(i).getPrice(), user.getUsername());
+			// userRepo.updateBalance(storeProducts.get(i).getPrice(), user.getUsername());
 			statRepo.updateNumUserBuy(store.getStoreName());
 			statRepo.updateNumUserView(store.getStoreName());
 			statRepo.updateSoldProducts(store.getStoreName(), quantity.get(i));
-			userRepo.save(user);/*if save->update*/
+			userRepo.save(user);/* if save->update */
 		}
 		return price;
 	}

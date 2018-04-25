@@ -1,4 +1,5 @@
 package SWEProject.Main.Controller;
+
 import SWEProject.Main.Controller.Entities.Brand;
 import SWEProject.Main.Controller.Entities.SystemProduct;
 import SWEProject.Main.Controller.Repository.BrandRepository;
@@ -8,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Controller
 public class BrandController {
 	@Autowired
 	private BrandRepository brandRepo;
-    @Autowired
-    private SystemProductRepository systemProductRepo;
+	@Autowired
+	private SystemProductRepository systemProductRepo;
+
 	// @GetMapping("/add-brand")
 	// public String addBrand(Model model){
 	// model.addAttribute("brand",new Brand());
@@ -21,11 +24,14 @@ public class BrandController {
 	// }
 	@PostMapping("/add-brand")
 	@ResponseBody
-	public void addBrand(@RequestBody Brand brand) {
-		if(!brandRepo.existsByName(brand.getName())) {
+	public boolean addBrand(@RequestBody Brand brand) {
+		if (!brandRepo.existsByName(brand.getName())) {
 			brandRepo.save(brand);
+			return true;
 		}
+		return false;
 	}
+
 	@RequestMapping("/brands")
 	@ResponseBody
 	public List<Brand> brands() {
@@ -37,10 +43,11 @@ public class BrandController {
 		}
 		return brands;
 	}
-    @RequestMapping("/brandOfProduct")
-    public @ResponseBody Brand brands(@RequestParam("pname") String pname) {
-        SystemProduct s=systemProductRepo.findOneByName(pname);
-        Brand b=s.getBrand();
-        return b;
-    }
+
+	@RequestMapping("/brandOfProduct")
+	public @ResponseBody Brand brands(@RequestParam("pname") String pname) {
+		SystemProduct s = systemProductRepo.findOneByName(pname);
+		Brand b = s.getBrand();
+		return b;
+	}
 }
