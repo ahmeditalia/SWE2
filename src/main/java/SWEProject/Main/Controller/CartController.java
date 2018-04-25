@@ -50,12 +50,10 @@ public class CartController {
     }
     @RequestMapping("/viewProductsCart")
     @ResponseBody
-    public void viewProductsCart() {
-        /*User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public List<StoreProduct> viewProductsCart() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Cart cart=cartRepository.findOneByUser_username(user.getUsername());
-        List<StoreProduct> storeProducts=cartRepository.findByCart(cart);
-        /*for(int i=0;i<storeProducts.size();i++)
-            System.out.print(storeProducts.get(i).getName()+"  ");*/
+        return storeProductRepository.findByCarts_Id(cart.getId());
     }
 
 }

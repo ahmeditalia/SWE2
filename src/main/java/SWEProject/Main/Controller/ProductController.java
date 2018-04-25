@@ -4,6 +4,7 @@ import SWEProject.Main.Controller.Repository.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,8 @@ public class ProductController {
 	private StatisticsRepository statRepo;
 	@Autowired
 	private UserRepository userRepo;
-
+	@Autowired
+	private CartRepository cartRepo;
 
 	@PostMapping("/add-product-to-system")
 	@ResponseBody
@@ -70,7 +72,7 @@ public class ProductController {
 	public  List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
 		if(spname.equals("all"))
 		{
-			return (List<StoreProduct>) storeProductRepo.findAll();
+			return (List<StoreProduct>) storeProductRepo.findAllByExist("exist");
 		}
 		return storeProductRepo.findByNameAndExist(spname,"exist");
 	}
@@ -84,28 +86,31 @@ public class ProductController {
 	@ResponseBody
 	public  boolean buyProduct(@RequestBody String all) {
 		String[] parts = all.split("-");
-		String spname = parts[0];
-		String normaluserName = parts[1];
-		String storeName = parts[2];
-		int quantity = Integer.parseInt(parts[3]);
-		User user=userRepo.findOneByUsername(normaluserName);
-		StoreProduct storeProduct=storeProductRepo.findByNameAndStoreAndExist(spname,storeName,"exist");
-		Store store=storeRepo.findOneByStoreName(storeName);
-		if(quantity>=2){
-			user.addDiscount(PlusTwoItems.class);
+		List<Integer>quantity=new ArrayList<Integer>();
+		for(int i=0;i<parts.length;i++) {
+			quantity.set(i, Integer.parseInt(parts[i]));
 		}
-		if(user.getBalance()>(storeProduct.getPrice()*user.getDiscount().getDis()/100)||storeProduct.getQuantity()<quantity){
-			return false;
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Cart cart=cartRepo.findOneByUser_username(user.getUsername());
+		List<StoreProduct> storeProducts= storeProductRepo.findByCarts_Id(cart.getId());
+		for(int i=0;i<storeProducts.size();i++) {
+			Store store=storeProducts.get(i).getStore();
+			if (quantity.get(i) >= 2) {
+				user.addDiscount(PlusTwoItems.class);
+			}
+			if (user.getBalance()>(storeProducts.get(i).getPrice()*user.getDiscount().getDis()/100)||storeProducts.get(i).getQuantity()<quantity.get(i)) {
+				return false;
+			}
+			user.deleteDiscount(FirstBuyDiscount.class);
+			user.deleteDiscount(PlusTwoItems.class);
+			user.decreaseBalance(storeProducts.get(i).getPrice());
+			storeProductRepo.updateQuantity(quantity.get(i), store.getStoreName(), storeProducts.get(i).getId());
+			userRepo.updateBalance(storeProducts.get(i).getPrice(), user.getUsername());
+			statRepo.updateNumUserBuy(store.getStoreName());
+			statRepo.updateNumUserView(store.getStoreName());
+			statRepo.updateSoldProducts(store.getStoreName(), quantity.get(i));
+			userRepo.save(user);/*if save->update*/
 		}
-		user.deleteDiscount(FirstBuyDiscount.class);
-		user.deleteDiscount(PlusTwoItems.class);
-		user.decreaseBalance(storeProduct.getPrice());
-		storeProductRepo.updateQuantity(quantity,storeName,storeProduct.getId());
-		userRepo.updateBalance(storeProduct.getPrice(),user.getUsername());
-		statRepo.updateNumUserBuy(storeName);
-		statRepo.updateNumUserView(storeName);
-		statRepo.updateSoldProducts(storeName,quantity);
-		userRepo.save(user);/*if save->update*/
 		return true;
 	}
 

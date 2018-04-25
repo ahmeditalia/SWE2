@@ -18,8 +18,12 @@ public interface StoreProductRepository extends CrudRepository<StoreProduct, Int
 
     StoreProduct findByNameAndStoreAndExist(String name,String store, String exist);
     List<StoreProduct> findByNameAndExist(String name , String exist);
+    List<StoreProduct> findAllByExist(String exist);
+
     List<StoreProduct> findByStore_StoreNameAndExist(String storeName , String exist);
     StoreProduct findByNameAndStore_storeName(String name , String store);
     @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id and exist = 'exist'")
     void updateQuantity(@Param("quantity") int quantity,@Param  ("store") String storeName,@Param("id") int id);
+    List<StoreProduct> findByCarts_Id(Integer id);
+
 }
