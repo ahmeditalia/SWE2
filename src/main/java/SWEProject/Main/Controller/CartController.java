@@ -24,16 +24,20 @@ public class CartController {
 
     @RequestMapping("/addtocart")
     @ResponseBody
-    public void addToCart(@RequestParam("spname") String spname) {
+    public boolean addToCart(@RequestParam("spname") String spname) {
         String[] parts = spname.split("-");
         String storeProductName = parts[0];
         String storeName = parts[1];
         StoreProduct storeProduct=storeProductRepository.findByNameAndStore_storeName(storeProductName,storeName);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Cart cart=cartRepository.findOneByUser_username(user.getUsername());
-        cart.addProduct(storeProduct);
-        storeProduct.addCart(cart);
-        storeProductRepository.save(storeProduct);
+        if(!storeProductRepository.existsByNameAndCarts_Id(storeProductName,cart.getId())) {
+            cart.addProduct(storeProduct);
+            storeProduct.addCart(cart);
+            storeProductRepository.save(storeProduct);
+            return true;
+        }
+        return false;
     }
     @RequestMapping("/removefromcart")
     @ResponseBody

@@ -1,14 +1,10 @@
 package SWEProject.Main.Controller.Repository;
 
-import SWEProject.Main.Controller.Entities.Brand;
-import SWEProject.Main.Controller.Entities.Product;
-import SWEProject.Main.Controller.Entities.Store;
-import SWEProject.Main.Controller.Entities.SystemProduct;
+import SWEProject.Main.Controller.Entities.*;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import SWEProject.Main.Controller.Entities.StoreProduct;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,4 +22,5 @@ public interface StoreProductRepository extends CrudRepository<StoreProduct, Int
     void updateQuantity(@Param("quantity") int quantity,@Param  ("store") String storeName,@Param("id") int id);
     List<StoreProduct> findByCarts_Id(Integer id);
     boolean existsByNameAndStore(String name,Store store);
+    boolean existsByNameAndCarts_Id(String name,Integer id);
 }
