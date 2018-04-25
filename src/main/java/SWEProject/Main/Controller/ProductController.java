@@ -84,34 +84,37 @@ public class ProductController {
 	}
 	@RequestMapping("/buyProduct")
 	@ResponseBody
-	public  boolean buyProduct(@RequestBody String all) {
+	public  double buyProduct(@RequestBody String all) {
 		String[] parts = all.split("-");
-		List<Integer>quantity=new ArrayList<Integer>();
-		for(int i=0;i<parts.length;i++) {
+		List<Integer> quantity = new ArrayList<Integer>();
+		for (int i = 0; i < parts.length; i++) {
 			quantity.set(i, Integer.parseInt(parts[i]));
 		}
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Cart cart=cartRepo.findOneByUser_username(user.getUsername());
-		List<StoreProduct> storeProducts= storeProductRepo.findByCarts_Id(cart.getId());
-		for(int i=0;i<storeProducts.size();i++) {
-			Store store=storeProducts.get(i).getStore();
+		Cart cart = cartRepo.findOneByUser_username(user.getUsername());
+		List<StoreProduct> storeProducts = storeProductRepo.findByCarts_Id(cart.getId());
+		double price = 0;
+		for (int i = 0; i < storeProducts.size(); i++) {
+			if (storeProducts.get(i).getQuantity() < quantity.get(i)) {
+				return -1;
+			}
+		}
+		for (int i = 0; i < storeProducts.size(); i++) {
+			Store store = storeProducts.get(i).getStore();
 			if (quantity.get(i) >= 2) {
 				user.addDiscount(PlusTwoItems.class);
 			}
-			if (user.getBalance()>(storeProducts.get(i).getPrice()*user.getDiscount().getDis()/100)||storeProducts.get(i).getQuantity()<quantity.get(i)) {
-				return false;
-			}
+			price+=(storeProducts.get(i).getPrice()*user.getDiscount().getDis());
 			user.deleteDiscount(FirstBuyDiscount.class);
 			user.deleteDiscount(PlusTwoItems.class);
-			user.decreaseBalance(storeProducts.get(i).getPrice());
+			//user.decreaseBalance(storeProducts.get(i).getPrice());
 			storeProductRepo.updateQuantity(quantity.get(i), store.getStoreName(), storeProducts.get(i).getId());
-			userRepo.updateBalance(storeProducts.get(i).getPrice(), user.getUsername());
+			//userRepo.updateBalance(storeProducts.get(i).getPrice(), user.getUsername());
 			statRepo.updateNumUserBuy(store.getStoreName());
 			statRepo.updateNumUserView(store.getStoreName());
 			statRepo.updateSoldProducts(store.getStoreName(), quantity.get(i));
 			userRepo.save(user);/*if save->update*/
 		}
-		return true;
+		return price;
 	}
-
 }
