@@ -54,7 +54,10 @@ public class AccountController {
 		{
 			return "redirect:/normal-user-view";
 		}
-
+		else if(user instanceof Collaborator)
+		{
+			return "redirect:/collaborator-view";
+		}
 		return "login";
 	}
 }

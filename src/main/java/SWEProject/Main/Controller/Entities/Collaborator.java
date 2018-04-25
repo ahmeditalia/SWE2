@@ -13,6 +13,12 @@ public class Collaborator extends User {
     @ManyToOne(cascade = CascadeType.ALL)
     private StoreOwner storeOwner;
 
+    public Collaborator(User user, StoreOwner storeOwner) {
+
+        super(user.username, user.password, user.email);
+        this.storeOwner = storeOwner;
+    }
+
     public StoreOwner getStoreOwner() { return storeOwner; }
 
     public void setStoreOwner(StoreOwner storeOwner) { this.storeOwner = storeOwner; }
