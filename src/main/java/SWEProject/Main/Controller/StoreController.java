@@ -38,14 +38,16 @@ public class StoreController {
 
     @PostMapping("/add-store")
     @ResponseBody
-    public void newStore(@RequestBody Store store, @RequestParam("type") String type) {
+    public boolean newStore(@RequestBody Store store, @RequestParam("type") String type) {
         if (!storeRepo.exists(store.getStoreName())) {
             StoreOwner storeOwner = new StoreOwner(
                     (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
             store = Creator.getInstance().createStore(type, store, storeOwner);
             storeOwner.addStore(store);
             storeRepo.save(store);
+            return true;
         }
+        return false;
     }
 
     @GetMapping("/store-view")
