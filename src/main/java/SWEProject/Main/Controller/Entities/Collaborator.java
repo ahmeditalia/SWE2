@@ -12,11 +12,10 @@ public class Collaborator extends User {
     @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     private StoreOwner storeOwner;
+    public Collaborator(){}
 
-    public Collaborator(User user, StoreOwner storeOwner) {
-
-        super(user.username, user.password, user.email);
-        this.storeOwner = storeOwner;
+    public Collaborator(User user) {
+        super(user.username,user.password,user.email);
     }
 
     public StoreOwner getStoreOwner() { return storeOwner; }

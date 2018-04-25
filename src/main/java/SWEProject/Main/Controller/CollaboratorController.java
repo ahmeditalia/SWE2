@@ -16,11 +16,15 @@ public class CollaboratorController {
     @Autowired
     private CollaboratorRepository collabRepo;
 
-    @RequestMapping("collaborator-view")
+    @RequestMapping("/view-store-collaborator")
     public List<Store> getCollabStores(){
 
         Collaborator user = (Collaborator) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return  collabRepo.findByStoreOwner(user.getStoreOwner());
+    }
+    @RequestMapping("/collaborator")
+    public String coll(){
+        return "collaborator";
     }
 }
 

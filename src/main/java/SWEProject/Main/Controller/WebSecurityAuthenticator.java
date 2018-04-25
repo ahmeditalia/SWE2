@@ -1,9 +1,6 @@
 package SWEProject.Main.Controller;
 
-import SWEProject.Main.Controller.Entities.Admin;
-import SWEProject.Main.Controller.Entities.NormalUser;
-import SWEProject.Main.Controller.Entities.StoreOwner;
-import SWEProject.Main.Controller.Entities.User;
+import SWEProject.Main.Controller.Entities.*;
 import SWEProject.Main.Controller.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -44,6 +41,10 @@ public class WebSecurityAuthenticator implements AuthenticationProvider {
         else if(user instanceof NormalUser){
             grantedAuthorities.add(new SimpleGrantedAuthority("NormalUser"));
         }
+        else if(user instanceof Collaborator){
+            grantedAuthorities.add(new SimpleGrantedAuthority("Collaborator"));
+        }
+
         return new UsernamePasswordAuthenticationToken(user, password, grantedAuthorities);
     }
     @Override

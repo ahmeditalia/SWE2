@@ -25,6 +25,11 @@ public class Creator {
 		{
 			return new NormalUser(user);
 		}
+		else if(type.equals("collaborator"))
+		{
+			return new Collaborator(user);
+		}
+
 		return null;
 	}
 	
