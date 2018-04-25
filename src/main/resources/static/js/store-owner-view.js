@@ -298,9 +298,14 @@ $(document).ready(function(){
 						      contentType : 'application/json; charset=utf-8',
 						      dataType : 'json',
 						      url: "/add-collaborator",
-						      data: JSON.stringify(Collaborator)
+						      data: JSON.stringify(Collaborator),
+						      success : function(data){
+						    	  if(data==true)
+						    		  alert('New Collaborator Added :)');
+						    	  else
+						    		  alert('Collaborator already exits :)');
+						      }
 						  });
-						alert('New Admin Added :)');
 						$("div#storeownerwindow").hide(500);
 						$("div#storeownerwindow").empty();
 					}
