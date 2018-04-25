@@ -274,6 +274,7 @@ $(document).ready(function(){
 				$("#storeownerwindow").empty();
 				$("div#storeownerwindow").hide();
 				var addacoll="<div class=\"addadmin\">"
+					+"<form name=\"Registrationform\">"
 					+"<h2>Add Collaborator</h2>"
 					+"<p>User Name</p>"
 					+"<input id=\"username\" name=\"username\" type=\"text\" placeholder=\"User Name\"></input>"
@@ -284,6 +285,7 @@ $(document).ready(function(){
 					+"<p>Password</p>"
 					+"<input id=\"password\" name=\"password\" type=\"password\" placeholder=\"********\"></input>"
 					+"<div id=\"validpassword\" class=\"validadd\"></div>"
+					+"</form>"
 					+"<button id=\"submitcollaborator\"  value=\"Add Collaborator\">Add Collaborator</input>"
 					+"<button id=\"cancel\" value=\"Cancel\">Cancel</button>"
 					+"</div>";
