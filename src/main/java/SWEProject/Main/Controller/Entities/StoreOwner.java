@@ -22,18 +22,18 @@ public class StoreOwner extends User{
 	public StoreOwner() {
 		super();
 		stores=new ArrayList<Store>();
-		discount.addDiscount(StoreOwnerDiscount.class);
+		discount.addDiscount("StoreOwnerDiscount");
 	}
 	public StoreOwner(User user)
 	{
 		super(user.username, user.password, user.email);
 		stores=new ArrayList<Store>();
-		discount.addDiscount(StoreOwnerDiscount.class);
+		discount.addDiscount("StoreOwnerDiscount");
 	}
 	public StoreOwner(String username, String email, String password) {
 		super(username, password, email);
 		stores=new ArrayList<Store>();
-		discount.addDiscount(StoreOwnerDiscount.class);
+		discount.addDiscount("StoreOwnerDiscount");
 	}
 	public List<Store> getStores() {
 		return stores;

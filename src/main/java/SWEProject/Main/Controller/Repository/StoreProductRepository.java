@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public interface StoreProductRepository extends CrudRepository<StoreProduct, Int
 
     List<StoreProduct> findByStore_StoreNameAndExist(String storeName , String exist);
     StoreProduct findByNameAndStore_storeName(String name , String store);
+    @Transactional
+    @Modifying
     @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id and exist = 'exist'")
-    void updateQuantity(@Param("quantity") int quantity,@Param  ("store") String storeName,@Param("id") int id);
+    void updateQuantity(@Param("quantity") int quantity,@Param("store") Store storeName,@Param("id") int id);
     List<StoreProduct> findByCarts_Id(Integer id);
     boolean existsByNameAndStoreAndExist(String name,Store store,String exist);
     boolean existsByNameAndCarts_Id(String name,Integer id);

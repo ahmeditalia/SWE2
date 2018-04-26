@@ -92,22 +92,25 @@ public class ProductController {
 		Cart cart = cartRepo.findOneByUser_username(user.getUsername());
 		double price = 0;
 		for (int i = 0; i < storeProducts.size(); i++) {
-			Store store = storeProducts.get(i).getStore();
+			Store store =storeRepo.findOneByStoreName(storeProducts.get(i).getStore().getStoreName());
 			if (storeProducts.get(i).getQuantity() >= 2) {
-				user.addDiscount(PlusTwoItems.class);
+				user.addDiscount("PlusTwoItems");
 			}
-			price += (storeProducts.get(i).getPrice() * user.getDiscount().getDis()/100);
-			user.deleteDiscount(PlusTwoItems.class);
-			// user.decreaseBalance(storeProducts.get(i).getPrice());
+			price += (storeProducts.get(i).getPrice() * (100-user.getDiscount().getDis()/100));
+			user.deleteDiscount("PlusTwoItems");
 			StoreProduct storeProduct=storeProductRepo.findByNameAndStore_storeName(storeProducts.get(i).getName(),storeProducts.get(i).getStore().getStoreName());
-			storeProductRepo.updateQuantity(storeProducts.get(i).getQuantity(), store.getStoreName(), storeProduct.getId());
-			// userRepo.updateBalance(storeProducts.get(i).getPrice(), user.getUsername());
-			statRepo.updateNumUserBuy(store.getStoreName());
-			statRepo.updateNumUserView(store.getStoreName());
-			statRepo.updateSoldProducts(store.getStoreName(),storeProducts.get(i).getQuantity());
-			userRepo.save(user);/* if save->update */
+			storeProduct.setQuantity(storeProduct.getQuantity()-storeProducts.get(i).getQuantity());
+			//store.getStatistics().increamentSoldProducts(storeProducts.get(i).getQuantity());
+			//store.getStatistics().increamentUserBuy();
+			//store.getStatistics().increamentUserViews();
+			storeRepo.save(store);
+			userRepo.save(user);
+			cart.removeProduct(storeProduct);
+			storeProduct.removeCart(cart);
+			storeProductRepo.save(storeProduct);
 		}
-		user.deleteDiscount(FirstBuyDiscount.class);
+		cartRepo.save(cart);
+		user.deleteDiscount("FirstBuyDiscount");
 		return price;
 	}
 }

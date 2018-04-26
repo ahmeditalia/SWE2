@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 @Entity
-public  class Discount {
+public class Discount {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     protected Integer id;
@@ -17,58 +17,43 @@ public  class Discount {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     protected User user;
-    public Discount(){
+    protected String type;
+    public Discount() {
+        type="Discount";
         dis=0;
-    }
-    public Discount(User user){
-        dis=0;
-        this.user=user;
-        FirstBuyDiscount f = new FirstBuyDiscount();
-        this.setDiscount(f);
-        NoDiscount ff=new NoDiscount();
-        f.setDiscount(ff);
     }
     public Discount getDiscount() {return discount;}
     public void setDiscount(Discount discount) {
         this.discount = discount;
     }
-    public double getDis() {
+    public  double getDis() {
+        if(type.equals("NoDiscount"))
+            return 0;
         return dis+discount.getDis();
     }
+    public void x(){System.out.println("x");}
     public void setDis(double d) {
         this.dis = d;
     }
-    public void addDiscount(Class c){
+    public void addDiscount(String c){
         Discount r=this;
-        while (!(r.getDiscount()instanceof NoDiscount)){
+        while (!(r.getDiscount().type.equals("NoDiscount") )){
             r=r.getDiscount();
         }
-        try {
-            Method[] methods = c.getMethods();
-            Object obj=c.newInstance();
-            for (int i = 0; i < methods.length; i++) {
-                if (methods[i].getName().startsWith("setDiscount")) {
-                    methods[i].invoke(obj,r.getDiscount());
-                }
-            }
-            r.setDiscount((Discount) obj);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+        if(c.equals("StoreOwnerDiscount")) {
+            StoreOwnerDiscount s = new StoreOwnerDiscount();
+            s.setDiscount(r.getDiscount());
+            r.setDiscount(s);
         }
-
     }
-    public void deleteDiscount(Class c){
+    public void deleteDiscount(String c){
         Discount r=this;
-        while (!(c.isInstance(r.getDiscount()))&&!(r.getDiscount()instanceof NoDiscount)){
+        while (!(c.equals(r.getDiscount().type))&&!(r.getDiscount().type.equals("NoDiscount"))){
             r=r.getDiscount();
         }
-        if(!(r.getDiscount()instanceof NoDiscount))
+        if(!(r.getDiscount().type.equals("NoDiscount")))
         {
-            r.setDiscount(r.getDiscount().getDiscount());
+            r.setType(r.getDiscount().getDiscount().getType());
         }
     }
 
@@ -78,5 +63,13 @@ public  class Discount {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

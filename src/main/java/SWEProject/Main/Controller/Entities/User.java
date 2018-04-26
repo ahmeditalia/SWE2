@@ -29,7 +29,12 @@ public class User {
 		email="";
 		password="";
 		balance=0;
-		discount=new Discount(this);
+		discount=new Discount();
+		discount.setUser(this);
+		FirstBuyDiscount f = new FirstBuyDiscount();
+		discount.setDiscount(f);
+		NoDiscount ff=new NoDiscount();
+		f.setDiscount(ff);
 		cart=new Cart(this);
 	}
 
@@ -39,7 +44,12 @@ public class User {
 		this.email = email;
 		this.password = password;
 		balance=0;
-		discount=new Discount(this);
+		discount=new Discount();
+		discount.setUser(this);
+		FirstBuyDiscount f = new FirstBuyDiscount();
+		discount.setDiscount(f);
+		NoDiscount ff=new NoDiscount();
+		f.setDiscount(ff);
 		cart=new Cart(this);
 	}
 	
@@ -81,10 +91,10 @@ public class User {
 		discount.setUser(this);
 
 	}
-	public void deleteDiscount(Class c){
+	public void deleteDiscount(String c){
 		discount.deleteDiscount(c);
 	}
-	public void addDiscount(Class c){
+	public void addDiscount(String c){
 		discount.addDiscount(c);
 	}
 	public Cart getCart() { return cart; }
