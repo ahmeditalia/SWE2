@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface StoreProductRepository extends CrudRepository<StoreProduct, Integer>{
 
-    StoreProduct findByNameAndStoreAndExist(String name,String store, String exist);
+    StoreProduct findByNameAndStoreAndExist(String name,Store store, String exist);
     List<StoreProduct> findByNameAndExist(String name , String exist);
     List<StoreProduct> findAllByExist(String exist);
 
@@ -21,6 +21,6 @@ public interface StoreProductRepository extends CrudRepository<StoreProduct, Int
     @Query("update StoreProduct s set s.quantity = s.quantity-:quantity where s.store = :store and s.id=:id and exist = 'exist'")
     void updateQuantity(@Param("quantity") int quantity,@Param  ("store") String storeName,@Param("id") int id);
     List<StoreProduct> findByCarts_Id(Integer id);
-    boolean existsByNameAndStore(String name,Store store);
+    boolean existsByNameAndStoreAndExist(String name,Store store,String exist);
     boolean existsByNameAndCarts_Id(String name,Integer id);
 }

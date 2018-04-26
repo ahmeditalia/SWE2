@@ -214,7 +214,7 @@ $(document).ready(function() {
 				+"<input id=\"email\" name=\"email\" type=\"text\" placeholder=\"avatar@mail.com\"></input>"
 				+"<div id=\"validemail\" class=\"validadd\"></div>"
 				+"<p>Password</p>"
-				+"<input id=\"password\" name=\"password\" type=\"text\" placeholder=\"********\"></input>"
+				+"<input id=\"password\" name=\"password\" type=\"password\" placeholder=\"********\"></input>"
 				+"<div id=\"validpassword\" class=\"validadd\"></div>"
 				+"</form>"
 				+"<button id=\"submitadmin\"  value=\"Add Admin\">Add Admin</input>"

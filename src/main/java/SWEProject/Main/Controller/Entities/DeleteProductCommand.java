@@ -27,13 +27,15 @@ public class DeleteProductCommand extends Command {
     }
 
     public void undo(CommandController commandController){
-
-        if(commandController.storeProRepo.exists(product.id)) {
-            product.setExist("exist");
-            commandController.storeProRepo.save(product);
-        }
-        Store store = commandController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
+    	
+    	Store store = commandController.storeRepo.findOneByStoreName(product.getStore().getStoreName());
         store.commands.remove(this);
         commandController.commandRepo.delete(this);
+        if(commandController.storeProRepo.existsByNameAndStoreAndExist(product.name, product.getStore(), "exist")) {
+        	StoreProduct storeProduct = commandController.storeProRepo.findByNameAndStoreAndExist(product.name, product.getStore(), "exist");
+            commandController.storeProRepo.delete(storeProduct);
+        }
+        product.setExist("exist");
+        commandController.storeProRepo.save(product);        
     }
 }

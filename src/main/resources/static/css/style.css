@@ -6,7 +6,9 @@ body {
 	font-family: sans-serif;
 	height: 100%; 
 }
-
+.divlist{
+	color:white;
+}
 .wrapper {
     display: flex;
     heigth:30px;

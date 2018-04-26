@@ -32,7 +32,7 @@ public class CommandController {
     public boolean addProduct(@RequestBody() StoreProduct product, @PathVariable("storeName") String sname) {
 
         Store store = storeRepo.findOneByStoreName(sname);
-        if(!storeProRepo.existsByNameAndStore(product.getName(),store)){
+        if(!storeProRepo.existsByNameAndStoreAndExist(product.getName(),store,"exist")){
             product.setStore(store);
             String desc = "add product " + product.getName() + " to store " + store.getStoreName()
                     + " with quantity " + product.getQuantity() + " and price " + product.getPrice();

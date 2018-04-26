@@ -17,7 +17,7 @@ public abstract class Command {
     @NotNull
     protected String description;
 
-    @NotNull
+//    @NotNull
     @ManyToOne
     protected StoreProduct product;
 
