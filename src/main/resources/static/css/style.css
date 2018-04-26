@@ -6,6 +6,19 @@ body {
 	font-family: sans-serif;
 	height: 100%; 
 }
+.plus-minus-input {
+	display: flex;
+          width:20%;
+}
+
+.plus-minus-input .input-group-field {
+	
+  flex-grow: 1;
+  text-align: center;
+  width:50px;
+}
+
+
 .divlist{
 	color:white;
 }

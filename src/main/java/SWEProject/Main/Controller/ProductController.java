@@ -96,8 +96,7 @@ public class ProductController {
 			if (storeProducts.get(i).getQuantity() >= 2) {
 				user.addDiscount(PlusTwoItems.class);
 			}
-			price += (storeProducts.get(i).getPrice() * user.getDiscount().getDis());
-			user.deleteDiscount(FirstBuyDiscount.class);
+			price += (storeProducts.get(i).getPrice() * user.getDiscount().getDis()/100);
 			user.deleteDiscount(PlusTwoItems.class);
 			// user.decreaseBalance(storeProducts.get(i).getPrice());
 			StoreProduct storeProduct=storeProductRepo.findByNameAndStore_storeName(storeProducts.get(i).getName(),storeProducts.get(i).getStore().getStoreName());
@@ -108,6 +107,7 @@ public class ProductController {
 			statRepo.updateSoldProducts(store.getStoreName(),storeProducts.get(i).getQuantity());
 			userRepo.save(user);/* if save->update */
 		}
+		user.deleteDiscount(FirstBuyDiscount.class);
 		return price;
 	}
 }
