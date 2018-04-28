@@ -50,7 +50,7 @@ public class AdminController {
 	}
 	@PostMapping("/add-admin")
 	@ResponseBody
-	public boolean registration(@RequestBody User admin)
+	public boolean addAdmin(@RequestBody User admin)
 	{
 		if(!userRepository.exists(admin.getUsername()))
 		{

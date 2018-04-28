@@ -39,11 +39,4 @@ public class StoreOwnerController {
 			return false;
 		}
 	}
-	/*
-	 * @GetMapping("/add-store") public String creationStoreView(Model model) {
-	 * 
-	 * return "add-store"; }
-	 */
-
-	/*test function*/
 }

@@ -49,14 +49,6 @@ public class StoreController {
         }
         return false;
     }
-
-    @GetMapping("/store-view")
-    public List<Store> StoreOwnerStores() {
-
-        StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Store> stores = storeRepo.findByStatus("accepted");
-        return stores;
-    }
     
     @RequestMapping("/store-commands")
     @ResponseBody
