@@ -17,6 +17,12 @@ public class BrandController {
 	@Autowired
 	private SystemProductRepository systemProductRepo;
 
+	public BrandController(){}
+
+	public BrandController(BrandRepository brandRepository) {
+		brandRepo = brandRepository;
+	}
+
 	// @GetMapping("/add-brand")
 	// public String addBrand(Model model){
 	// model.addAttribute("brand",new Brand());
