@@ -1,10 +1,12 @@
 package SWEProject.Main.Controller;
 import SWEProject.Main.Controller.Entities.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import SWEProject.Main.Controller.Repository.UserRepository;
 @Controller
 public class AccountController {

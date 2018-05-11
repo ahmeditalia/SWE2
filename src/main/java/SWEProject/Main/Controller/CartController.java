@@ -1,6 +1,5 @@
 package SWEProject.Main.Controller;
 
-import SWEProject.Main.Controller.Entities.Brand;
 import SWEProject.Main.Controller.Entities.Cart;
 import SWEProject.Main.Controller.Entities.StoreProduct;
 import SWEProject.Main.Controller.Entities.User;

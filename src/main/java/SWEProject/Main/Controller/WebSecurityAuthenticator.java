@@ -27,8 +27,6 @@ public class WebSecurityAuthenticator implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-
-        userRepository.existsByUsernameAndPassword(username, password);
         User user = userRepository.findOneByUsernameAndPassword(username, password);
         if(null == user) { throw new BadCredentialsException("Invalid Username or Password Douche!");}
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

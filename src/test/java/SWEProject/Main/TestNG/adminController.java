@@ -1,4 +1,4 @@
-package SWEProject.TestNG;
+package SWEProject.Main.TestNG;
 
 import org.testng.annotations.Test;
 
