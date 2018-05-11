@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import SWEProject.Main.Controller.Repository.StoreRepository;
 @Controller
 public class StoreOwnerController {
-
-	@Autowired
 	StoreRepository storeRepo;
-	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	public StoreOwnerController(StoreRepository storeRepo, UserRepository userRepository) {
+		this.storeRepo = storeRepo;
+		this.userRepository = userRepository;
+	}
 
 	@GetMapping("/store-owner-view")
 	public String showStoreOwnerView() {

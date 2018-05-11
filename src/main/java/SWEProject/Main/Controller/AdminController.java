@@ -10,13 +10,16 @@ import SWEProject.Main.Controller.Repository.StoreRepository;
 import java.util.List;
 @Controller
 public class AdminController {
-	@Autowired
 	StoreRepository storeRepo;
-	@Autowired
 	StatisticsRepository statRepo;
-	@Autowired
 	UserRepository userRepository;
-
+	
+	@Autowired
+	public AdminController(StoreRepository storeRepo, StatisticsRepository statRepo, UserRepository userRepository) {
+		this.storeRepo = storeRepo;
+		this.statRepo = statRepo;
+		this.userRepository = userRepository;
+	}
 	@RequestMapping("/view-request-stores")
 	@ResponseBody
 	public List<Store> Viewrequests() {

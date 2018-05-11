@@ -10,15 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 @Controller
 public class StoreController {
-    @Autowired
     public StoreRepository storeRepo;
-    @Autowired
     public StoreProductRepository storeProductRepo;
-    @Autowired
     public StatisticsRepository statRepo;
 
+    @Autowired
+    public StoreController(StoreRepository storeRepo, StoreProductRepository storeProductRepo,
+			StatisticsRepository statRepo) {
+		this.storeRepo = storeRepo;
+		this.storeProductRepo = storeProductRepo;
+		this.statRepo = statRepo;
+	}
 
-    @RequestMapping("/ShowOwnerStores")
+	@RequestMapping("/ShowOwnerStores")
     @ResponseBody
     public List<Store> showAllStores() {
         StoreOwner user = (StoreOwner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

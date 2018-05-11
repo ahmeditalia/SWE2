@@ -18,10 +18,15 @@ import java.util.List;
 @Service
 public class WebSecurityAuthenticator implements AuthenticationProvider {
 
-    @Autowired(required = true)
     private UserRepository userRepository;
-
-    @Override
+    
+    @Autowired(required = true)
+    public WebSecurityAuthenticator(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+    
+    
+	@Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String username = authentication.getName();

@@ -11,13 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 @Controller
 public class StatisticsController {
-    @Autowired
     StatisticsRepository statRepo;
-    @Autowired
     StoreRepository storeRepo;
-    @Autowired
     
-    @RequestMapping("/statistics")
+    @Autowired
+    public StatisticsController(StatisticsRepository statRepo, StoreRepository storeRepo) {
+		this.statRepo = statRepo;
+		this.storeRepo = storeRepo;
+	}
+
+
+	@RequestMapping("/statistics")
     @ResponseBody
     public List<Statistics> showstat(@RequestBody List<String> Listsname) {
     	List<Statistics> retList=new ArrayList<Statistics>();

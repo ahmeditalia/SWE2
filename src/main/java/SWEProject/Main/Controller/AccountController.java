@@ -10,9 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import SWEProject.Main.Controller.Repository.UserRepository;
 @Controller
 public class AccountController {
-	@Autowired
+	
 	private UserRepository userRepository;
 	private Creator creator=Creator.getInstance();
+	
+	@Autowired
+	public AccountController(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
 	@GetMapping("/Registration")
 	public String showRegistrationForm(Model model)
 	{
