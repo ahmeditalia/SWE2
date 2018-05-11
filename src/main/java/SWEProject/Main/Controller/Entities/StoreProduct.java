@@ -81,4 +81,15 @@ public class StoreProduct extends Product {
     public void removeCart(Cart cart){
         carts.remove(cart);
     }
+    @PreRemove
+    public void preremove()
+    {
+    	store.products.remove(this);
+    	for(Cart c:carts)
+    	{
+    		c.getStoreProducts().remove(this);
+    	}
+    	store=null;
+    	carts.clear();
+    }
 }

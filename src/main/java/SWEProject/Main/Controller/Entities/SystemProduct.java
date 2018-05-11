@@ -5,4 +5,5 @@ import javax.persistence.*;
 @Entity
 public class SystemProduct extends Product{
     public SystemProduct(){}
+    
 }

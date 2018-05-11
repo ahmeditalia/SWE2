@@ -1,6 +1,5 @@
 package SWEProject.Main.Controller;
 
-import SWEProject.Main.Controller.Entities.Brand;
 import SWEProject.Main.Controller.Entities.Cart;
 import SWEProject.Main.Controller.Entities.StoreProduct;
 import SWEProject.Main.Controller.Entities.User;
@@ -17,12 +16,15 @@ import java.util.List;
 
 @Controller
 public class CartController {
-    @Autowired
+    
     StoreProductRepository storeProductRepository;
-    @Autowired
     CartRepository cartRepository;
-
-    @RequestMapping("/addtocart")
+    @Autowired
+    public CartController(StoreProductRepository storeProductRepository, CartRepository cartRepository) {
+		this.storeProductRepository = storeProductRepository;
+		this.cartRepository = cartRepository;
+	}
+	@RequestMapping("/addtocart")
     @ResponseBody
     public boolean addToCart(@RequestParam("spname") String spname) {
         String[] parts = spname.split("-");

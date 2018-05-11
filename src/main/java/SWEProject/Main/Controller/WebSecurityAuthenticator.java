@@ -18,17 +18,20 @@ import java.util.List;
 @Service
 public class WebSecurityAuthenticator implements AuthenticationProvider {
 
-    @Autowired(required = true)
     private UserRepository userRepository;
-
-    @Override
+    
+    @Autowired(required = true)
+    public WebSecurityAuthenticator(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+    
+    
+	@Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-
-        userRepository.existsByUsernameAndPassword(username, password);
         User user = userRepository.findOneByUsernameAndPassword(username, password);
         if(null == user) { throw new BadCredentialsException("Invalid Username or Password Douche!");}
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

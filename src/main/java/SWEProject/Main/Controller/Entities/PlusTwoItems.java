@@ -1,8 +1,14 @@
 package SWEProject.Main.Controller.Entities;
 
-public class PlusTwoItems extends Discount {
-    public PlusTwoItems(){
-        type="PlusTwoItems";
-        this.dis=10;
-    }
+import javax.persistence.Entity;
+
+@Entity
+public class PlusTwoItems extends IDiscount {
+	public PlusTwoItems(Discount discount) {
+		super(10.0);
+		this.discount = discount;
+	}
+	public PlusTwoItems() {
+		super(10.0);
+	}
 }

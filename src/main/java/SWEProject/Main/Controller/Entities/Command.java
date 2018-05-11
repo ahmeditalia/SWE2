@@ -1,8 +1,6 @@
 package SWEProject.Main.Controller.Entities;
 
 import SWEProject.Main.Controller.CommandController;
-import SWEProject.Main.Controller.StoreController;
-
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,7 +16,7 @@ public abstract class Command {
     protected String description;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     protected StoreProduct product;
 
     public Command() {}
@@ -49,5 +47,10 @@ public abstract class Command {
 
     public abstract void undo(CommandController commandController);
 
+    @PreRemove
+    public void remove()
+    {
+    	product.getStore().commands.remove(this);
+    }
 }
 
