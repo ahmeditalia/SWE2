@@ -14,10 +14,13 @@ import java.util.List;
 @Controller
 public class CollaboratorController {
 
-    @Autowired
+    
     private CollaboratorRepository collabRepo;
-
-    @RequestMapping("/view-store-collaborator")
+    @Autowired
+    public CollaboratorController(CollaboratorRepository collabRepo) {
+		this.collabRepo = collabRepo;
+	}
+	@RequestMapping("/view-store-collaborator")
     @ResponseBody
     public List<Store> getCollabStores(){
 

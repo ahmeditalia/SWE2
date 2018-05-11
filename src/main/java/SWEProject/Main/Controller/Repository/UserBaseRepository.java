@@ -4,9 +4,9 @@ package SWEProject.Main.Controller.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.query.Param;
 
 import SWEProject.Main.Controller.Entities.User;
-import org.springframework.data.repository.query.Param;
 
 @NoRepositoryBean
 public interface UserBaseRepository<T extends User> extends CrudRepository<T, String>{

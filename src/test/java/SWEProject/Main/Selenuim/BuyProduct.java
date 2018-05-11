@@ -1,4 +1,4 @@
-package SWEProject.Selenuim;
+package SWEProject.Main.Selenuim;
 
 import org.testng.annotations.Test;
 

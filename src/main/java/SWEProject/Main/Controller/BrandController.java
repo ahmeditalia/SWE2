@@ -12,10 +12,15 @@ import java.util.List;
 
 @Controller
 public class BrandController {
-	@Autowired
+	
 	private BrandRepository brandRepo;
-	@Autowired
 	private SystemProductRepository systemProductRepo;
+
+	@Autowired
+	public BrandController(BrandRepository brandRepo, SystemProductRepository systemProductRepo) {
+		this.brandRepo = brandRepo;
+		this.systemProductRepo = systemProductRepo;
+	}
 
 	// @GetMapping("/add-brand")
 	// public String addBrand(Model model){

@@ -1,11 +1,8 @@
 package SWEProject.Main.Controller.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 @Entity
 @Inheritance
@@ -18,7 +15,7 @@ public class User {
 	protected String password;
 	protected double balance;
 	@JsonIgnore
-	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	protected Discount discount;
 	@JsonIgnore
 	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
@@ -29,12 +26,7 @@ public class User {
 		email="";
 		password="";
 		balance=0;
-		discount=new Discount();
-		discount.setUser(this);
-		FirstBuyDiscount f = new FirstBuyDiscount();
-		discount.setDiscount(f);
-		NoDiscount ff=new NoDiscount();
-		f.setDiscount(ff);
+		discount=new FirstBuyDiscount(new NoDiscount());
 		cart=new Cart(this);
 	}
 
@@ -44,12 +36,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		balance=0;
-		discount=new Discount();
-		discount.setUser(this);
-		FirstBuyDiscount f = new FirstBuyDiscount();
-		discount.setDiscount(f);
-		NoDiscount ff=new NoDiscount();
-		f.setDiscount(ff);
+		discount=new FirstBuyDiscount(new NoDiscount());
 		cart=new Cart(this);
 	}
 	
@@ -88,14 +75,15 @@ public class User {
 	}
 	public void setDiscount(Discount discount) {
 		this.discount = discount;
-		discount.setUser(this);
-
 	}
-	public void deleteDiscount(String c){
-		discount.deleteDiscount(c);
+	public Integer deleteDiscount(Class c){
+		Integer temp=discount.find(c);
+		discount=discount.deleteDiscount(c);
+		return temp;
 	}
-	public void addDiscount(String c){
-		discount.addDiscount(c);
+	public void addDiscount(IDiscount c){
+		c.setDiscount(discount);
+		discount=c;
 	}
 	public Cart getCart() { return cart; }
 	public void setCart(Cart cart) { this.cart = cart; }
