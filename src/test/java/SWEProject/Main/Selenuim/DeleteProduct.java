@@ -1,4 +1,4 @@
-package SWEProject.Selenuim;
+package SWEProject.Main.Selenuim;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package SWEProject.TestNG;
+package SWEProject.Main.TestNG;
 
 import SWEProject.Main.Application;
 import SWEProject.Main.Controller.CollaboratorController;
@@ -6,7 +6,6 @@ import SWEProject.Main.Controller.Entities.Collaborator;
 import SWEProject.Main.Controller.Entities.Store;
 import SWEProject.Main.Controller.Entities.StoreOwner;
 import SWEProject.Main.Controller.Entities.User;
-import SWEProject.Main.Controller.Repository.CollaboratorRepository;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,18 +14,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.*;
-
-import static org.mockito.Mockito.mock;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
