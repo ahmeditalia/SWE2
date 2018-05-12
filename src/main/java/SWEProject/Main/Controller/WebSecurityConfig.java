@@ -12,9 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
+    
     WebSecurityAuthenticator webSecurityAuthenticator;
-
+    @Autowired
+    public WebSecurityConfig(WebSecurityAuthenticator webSecurityAuthenticator) {
+		this.webSecurityAuthenticator = webSecurityAuthenticator;
+	}
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -35,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         http.csrf().disable();
     }
-    @Override
+	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(webSecurityAuthenticator);
     }

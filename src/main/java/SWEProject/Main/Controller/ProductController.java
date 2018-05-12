@@ -20,11 +20,17 @@ public class ProductController {
 	@Autowired
 	private StoreRepository storeRepo;
 	@Autowired
-	private StatisticsRepository statRepo;
-	@Autowired
 	private UserRepository userRepo;
 	@Autowired
 	private CartRepository cartRepo;
+	@Autowired
+	private DiscountRepository discountRepository;
+	@Autowired
+	private TransactionRepository transRepo;
+	@Autowired
+	private CommandRepository commandRepo;
+	@Autowired
+	private SoldProductRepository soldProdRepo;
 
 	@PostMapping("/add-product-to-system")
 	@ResponseBody
@@ -40,13 +46,8 @@ public class ProductController {
 
 	@RequestMapping("/allSystemProduct")
 	@ResponseBody
-	public List<Product> allSystemProduct() {
-		Iterable<SystemProduct> Products = sysProductrepo.findAll();
-		List<Product> products = new ArrayList<Product>();
-		for (Product p : Products) {
-			products.add(p);
-		}
-		return products;
+	public Iterable<SystemProduct> allSystemProduct() {
+		return sysProductrepo.findAll();
 	}
 
 	@RequestMapping("/Store-products")
@@ -88,29 +89,49 @@ public class ProductController {
 	@RequestMapping("/buyProduct")
 	@ResponseBody
 	public double buyProduct(@RequestBody List<StoreProduct> storeProducts) {
+		int deletedItemID;
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		user=userRepo.findOne(user.getUsername());
 		Cart cart = cartRepo.findOneByUser_username(user.getUsername());
 		double price = 0;
 		for (int i = 0; i < storeProducts.size(); i++) {
 			Store store =storeRepo.findOneByStoreName(storeProducts.get(i).getStore().getStoreName());
 			if (storeProducts.get(i).getQuantity() >= 2) {
-				user.addDiscount("PlusTwoItems");
+				user.addDiscount(new PlusTwoItems());
 			}
-			price += (storeProducts.get(i).getPrice() * (100-user.getDiscount().getDis()/100));
-			user.deleteDiscount("PlusTwoItems");
+			price += (storeProducts.get(i).getPrice() * ((100-user.getDiscount().getDis())/100));
+			user.deleteDiscount(PlusTwoItems.class);
 			StoreProduct storeProduct=storeProductRepo.findByNameAndStore_storeName(storeProducts.get(i).getName(),storeProducts.get(i).getStore().getStoreName());
-			storeProduct.setQuantity(storeProduct.getQuantity()-storeProducts.get(i).getQuantity());
-			//store.getStatistics().increamentSoldProducts(storeProducts.get(i).getQuantity());
-			//store.getStatistics().increamentUserBuy();
-			//store.getStatistics().increamentUserViews();
-			storeRepo.save(store);
-			userRepo.save(user);
-			cart.removeProduct(storeProduct);
-			storeProduct.removeCart(cart);
-			storeProductRepo.save(storeProduct);
+			if(storeProduct.getQuantity()==storeProducts.get(i).getQuantity())
+			{
+				commandRepo.deleteByProduct_Id(storeProduct.getId());
+			}
+			else {
+				storeProduct.setQuantity(storeProduct.getQuantity()-storeProducts.get(i).getQuantity());
+				storeRepo.save(store);
+				cart.removeProduct(storeProduct);
+				storeProduct.removeCart(cart);
+				storeProductRepo.save(storeProduct);
+			}
+			UpdateStatistics(store,storeProducts.get(i).getQuantity());
+			SoldProduct soldProduct=new SoldProduct(storeProduct,storeProducts.get(i).getQuantity(),storeProducts.get(i).getPrice(), price);
+			Transactions transactions=new Transactions(user, store, soldProduct);
+			soldProdRepo.save(soldProduct);
+			transRepo.save(transactions);
 		}
+		deletedItemID=user.deleteDiscount(FirstBuyDiscount.class);
 		cartRepo.save(cart);
-		user.deleteDiscount("FirstBuyDiscount");
+		userRepo.save(user);
+		if(deletedItemID!=-1)
+		{
+			discountRepository.delete(deletedItemID);
+		}
 		return price;
+	}
+	public void UpdateStatistics(Store store,int quantity)
+	{
+		store.getStatistics().increamentSoldProducts(quantity);
+		store.getStatistics().increamentUserBuy();
+		store.getStatistics().increamentUserViews();
 	}
 }

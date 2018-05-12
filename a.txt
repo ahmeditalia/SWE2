@@ -1,0 +1,25 @@
+accountController	hossam
+adminController		hdrmi
+statisticsContrller	italia
+brandController		hdrmi
+cartController		hossam
+collaboratorCon		noura
+commandController	noura
+productController	italia
+storeController		noura
+storeOwnerContr		noura
+websecurity			hossam->login_registration
+
+
+
+
+
+7-selenuim
+1-italia normal user buy productController
+2-hdrmi registration
+3-hdrmi login
+4-italia storeowner addstore
+5-noura storeowner addproduct
+6-hossam admin addbrand
+7-italia admin accept request
+8-hdrmi admin addsystemproduct

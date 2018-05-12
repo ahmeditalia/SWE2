@@ -1,8 +1,6 @@
 package SWEProject.Main.Controller.Entities;
 
 import SWEProject.Main.Controller.CommandController;
-import SWEProject.Main.Controller.StoreController;
-
 import javax.persistence.Entity;
 
 @Entity

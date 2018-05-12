@@ -2,16 +2,12 @@ package SWEProject.Main.Controller.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Product {
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.TABLE)
 	protected Integer id;
 	protected String name;
 	@NotNull
@@ -20,6 +16,16 @@ public abstract class Product {
 	protected Brand brand;
 	@NotNull
 	protected String type;
+	public Product(){}
+
+	
+	public Product(String name, Brand brand, String type) {
+		super();
+		this.name = name;
+		this.brand = brand;
+		this.type = type;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -52,5 +58,4 @@ public abstract class Product {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Product(){}
 }
