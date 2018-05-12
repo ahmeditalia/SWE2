@@ -74,9 +74,13 @@ public class ProductController {
 	@ResponseBody
 	public List<StoreProduct> ShowAllProductsByName(@RequestBody String spname) {
 		if (spname.equals("all")) {
-			return (List<StoreProduct>) storeProductRepo.findAllByExist("exist");
+			return storeProductRepo.findAllByExist("exist");
 		}
-		return storeProductRepo.findByNameAndExist(spname, "exist");
+		else if(storeProductRepo.existsByNameAndExist(spname, "exist")) {
+			return storeProductRepo.findByNameAndExist(spname, "exist");
+		}
+		else
+			return new ArrayList<StoreProduct>();
 	}
 
 	@RequestMapping("/ShowProductByName/{spname}")
@@ -128,6 +132,7 @@ public class ProductController {
 		}
 		return price;
 	}
+	
 	public void UpdateStatistics(Store store,int quantity)
 	{
 		store.getStatistics().increamentSoldProducts(quantity);

@@ -14,6 +14,7 @@ public interface StoreProductRepository extends CrudRepository<StoreProduct, Int
 
     StoreProduct findByNameAndStoreAndExist(String name,Store store, String exist);
     List<StoreProduct> findByNameAndExist(String name , String exist);
+    boolean existsByNameAndExist(String name , String exist);
     List<StoreProduct> findAllByExist(String exist);
 
     List<StoreProduct> findByStore_StoreNameAndExist(String storeName , String exist);

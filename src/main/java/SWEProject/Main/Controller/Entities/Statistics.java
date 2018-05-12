@@ -1,7 +1,5 @@
 package SWEProject.Main.Controller.Entities;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,8 +15,6 @@ public class Statistics implements Operations {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     public Store store;
-    @OneToMany
-    public List<Stat> addedstatistics;
     public Statistics() {
     }
 
