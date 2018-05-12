@@ -22,11 +22,6 @@ public class BrandController {
 		this.systemProductRepo = systemProductRepo;
 	}
 
-	// @GetMapping("/add-brand")
-	// public String addBrand(Model model){
-	// model.addAttribute("brand",new Brand());
-	// return "add-brand";
-	// }
 	@PostMapping("/add-brand")
 	@ResponseBody
 	public boolean addBrand(@RequestBody Brand brand) {
