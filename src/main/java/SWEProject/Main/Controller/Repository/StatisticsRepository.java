@@ -2,10 +2,7 @@ package SWEProject.Main.Controller.Repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
 import SWEProject.Main.Controller.Entities.Statistics;
-import SWEProject.Main.Controller.Entities.Store;
-
 import org.springframework.data.repository.query.Param;
 
 public interface StatisticsRepository extends CrudRepository<Statistics, Integer>{

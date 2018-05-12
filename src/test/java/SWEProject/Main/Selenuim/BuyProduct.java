@@ -1,4 +1,4 @@
-package SWEProject.Selenuim;
+package SWEProject.Main.Selenuim;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;

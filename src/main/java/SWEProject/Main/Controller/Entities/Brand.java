@@ -2,10 +2,7 @@ package SWEProject.Main.Controller.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 

@@ -5,9 +5,6 @@ import SWEProject.Main.Controller.Repository.CommandRepository;
 import SWEProject.Main.Controller.Repository.StoreProductRepository;
 import SWEProject.Main.Controller.Repository.StoreRepository;
 import SWEProject.Main.Controller.Repository.SystemProductRepository;
-
-import org.apache.coyote.http2.HpackEncoder.State;
-import org.apache.coyote.http2.Http2Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +12,22 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class CommandController {
 	
-	@Autowired
+	
     public StoreProductRepository storeProRepo;
-
-	@Autowired
     public CommandRepository commandRepo;
-
-	@Autowired
     public StoreRepository storeRepo;
-
-    @Autowired
     public SystemProductRepository sysProRepo;
+    
+    @Autowired
+    public CommandController(StoreProductRepository storeProRepo, CommandRepository commandRepo,
+			StoreRepository storeRepo, SystemProductRepository sysProRepo) {
+		this.storeProRepo = storeProRepo;
+		this.commandRepo = commandRepo;
+		this.storeRepo = storeRepo;
+		this.sysProRepo = sysProRepo;
+	}
 
-    @RequestMapping("/add-product-store/{storeName}")
+	@RequestMapping("/add-product-store/{storeName}")
     @ResponseBody
     public boolean addProduct(@RequestBody() StoreProduct product, @PathVariable("storeName") String sname) {
 
