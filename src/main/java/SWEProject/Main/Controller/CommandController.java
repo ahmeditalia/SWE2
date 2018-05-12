@@ -47,26 +47,34 @@ public class CommandController {
 
     @RequestMapping("/delete-store-product")
     @ResponseBody
-    public void deleteProduct(@RequestParam("id") int productid) {
+    public boolean deleteProduct(@RequestParam("id") int productid) {
 
         StoreProduct product = storeProRepo.findOne(productid);
-        String desc = "delete product " + product.getName() + " from store " + product.getStore().getStoreName();
-        DeleteProductCommand deleteProduct = new DeleteProductCommand(product,desc);
-        deleteProduct.execute(this);
+        if(product != null) {
+            String desc = "delete product " + product.getName() + " from store " + product.getStore().getStoreName();
+            DeleteProductCommand deleteProduct = new DeleteProductCommand(product, desc);
+            deleteProduct.execute(this);
+            return true;
+        }
+        return false;
     }
 
     @RequestMapping("/edit-store-product")
     @ResponseBody
-    public void editProduct(@RequestParam("id") int productid, @RequestParam("quantity") int quantity,
+    public boolean editProduct(@RequestParam("id") int productid, @RequestParam("quantity") int quantity,
                             @RequestParam("price") double price) {
 
         StoreProduct product = storeProRepo.findOne(productid);
-        String desc = "edit product " + product.getName() + " with quntity " + product.getQuantity() + " and price "
-                + product.getPrice();
-        product.setQuantity(quantity);
-        product.setPrice(price);
-        EditProductCommand editProduct = new EditProductCommand(product,desc);
-        editProduct.execute(this);
+        if(product != null) {
+            String desc = "edit product " + product.getName() + " with quntity " + product.getQuantity() + " and price "
+                    + product.getPrice();
+            product.setQuantity(quantity);
+            product.setPrice(price);
+            EditProductCommand editProduct = new EditProductCommand(product, desc);
+            editProduct.execute(this);
+            return true;
+        }
+        return false;
     }
 
     @RequestMapping("/undo")
@@ -76,5 +84,4 @@ public class CommandController {
         Command command = commandRepo.findOne(commandId);
         command.undo(this);
     }
-
 }

@@ -7,4 +7,5 @@ public interface BrandRepository  extends CrudRepository<Brand,Integer> {
     boolean existsByName(String name);
     Brand findBrandByName(String name);
     Brand findOneByName(String name);
+    Long countByName(String name);
 }
