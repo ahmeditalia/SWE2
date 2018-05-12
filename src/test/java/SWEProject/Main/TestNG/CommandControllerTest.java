@@ -1,4 +1,4 @@
-package SWEProject.TestNG;
+package SWEProject.Main.TestNG;
 
 import SWEProject.Main.Application;
 import SWEProject.Main.Controller.CommandController;
