@@ -1,20 +1,25 @@
 package SWEProject.Main.Controller;
 import SWEProject.Main.Controller.Entities.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import SWEProject.Main.Controller.Repository.UserRepository;
 @Controller
 public class AccountController {
-	@Autowired
+	
 	private UserRepository userRepository;
 	private Creator creator=Creator.getInstance();
-	public AccountController(){}
-	public AccountController(UserRepository userRepository){
-		this.userRepository=userRepository;
+	
+	@Autowired
+	public AccountController(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
+	
 	@GetMapping("/Registration")
 	public String showRegistrationForm(Model model)
 	{
