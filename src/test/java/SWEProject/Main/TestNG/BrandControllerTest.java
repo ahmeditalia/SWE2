@@ -1,63 +1,83 @@
 package SWEProject.Main.TestNG;
 
-
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import SWEProject.Main.Application;
 import SWEProject.Main.Controller.BrandController;
 import SWEProject.Main.Controller.Entities.Brand;
-import SWEProject.Main.Controller.Repository.BrandRepository;
-import SWEProject.Main.Controller.Repository.SystemProductRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class BrandControllerTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
-	private BrandRepository brandRepo;
-	@Autowired
-	private SystemProductRepository systemProductRepo;
-	@Autowired
 	private BrandController brandController;
-	
+
 	@DataProvider(name = "validaddbrand")
-	public Object[][] casesValid() {
-		return new Object[][] {{ "Brand1", "category1" }, { "Brand1", "category1" },{ "testbrand1", "testcate1" }, { "B2", "cate2" } };
+	public Object[][] validaddbrand() {
+		return new Object[][] { { "Brand3", "category3" }, { "Brand4", "category4" }, { "testbrand1", "testcate1" },{ "B2", "cate2" } };
 	}
 
 	@DataProvider(name = "invalidaddbrand")
-	public Object[][] casesInvalid() {
-		return new Object[][] { { null, null }, { " ", " " } };
+	public Object[][] invalidaddbrand() {
+		return new Object[][] { { "brand1", "category1" } };
 	}
 
-	@BeforeTest
-	public void setup() {
-		brandController = new BrandController(brandRepo,systemProductRepo);
-	}
-
-	@Test(dataProvider = "validaddbrand")
+	@Test(priority = 2, dataProvider = "validaddbrand")
 	public void validtest(String[] Case) throws Exception {
-		Brand brand = new Brand(Case[0], Case[1]);
-		// brandController.addBrand(brand);
-		// when(brandRepo.existsByName(anyString())).thenReturn(false);
-		// when(brandRepo.save(Matchers.any(Brand.class))).thenReturn(brand);
-		assertEquals(brandController.addBrand(brand), true);
+		assertEquals(brandController.addBrand(new Brand(Case[0], Case[1])), true);
 	}
 
-	// @Test(dataProvider="invalidaddbrand")
-	// public void invalidtest(String[] Case) throws Exception {
-	// Brand brand = new Brand(Case[0], Case[1]);
-	// when(brandRepo.existsByName(anyString())).thenReturn(true);
-	// when(brandRepo.save(Matchers.any(Brand.class))).thenReturn(brand);
-	// assertEquals(brandController.addBrand(brand), false);
-	// }
+	@Test(priority = 2, dataProvider = "invalidaddbrand")
+	public void invalidtest(String[] Case) throws Exception {
+		assertEquals(brandController.addBrand(new Brand(Case[0], Case[1])), false);
+	}
 
+	@Test(priority = 1)
+	public void allBrandsTest() {
+		List<Brand> expected = brandController.brands();
+		if (!expected.get(0).getName().equals("brand1") || !expected.get(0).getCategory().equals("category1")) {
+			assertTrue(false);
+			return;
+		}
+		if (!expected.get(1).getName().equals("brand2") || !expected.get(1).getCategory().equals("category2")) {
+			assertTrue(false);
+			return;
+		}
+		assertTrue(true);
+	}
+
+	@Test(priority=3)
+	public void validbrandByProduct() {
+		Brand brand = brandController.brands("product1");
+		if (!brand.getName().equals("brand1")) {
+			assertTrue(false);
+			return;
+		}
+		brand = brandController.brands("product2");
+		if (!brand.getName().equals("brand2")) {
+			assertTrue(false);
+			return;
+		}
+		assertTrue(true);
+	}
+	
+	@Test(priority=3)
+	public void invalidbrandByProduct() {
+		Brand brand = brandController.brands("product1");
+		if (!brand.getName().equals("brand1")) {
+			assertTrue(false);
+			return;
+		}
+		assertTrue(true);	
+	}
 }
-
