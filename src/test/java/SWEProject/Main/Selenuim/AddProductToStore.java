@@ -33,7 +33,7 @@ public class AddProductToStore {
         driver.manage().timeouts().implicitlyWait(50L, TimeUnit.SECONDS);
 
         driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys("321");
+        driver.findElement(By.name("username")).sendKeys("s");
 
         driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys("12345678");
