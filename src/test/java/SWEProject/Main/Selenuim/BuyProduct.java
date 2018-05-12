@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-public class BuyProduct {
+public class addBrandTest {
     @Test
     public  void BrandAndCategoryExist() throws InterruptedException {
         String PathChrome = "D:\\FCI\\y3\\swe2\\Selenium\\chromedriver_win32\\chromedriver.exe";
@@ -19,7 +19,7 @@ public class BuyProduct {
         WebDriver driver = new ChromeDriver();
         driver.get("http://localhost:8383/login");
         driver.manage().window().maximize();
-        driver.findElement(By.xpath("//html//body/div/form/input[1]")).sendKeys("Admin2");
+        driver.findElement(By.xpath("//html//body/div/form/input[1]")).sendKeys("a");
         driver.findElement(By.xpath("//html//body/div/form/input[2]")).sendKeys("12345678");
         driver.findElement(By.xpath("/html/body/div/form/input[3]")).click();
         driver.findElement(By.xpath("//*[@id=\"addbrandtosystem\"]")).click();
